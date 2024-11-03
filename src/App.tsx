@@ -1,5 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import Intro from "./components/Intro";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -22,7 +23,7 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      App
+      <Intro />
     </>
   );
 };
