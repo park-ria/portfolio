@@ -1,5 +1,8 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./styles/theme";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 import Intro from "./components/Intro";
 
 const GlobalStyle = createGlobalStyle`
@@ -20,10 +23,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = () => {
+  const isDark = useRecoilValue(isDarkAtom);
+
   return (
     <>
-      <GlobalStyle />
-      <Intro />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <Intro />
+      </ThemeProvider>
     </>
   );
 };
