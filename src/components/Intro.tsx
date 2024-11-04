@@ -20,7 +20,7 @@ const SvgArea = styled.div`
     height: 1911px;
     stroke-width: 2;
     fill: none;
-    stroke: #fff;
+    //stroke: #fff;
   }
 
   .plane {
