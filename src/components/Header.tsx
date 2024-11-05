@@ -9,6 +9,11 @@ const Nav = styled.ul`
   align-items: center;
 `;
 
+const Menu = styled.li`
+  font-size: 20px;
+  cursor: pointer;
+`;
+
 const menuArr: string[] = [
   "Home",
   "About",
@@ -19,13 +24,15 @@ const menuArr: string[] = [
 ];
 
 const Header = () => {
-  const menus = useRef<(HTMLLIElement | null)[]>([]);
   return (
     <Nav>
       {menuArr.map((menu: string, index: number) => (
-        <li key={index} ref={(el) => (menus.current[index] = el)}>
+        <Menu
+          key={index}
+          //onClick={(e) => moveScroll(e, index)}
+        >
           {menu}
-        </li>
+        </Menu>
       ))}
     </Nav>
   );
