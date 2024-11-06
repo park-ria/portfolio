@@ -97,6 +97,7 @@ const Intro = () => {
     const unsubscribe = scrollYProgress.on("change", updateOffsetDistance);
     return () => unsubscribe();
   }, [scrollYProgress]);
+
   return (
     <Container ref={loadRef}>
       <SvgArea>

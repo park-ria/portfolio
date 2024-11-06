@@ -1,7 +1,7 @@
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./styles/theme";
-import { useRecoilValue } from "recoil";
-import { isDarkAtom } from "./atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { isDarkAtom, selectedIndexAtom } from "./atoms";
 import { useRef } from "react";
 import Intro from "./components/Intro";
 import Header from "./components/Header";
@@ -30,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: "Noto Sans KR", sans-serif;
+    background: ${({ theme }) => theme.bgColor};
   }
 
   .teko {
@@ -37,7 +38,18 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-// 컴포넌트를 매핑하여 사용할 수 있도록 설정
+const Main = styled.main<{ $menuIdx: number }>`
+  display: flex;
+  flex-direction: column;
+
+  ${({ $menuIdx }) =>
+    $menuIdx &&
+    `flex-direction: row;
+  flex: 1;`}
+`;
+
+const Section = styled.section``;
+
 const componentMap = {
   Home,
   About,
@@ -59,10 +71,10 @@ const menuArr: (keyof typeof componentMap)[] = [
 const App = () => {
   const isDark = useRecoilValue(isDarkAtom);
   const menuRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [selectedIndex, setSelectedIndex] = useRecoilState(selectedIndexAtom);
 
-  const moveSection = (e: React.MouseEvent<HTMLLIElement>, index: number) => {
-    console.log(index);
-    //menuRef.current[index]?.scrollIntoView({ behavior: 'smooth' });
+  const moveSection = (index: number) => {
+    menuRef.current[index]?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -70,15 +82,19 @@ const App = () => {
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
         <Intro />
-        <Header />
-        {menuArr.map((menu, index) => {
-          const Component = componentMap[menu];
-          return (
-            <div key={index} ref={(el) => (menuRef.current[index] = el)}>
-              <Component />
-            </div>
-          );
-        })}
+        <Main $menuIdx={selectedIndex}>
+          <Header onClick={moveSection} />
+          <Section>
+            {menuArr.map((menu, index) => {
+              const Component = componentMap[menu];
+              return (
+                <div key={index} ref={(el) => (menuRef.current[index] = el)}>
+                  <Component />
+                </div>
+              );
+            })}
+          </Section>
+        </Main>
       </ThemeProvider>
     </>
   );
