@@ -60,7 +60,7 @@ const App = () => {
   const isDark = useRecoilValue(isDarkAtom);
   const menuRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const moveScroll = (e: React.MouseEvent<HTMLLIElement>, index: number) => {
+  const moveSection = (e: React.MouseEvent<HTMLLIElement>, index: number) => {
     console.log(index);
     //menuRef.current[index]?.scrollIntoView({ behavior: 'smooth' });
   };
