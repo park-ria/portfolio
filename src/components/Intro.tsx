@@ -13,16 +13,27 @@ const Container = styled.div`
 `;
 
 const SvgArea = styled.div`
+  border: 1px solid #f00;
   width: fit-content;
+  height: 1911px;
   position: absolute;
   bottom: 0;
   left: 400px;
+
+  @media screen and (max-width: 1450px) {
+    left: 90px;
+  }
+
+  @media screen and (max-width: 1450px) {
+    left: -200px;
+  }
+
   .load {
     width: 990px;
     height: 1911px;
     stroke-width: 2;
     fill: none;
-    //stroke: #fff;
+    stroke: #fff;
   }
 
   .plane {
@@ -45,6 +56,14 @@ const Text1 = styled.svg`
   left: 50%;
   transform: translateX(-50%);
   fill: #fff;
+
+  @media screen and (max-width: 1450px) {
+    height: 80px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    height: 50px;
+  }
 `;
 
 const Text2 = styled.svg`
@@ -53,6 +72,13 @@ const Text2 = styled.svg`
   top: 1000px;
   left: 200px;
   fill: #fff;
+  @media screen and (max-width: 1450px) {
+    height: 80px;
+    left: 100px;
+  }
+  @media screen and (max-width: 1024px) {
+    height: 50px;
+  }
 `;
 
 const Text3 = styled.svg`
@@ -61,6 +87,13 @@ const Text3 = styled.svg`
   top: 1500px;
   right: 200px;
   fill: #fff;
+  @media screen and (max-width: 1450px) {
+    height: 80px;
+    right: 100px;
+  }
+  @media screen and (max-width: 1024px) {
+    height: 50px;
+  }
 `;
 
 const Intro = () => {
