@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const Wrapper = styled.div`
-  border: 1px solid #f00;
   width: 100%;
   height: 1080px;
   display: flex;
@@ -48,7 +47,7 @@ const ImgCircle = styled.div`
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: #00f;
+  //background: #00f;
 `;
 
 const FrontCircle = styled(motion.span)`
@@ -154,10 +153,14 @@ const Home = () => {
 
   const frontTranslateY = useTransform(
     scrollYProgress,
-    [0, 0.55],
-    ["-40%", "0%"]
+    [0, 0.5],
+    ["50%", "0%"]
   );
-  const backTranslateY = useTransform(scrollYProgress, [0, 0.4], ["70%", "0%"]);
+  const backTranslateY = useTransform(
+    scrollYProgress,
+    [0, 0.3],
+    ["-20%", "0%"]
+  );
 
   return (
     <Wrapper>

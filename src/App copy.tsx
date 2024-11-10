@@ -76,6 +76,22 @@ const App = () => {
     { component: Contact, ref: contactRef },
   ];
 
+  useEffect(() => {
+    const updateIndexOnScroll = () => {
+      menuRef.map((menu, index) => {
+        if (menu.ref.current) {
+          console.log(index);
+          const { top, bottom } = menu.ref.current.getBoundingClientRect();
+          if (top < window.innerHeight / 2 && bottom > window.innerHeight / 2)
+            setSelectedIndex(index);
+        }
+      });
+    };
+
+    scrollY.on("change", updateIndexOnScroll);
+    return () => scrollY.clearListeners();
+  }, [scrollY, setSelectedIndex]);
+
   const moveSection = (index: number) => {
     menuRef[index].ref.current?.scrollIntoView({
       behavior: "smooth",
