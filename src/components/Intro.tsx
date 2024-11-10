@@ -113,9 +113,8 @@ const Intro = () => {
 
   useEffect(() => {
     const updateOffsetDistance = (e: number) => {
-      //console.log(e);
       if (planeRef.current) {
-        planeRef.current.style.offsetDistance = `${e * 100}%`;
+        planeRef.current.style.offsetDistance = `${e * 99}%`;
         planeRef.current.style.opacity = e >= 1 ? "0" : "1";
       }
       if (e > 0.1 && textRef1.current) {

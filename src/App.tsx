@@ -82,7 +82,8 @@ const App = () => {
       menuRef.map((menu, index) => {
         if (menu.ref.current) {
           const { top, bottom } = menu.ref.current.getBoundingClientRect();
-          const inView = top >= 0 && bottom <= window.innerHeight;
+          const inView =
+            top < window.innerHeight * 0.1 && bottom > window.innerHeight * 0.9;
           if (inView) setSelectedIndex(index);
         }
       });
@@ -108,11 +109,7 @@ const App = () => {
           <Header onClick={moveSection} />
           <Section $menuIdx={selectedIndex}>
             {menuRef.map((menu, index) => (
-              <div
-                key={index}
-                ref={menu.ref}
-                style={{ border: "1px solid #f00" }}
-              >
+              <div key={index} ref={menu.ref}>
                 <menu.component />
               </div>
             ))}

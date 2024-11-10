@@ -5,7 +5,6 @@ import { selectedIndexAtom } from "../atoms";
 import React from "react";
 
 const Wrapper = styled.header<{ $menuIdx: number }>`
-  border: 1px solid #f00;
   position: absolute;
   top: 0;
   left: 0;
@@ -13,6 +12,7 @@ const Wrapper = styled.header<{ $menuIdx: number }>`
   height: 80px;
   display: flex;
   align-items: center;
+  z-index: 1;
 
   ${({ $menuIdx }) =>
     $menuIdx &&
