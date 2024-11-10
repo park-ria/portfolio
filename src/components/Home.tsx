@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = () => {
-  return <div style={{ height: "100vh" }}>Home</div>;
+  return <div style={{ marginTop: "80px", height: "50vh" }}>Home</div>;
 };
 
 export default Home;

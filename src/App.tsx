@@ -1,8 +1,9 @@
+import React, { useRef, useEffect, Component, RefObject } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./styles/theme";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { isDarkAtom, selectedIndexAtom } from "./atoms";
-import { useRef } from "react";
+import { useScroll } from "framer-motion";
 import Intro from "./components/Intro";
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -39,42 +40,63 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Main = styled.main<{ $menuIdx: number }>`
+  position: relative;
   display: flex;
   flex-direction: column;
-
-  ${({ $menuIdx }) =>
-    $menuIdx &&
-    `flex-direction: row;
-  flex: 1;`}
+  ${({ $menuIdx }) => $menuIdx && `flex-direction: row;`}
 `;
 
-const Section = styled.section``;
-
-const componentMap = {
-  Home,
-  About,
-  Career,
-  Skill,
-  Works,
-  Contact,
-};
-
-const menuArr: (keyof typeof componentMap)[] = [
-  "Home",
-  "About",
-  "Career",
-  "Skill",
-  "Works",
-  "Contact",
-];
+const Section = styled.section<{ $menuIdx: number }>`
+  flex: 1;
+  ${({ $menuIdx }) => $menuIdx && `flex:1;`}
+`;
 
 const App = () => {
   const isDark = useRecoilValue(isDarkAtom);
-  const menuRef = useRef<(HTMLDivElement | null)[]>([]);
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedIndexAtom);
+  const { scrollY } = useScroll();
+
+  const homeRef = useRef<HTMLDivElement | null>(null);
+  const aboutRef = useRef<HTMLDivElement | null>(null);
+  const careerRef = useRef<HTMLDivElement | null>(null);
+  const skillRef = useRef<HTMLDivElement | null>(null);
+  const worksRef = useRef<HTMLDivElement | null>(null);
+  const contactRef = useRef<HTMLDivElement | null>(null);
+
+  interface MenuType {
+    component: React.ComponentType;
+    ref: RefObject<HTMLDivElement>;
+  }
+
+  const menuRef: MenuType[] = [
+    { component: Home, ref: homeRef },
+    { component: About, ref: aboutRef },
+    { component: Career, ref: careerRef },
+    { component: Skill, ref: skillRef },
+    { component: Works, ref: worksRef },
+    { component: Contact, ref: contactRef },
+  ];
+
+  useEffect(() => {
+    const updateIndexOnScroll = () => {
+      menuRef.map((menu, index) => {
+        if (menu.ref.current) {
+          const { top, bottom } = menu.ref.current.getBoundingClientRect();
+          const inView = top >= 0 && bottom <= window.innerHeight;
+          if (inView) setSelectedIndex(index);
+        }
+      });
+    };
+
+    scrollY.on("change", updateIndexOnScroll);
+    return () => scrollY.clearListeners();
+  }, [scrollY, setSelectedIndex]);
 
   const moveSection = (index: number) => {
-    menuRef.current[index]?.scrollIntoView({ behavior: "smooth" });
+    menuRef[index].ref.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   return (
@@ -84,15 +106,16 @@ const App = () => {
         <Intro />
         <Main $menuIdx={selectedIndex}>
           <Header onClick={moveSection} />
-          <Section>
-            {menuArr.map((menu, index) => {
-              const Component = componentMap[menu];
-              return (
-                <div key={index} ref={(el) => (menuRef.current[index] = el)}>
-                  <Component />
-                </div>
-              );
-            })}
+          <Section $menuIdx={selectedIndex}>
+            {menuRef.map((menu, index) => (
+              <div
+                key={index}
+                ref={menu.ref}
+                style={{ border: "1px solid #f00" }}
+              >
+                <menu.component />
+              </div>
+            ))}
           </Section>
         </Main>
       </ThemeProvider>

@@ -2,8 +2,13 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { selectedIndexAtom } from "../atoms";
+import React from "react";
 
 const Wrapper = styled.header<{ $menuIdx: number }>`
+  border: 1px solid #f00;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 80px;
   display: flex;
@@ -11,10 +16,11 @@ const Wrapper = styled.header<{ $menuIdx: number }>`
 
   ${({ $menuIdx }) =>
     $menuIdx &&
-    `position: sticky;top: 0;
-  width: fit-content;
-  height: fit-content;
-  padding: 200px 30px 0 30px;`}
+    `position: sticky;
+    top: 0;
+    width: fit-content;
+    height: fit-content;
+    padding: 200px 30px 0 30px;`}
 `;
 
 const Nav = styled.ul<{ $menuIdx: number }>`
@@ -55,11 +61,11 @@ const menuArr: string[] = [
   "Contact",
 ];
 
-interface HeaderProps {
+interface HeaderType {
   onClick: (index: number) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onClick }) => {
+const Header = ({ onClick }: HeaderType) => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedIndexAtom);
 
   const handleClick = (index: number) => {
@@ -88,4 +94,4 @@ const Header: React.FC<HeaderProps> = ({ onClick }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
