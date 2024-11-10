@@ -40,6 +40,7 @@ const Menu = styled(motion.li)<{ $isSelected: boolean; $menuIdx: number }>`
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  color: ${({ theme }) => theme.textColor};
   cursor: pointer;
 
   ${({ $menuIdx }) => $menuIdx && `width: fit-content;`}

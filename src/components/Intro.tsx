@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const SvgArea = styled.div`
-  border: 1px solid #f00;
+  //border: 1px solid #f00;
   width: fit-content;
   height: 1911px;
   position: absolute;
@@ -33,7 +33,7 @@ const SvgArea = styled.div`
     height: 1911px;
     stroke-width: 2;
     fill: none;
-    stroke: #fff;
+    //stroke: #fff;
   }
 
   .plane {
