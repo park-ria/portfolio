@@ -1,7 +1,12 @@
-import React from "react";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 850px;
+`;
 
 const Contact = () => {
-  return <div style={{ height: "60vh" }}>Contact</div>;
+  return <Wrapper>Contact</Wrapper>;
 };
 
 export default Contact;

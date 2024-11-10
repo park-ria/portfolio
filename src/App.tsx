@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, RefObject } from "react";
+import React, { useRef, RefObject, useEffect } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./styles/theme";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -82,6 +82,21 @@ const App = () => {
       block: "start",
     });
   };
+
+  useEffect(() => {
+    const updateIndexOnScroll = () => {
+      menuRef.map((menu, index) => {
+        if (menu.ref.current) {
+          const { top, bottom } = menu.ref.current.getBoundingClientRect();
+          if (top < window.innerHeight / 2 && bottom > window.innerHeight / 2)
+            setSelectedIndex(index);
+        }
+      });
+    };
+
+    scrollY.on("change", updateIndexOnScroll);
+    return () => scrollY.clearListeners();
+  }, [scrollY, selectedIndex]);
 
   return (
     <>

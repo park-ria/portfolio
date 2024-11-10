@@ -10,6 +10,7 @@ const Wrapper = styled.header<{ $menuIdx: number }>`
   left: 0;
   width: 100%;
   height: 80px;
+  background: transparent;
   display: flex;
   align-items: center;
   z-index: 1;
