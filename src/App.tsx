@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, Component, RefObject } from "react";
+import React, { useRef, useEffect, RefObject } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./styles/theme";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -46,9 +46,8 @@ const Main = styled.main<{ $menuIdx: number }>`
   ${({ $menuIdx }) => $menuIdx && `flex-direction: row;`}
 `;
 
-const Section = styled.section<{ $menuIdx: number }>`
+const Section = styled.section`
   flex: 1;
-  ${({ $menuIdx }) => $menuIdx && `flex:1;`}
 `;
 
 const App = () => {
@@ -81,10 +80,10 @@ const App = () => {
     const updateIndexOnScroll = () => {
       menuRef.map((menu, index) => {
         if (menu.ref.current) {
+          console.log(index);
           const { top, bottom } = menu.ref.current.getBoundingClientRect();
-          const inView =
-            top < window.innerHeight * 0.1 && bottom > window.innerHeight * 0.9;
-          if (inView) setSelectedIndex(index);
+          if (top < window.innerHeight / 2 && bottom > window.innerHeight / 2)
+            setSelectedIndex(index);
         }
       });
     };
@@ -107,7 +106,7 @@ const App = () => {
         <Intro />
         <Main $menuIdx={selectedIndex}>
           <Header onClick={moveSection} />
-          <Section $menuIdx={selectedIndex}>
+          <Section>
             {menuRef.map((menu, index) => (
               <div key={index} ref={menu.ref}>
                 <menu.component />

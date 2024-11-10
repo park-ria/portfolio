@@ -1,5 +1,6 @@
-import React from "react";
 import styled from "styled-components";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const Wrapper = styled.div`
   border: 1px solid #f00;
@@ -50,7 +51,7 @@ const ImgCircle = styled.div`
   background: #00f;
 `;
 
-const FrontCircle = styled.span`
+const FrontCircle = styled(motion.span)`
   display: inline-block;
   width: 250px;
   height: 500px;
@@ -97,7 +98,7 @@ const FrontCircle = styled.span`
   }
 `;
 
-const BackCircle = styled.span`
+const BackCircle = styled(motion.span)`
   display: inline-block;
   width: 250px;
   height: 500px;
@@ -145,6 +146,19 @@ const BackCircle = styled.span`
 `;
 
 const Home = () => {
+  const imgCircleRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: imgCircleRef,
+    offset: ["start end", "end start"],
+  });
+
+  const frontTranslateY = useTransform(
+    scrollYProgress,
+    [0, 0.55],
+    ["-40%", "0%"]
+  );
+  const backTranslateY = useTransform(scrollYProgress, [0, 0.4], ["70%", "0%"]);
+
   return (
     <Wrapper>
       <HomeInner>
@@ -161,11 +175,11 @@ const Home = () => {
           </HomeDesc>
         </HomeTextSection>
         <HomeImgSection>
-          <ImgCircle>
-            <FrontCircle>
+          <ImgCircle ref={imgCircleRef}>
+            <FrontCircle style={{ translateY: frontTranslateY }}>
               <span />
             </FrontCircle>
-            <BackCircle>
+            <BackCircle style={{ translateY: backTranslateY }}>
               <span />
             </BackCircle>
           </ImgCircle>
