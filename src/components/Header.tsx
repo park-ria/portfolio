@@ -17,7 +17,7 @@ const Wrapper = styled.header<{ $menuIdx: number }>`
 
   ${({ $menuIdx }) =>
     $menuIdx &&
-    `position: sticky;
+    `position: fixed;
     top: 0;
     width: fit-content;
     height: fit-content;
@@ -47,11 +47,12 @@ const Menu = styled(motion.li)<{ $isSelected: boolean; $menuIdx: number }>`
   ${({ $menuIdx }) => $menuIdx && `width: fit-content;`}
 `;
 
-const Underline = styled(motion.span)`
+const Underline = styled(motion.span)<{ $menuIdx: number }>`
   display: inline-block;
   width: 100%;
   height: 3px;
-  background: ${({ theme }) => theme.accentColor};
+  background: ${({ $menuIdx, theme }) =>
+    $menuIdx === 1 ? "#fff" : theme.accentColor};
 `;
 
 const menuArr: string[] = [
@@ -87,7 +88,10 @@ const Header = ({ onClick }: HeaderType) => {
           >
             {menu}
             {index === selectedIndex && (
-              <Underline layoutId="underline"></Underline>
+              <Underline
+                $menuIdx={selectedIndex}
+                layoutId="underline"
+              ></Underline>
             )}
           </Menu>
         ))}

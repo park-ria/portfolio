@@ -39,11 +39,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Main = styled.main<{ $menuIdx: number }>`
+const Main = styled.main`
   position: relative;
   display: flex;
   flex-direction: column;
-  ${({ $menuIdx }) => $menuIdx && `flex-direction: row;`}
 `;
 
 const Section = styled.section`
@@ -103,7 +102,7 @@ const App = () => {
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
         <Intro />
-        <Main $menuIdx={selectedIndex}>
+        <Main>
           <Header onClick={moveSection} />
           <Section>
             {menuRef.map((menu, index) => (
