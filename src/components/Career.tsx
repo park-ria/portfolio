@@ -5,8 +5,21 @@ const Wrapper = styled.div`
   height: 1290px;
 `;
 
+const Title = styled.h1`
+  width: fit-content;
+  margin: 0 auto;
+  padding-top: 100px;
+  font: 700 80px/1 "Teko", serif;
+  letter-spacing: -2px;
+  color: ${({ theme }) => theme.textColor};
+`;
+
 const Career = () => {
-  return <Wrapper>Career</Wrapper>;
+  return (
+    <Wrapper>
+      <Title>CAREER</Title>
+    </Wrapper>
+  );
 };
 
 export default Career;

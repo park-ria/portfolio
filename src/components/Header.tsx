@@ -16,12 +16,13 @@ const Wrapper = styled.header<{ $menuIdx: number }>`
   z-index: 1;
 
   ${({ $menuIdx }) =>
-    $menuIdx &&
-    `position: fixed;
-    top: 0;
-    width: fit-content;
-    height: fit-content;
-    padding: 200px 30px 0 30px;`}
+    $menuIdx
+      ? `position: fixed;
+        top: 0;
+        width: fit-content;
+        height: fit-content;
+        padding: 200px 30px 0 30px;`
+      : "border-bottom: 1px solid #eee;"}
 `;
 
 const Nav = styled.ul<{ $menuIdx: number }>`
@@ -33,8 +34,8 @@ const Nav = styled.ul<{ $menuIdx: number }>`
   ${({ $menuIdx }) =>
     $menuIdx &&
     `width: fit-content;
-  flex-direction: column;
-  gap: 30px;`}
+    flex-direction: column;
+    gap: 30px;`}
 `;
 
 const Menu = styled(motion.li)<{ $isSelected: boolean; $menuIdx: number }>`

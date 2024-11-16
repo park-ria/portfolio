@@ -114,29 +114,27 @@ const Intro = () => {
 
   useEffect(() => {
     const updateOffsetDistance = (e: number) => {
-      // Box1의 위치를 기준으로 planeRef가 해당 영역에 들어올 때 색깔을 변경
       const text1Top = textRef1.current?.getBoundingClientRect().top || 0;
       const text2Top = textRef2.current?.getBoundingClientRect().top || 0;
       const text3Top = textRef3.current?.getBoundingClientRect().top || 0;
       const planeTop = planeRef.current?.getBoundingClientRect().top || 0;
 
-      // planeRef가 Box1의 div 영역에 들어왔을 때 textRef1 색상 변경
       if (planeTop >= text1Top && textRef1.current) {
         textRef1.current.style.fill = isDark ? "#ED91BC" : "#C8F31D";
       } else if (textRef1.current) {
-        textRef1.current.style.fill = "#fff"; // 원래 색상으로 돌아옴
+        textRef1.current.style.fill = "#fff";
       }
 
       if (planeTop >= text2Top && textRef2.current) {
         textRef2.current.style.fill = isDark ? "#ED91BC" : "#C8F31D";
       } else if (textRef2.current) {
-        textRef2.current.style.fill = "#fff"; // 원래 색상으로 돌아옴
+        textRef2.current.style.fill = "#fff";
       }
 
       if (planeTop >= text3Top && textRef3.current) {
         textRef3.current.style.fill = isDark ? "#ED91BC" : "#C8F31D";
       } else if (textRef3.current) {
-        textRef3.current.style.fill = "#fff"; // 원래 색상으로 돌아옴
+        textRef3.current.style.fill = "#fff";
       }
 
       // planeRef 위치 및 불투명도 조정
