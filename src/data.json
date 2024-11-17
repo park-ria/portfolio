@@ -1,0 +1,230 @@
+{
+  "career": [
+    {
+      "orderNum": "01",
+      "company": "(주)아이티맨",
+      "period": "3년 8개월",
+      "project": [
+        {
+          "name": "한전KPS 원전 정비지원 종합상황실 시스템 유지관리",
+          "period": "2023.09~2024.02",
+          "position": "웹 개발",
+          "skill": [
+            {
+              "title": "백엔드",
+              "content": "Spring Framework를 기반으로 서버와 비즈니스 로직을 관리하고, MyBatis를 활용하여 Oracle DB의 데이터를 효율적으로 관리했습니다."
+            },
+            {
+              "title": "프론트엔드",
+              "content": "JSP와 JavaScript를 통해 웹화면을 수정하고, ajax로 서버와 데이터를 주고받는 기능을 관리했습니다."
+            },
+            {
+              "title": "버전관리",
+              "content": "SVN을 통해 소스 코드 버전 관리를 효과적으로 수행했습니다."
+            }
+          ],
+          "skillIcon": [
+            "java",
+            "spring",
+            "oracle",
+            "mybatis",
+            "javascript",
+            "jsp",
+            "css",
+            "svn"
+          ]
+        },
+        {
+          "name": "한전KPS 전력정비산업 품질플랫폼 시스템 유지관리",
+          "period": "2023.09~2024.02",
+          "site": "https://qpc.kps.co.kr/",
+          "position": "웹 개발",
+          "skill": [
+            {
+              "title": "백엔드",
+              "content": "Spring Framework를 기반으로 서버와 비즈니스 로직을 관리하고, MyBatis를 활용하여 Oracle DB의 데이터를 효율적으로 관리했습니다."
+            },
+            {
+              "title": "프론트엔드",
+              "content": "JSP와 JavaScript를 통해 웹화면을 수정하고, ajax로 서버와 데이터를 주고받는 기능을 관리했습니다."
+            },
+            {
+              "title": "버전관리",
+              "content": "SVN을 통해 소스 코드 버전 관리를 효과적으로 수행했습니다."
+            }
+          ],
+          "skillIcon": [
+            "java",
+            "spring",
+            "oracle",
+            "mybatis",
+            "javascript",
+            "jsp",
+            "css",
+            "svn"
+          ]
+        },
+        {
+          "name": "한전KPS 원전 정비지원 종합상황실 시스템 구축",
+          "period": "2023.01~2023.09",
+          "position": "웹 개발",
+          "skill": [
+            {
+              "title": "백엔드",
+              "content": "Spring Framework를 기반으로 서버와 비즈니스 로직을 구축하고, MyBatis를 활용하여 Oracle DB의 데이터를 효율적으로 관리했습니다."
+            },
+            {
+              "title": "프론트엔드",
+              "content": "JSP와 JavaScript를 사용하여 UI를 설계하고 동적 화면을 구현했습니다. JavaScript를 통해 이벤트를 적용시키고, ajax로 서버와 데이터를 주고받는 기능을 구현했습니다."
+            },
+            {
+              "title": "버전관리",
+              "content": "SVN을 통해 소스 코드 버전 관리 및 협업을 효과적으로 수행했습니다."
+            }
+          ],
+          "skillIcon": [
+            "java",
+            "spring",
+            "oracle",
+            "mybatis",
+            "javascript",
+            "jsp",
+            "css",
+            "svn"
+          ]
+        },
+        {
+          "name": "한전KPS 전력정비산업 품질플랫폼 구축",
+          "period": "2022.09~2023.01",
+          "site": "https://qpc.kps.co.kr/",
+          "position": "웹 개발",
+          "skill": [
+            {
+              "title": "백엔드",
+              "content": "Spring Framework를 기반으로 서버와 비즈니스 로직을 구축하고, MyBatis를 활용하여 Oracle DB의 데이터를 효율적으로 관리했습니다."
+            },
+            {
+              "title": "프론트엔드",
+              "content": "JSP와 JavaScript를 사용하여 UI를 설계하고 동적 화면을 구현했습니다. JavaScript를 통해 이벤트를 적용시키고, ajax로 서버와 데이터를 주고받는 기능을 구현했습니다."
+            },
+            {
+              "title": "버전관리",
+              "content": "SVN을 통해 소스 코드 버전 관리 및 협업을 효과적으로 수행했습니다."
+            }
+          ],
+          "skillIcon": [
+            "java",
+            "spring",
+            "oracle",
+            "mybatis",
+            "javascript",
+            "jsp",
+            "css",
+            "svn"
+          ]
+        },
+        {
+          "name": "2022년 한전KPS 대중소 상생형 스마트공장 구축",
+          "period": "2022.06~2022.09",
+          "position": "웹 개발",
+          "skill": [
+            {
+              "title": "백엔드",
+              "content": "Spring Framework를 기반으로 서버와 비즈니스 로직을 구축하고, MyBatis를 활용하여 Maria DB의 데이터를 효율적으로 관리했습니다."
+            },
+            {
+              "title": "프론트엔드",
+              "content": "JSP와 JavaScript를 사용하여 UI를 설계하고 동적 화면을 구현했습니다. JavaScript를 통해 이벤트를 적용시키고, ajax로 서버와 데이터를 주고받는 기능을 구현했습니다."
+            },
+            {
+              "title": "버전관리",
+              "content": "SVN을 통해 소스 코드 버전 관리 및 협업을 효과적으로 수행했습니다."
+            }
+          ],
+          "skillIcon": [
+            "java",
+            "spring",
+            "mariadb",
+            "mybatis",
+            "javascript",
+            "jsp",
+            "css",
+            "svn"
+          ]
+        },
+        {
+          "name": "하이텍 대중소 상생형 스마트공장 신규구축",
+          "period": "2020.11~2021.06",
+          "position": "웹 개발",
+          "skill": [
+            {
+              "title": "백엔드",
+              "content": "Spring Framework를 기반으로 서버와 비즈니스 로직을 구축하고, MyBatis를 활용하여 Maria DB의 데이터를 효율적으로 관리했습니다."
+            },
+            {
+              "title": "프론트엔드",
+              "content": "JSP와 JavaScript를 사용하여 UI를 설계하고 동적 화면을 구현했습니다. JavaScript를 통해 이벤트를 적용시키고, ajax로 서버와 데이터를 주고받는 기능을 구현했습니다."
+            },
+            {
+              "title": "버전관리",
+              "content": "SVN을 통해 소스 코드 버전 관리 및 협업을 효과적으로 수행했습니다."
+            }
+          ],
+          "skillIcon": [
+            "java",
+            "spring",
+            "mariadb",
+            "mybatis",
+            "javascript",
+            "jsp",
+            "css",
+            "svn"
+          ]
+        },
+        {
+          "name": "한국항공조명 스마트공장 고도화 사업",
+          "period": "2020.09~2020.12",
+          "position": "웹 개발",
+          "skill": [
+            {
+              "title": "백엔드",
+              "content": "주문,발주부터 출하까지 전 공정을 Spring Framework를 기반으로 서버와 비즈니스 로직을 구축하고, MyBatis를 활용하여 Maria DB의 데이터를 효율적으로 관리했습니다."
+            },
+            {
+              "title": "프론트엔드",
+              "content": "JSP와 JavaScript를 사용하여 UI를 설계하고 동적 화면을 구현했습니다. JavaScript를 통해 이벤트를 적용시키고, ajax로 서버와 데이터를 주고받는 기능을 구현했습니다."
+            },
+            {
+              "title": "버전관리",
+              "content": "SVN을 통해 소스 코드 버전 관리 및 협업을 효과적으로 수행했습니다."
+            }
+          ],
+          "skillIcon": [
+            "java",
+            "spring",
+            "mariadb",
+            "mybatis",
+            "javascript",
+            "jsp",
+            "css",
+            "svn"
+          ]
+        }
+      ]
+    },
+    {
+      "orderNum": "02",
+      "company": "알앤비시스템(주)",
+      "period": "1년",
+      "project": [
+        {
+          "name": "관공서 서버 및 스토리지 점검",
+          "period": "2014.06 ~ 2015.06",
+          "position": "서버엔지니어",
+          "content": "hp 서버 및 스토리지 점검",
+          "skillIcon": ["centos", "redhat"]
+        }
+      ]
+    }
+  ]
+}

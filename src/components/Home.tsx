@@ -56,7 +56,7 @@ const HomeTitle = styled.div`
 `;
 
 const HomeDesc = styled.p`
-  font-size: 18px;
+  font-size: 1.125rem;
   color: ${({ theme }) => theme.textColor};
 `;
 
@@ -276,15 +276,18 @@ const Home = () => {
           <ImgWrapper>
             <ImgCircle
               ref={imgCircleRef}
-              initial={{ background: "transparent" }}
+              initial={{ background: "rgba(255, 255, 255, 0)" }}
               animate={{
-                background: selectedIndex > 0 ? "#fff" : "transparent",
+                background:
+                  selectedIndex > 0
+                    ? "rgba(255, 255, 255, 1)"
+                    : "rgba(255, 255, 255, 0)",
                 boxShadow:
-                  selectedIndex > 0 ? "5px 5px 5px rgba(0, 0, 0, 0.4)" : "",
+                  selectedIndex > 0 ? "5px 5px 5px rgba(0, 0, 0, 0.4)" : "none",
               }}
               transition={{
-                background: { duration: 0.5 },
-                boxShadow: { duration: 0.5, delay: 0.8 },
+                background: { duration: 0.3 },
+                boxShadow: { duration: 0.5, delay: 0.5 },
               }}
             >
               <AboutCircle
@@ -292,7 +295,7 @@ const Home = () => {
                 animate={{
                   opacity: selectedIndex > 0 ? 1 : 0,
                 }}
-                transition={{ duration: 1, delay: 0.8 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
               />
               <FrontCircle
                 style={{ translateY: frontTranslateY }}
@@ -300,7 +303,7 @@ const Home = () => {
                 animate={{
                   opacity: selectedIndex > 0 ? 0 : 1,
                 }}
-                transition={{ duration: 2 }}
+                transition={{ duration: 0.5 }}
               >
                 <span />
               </FrontCircle>
@@ -310,7 +313,7 @@ const Home = () => {
                 animate={{
                   opacity: selectedIndex > 0 ? 0 : 1,
                 }}
-                transition={{ duration: 2 }}
+                transition={{ duration: 0.5 }}
               >
                 <span />
               </BackCircle>

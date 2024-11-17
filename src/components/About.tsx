@@ -32,8 +32,7 @@ const SubRow = styled.div`
 
 const SubTitle = styled.h3`
   margin-bottom: 10px;
-  font: 500 32px/1 "Teko", serif;
-  letter-spacing: -2px;
+  font: 500 2rem/1 "Teko", serif;
   color: ${({ theme }) => theme.textColor};
 `;
 
@@ -41,7 +40,7 @@ const SubDesc = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: 20px;
+  font-size: 1.25rem;
   label {
     margin-right: 20px;
   }

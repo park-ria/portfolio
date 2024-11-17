@@ -8,7 +8,7 @@ import Intro from "./components/Intro";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import About from "./components/About";
-import Career from "./components/Career";
+import Career from "./components/Career/Career";
 import Skill from "./components/Skill";
 import Works from "./components/Works";
 import Contact from "./components/Contact";
@@ -32,6 +32,12 @@ const GlobalStyle = createGlobalStyle`
   body{
     font-family: "Noto Sans KR", sans-serif;
     background: ${({ theme }) => theme.bgColor};
+  }
+
+  :root{
+    --dark-gray-color : #999;
+    --gray-color: #ececec;
+    --light-gray-color: #f9f9f9;
   }
 
   .teko {

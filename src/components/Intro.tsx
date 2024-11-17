@@ -120,19 +120,19 @@ const Intro = () => {
       const planeTop = planeRef.current?.getBoundingClientRect().top || 0;
 
       if (planeTop >= text1Top && textRef1.current) {
-        textRef1.current.style.fill = isDark ? "#ED91BC" : "#C8F31D";
+        textRef1.current.style.fill = isDark ? "#f1629c" : "#c8f31d";
       } else if (textRef1.current) {
         textRef1.current.style.fill = "#fff";
       }
 
       if (planeTop >= text2Top && textRef2.current) {
-        textRef2.current.style.fill = isDark ? "#ED91BC" : "#C8F31D";
+        textRef2.current.style.fill = isDark ? "#f1629c" : "#c8f31d";
       } else if (textRef2.current) {
         textRef2.current.style.fill = "#fff";
       }
 
       if (planeTop >= text3Top && textRef3.current) {
-        textRef3.current.style.fill = isDark ? "#ED91BC" : "#C8F31D";
+        textRef3.current.style.fill = isDark ? "#f1629c" : "#c8f31d";
       } else if (textRef3.current) {
         textRef3.current.style.fill = "#fff";
       }

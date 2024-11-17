@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
-import { selectedIndexAtom } from "../atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { isDarkAtom, selectedIndexAtom } from "../atoms";
 import React from "react";
 
 const Wrapper = styled.header<{ $menuIdx: number }>`
@@ -70,6 +70,7 @@ interface HeaderType {
 }
 
 const Header = ({ onClick }: HeaderType) => {
+  const setMode = useSetRecoilState(isDarkAtom);
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedIndexAtom);
 
   const handleClick = (index: number) => {
@@ -96,6 +97,7 @@ const Header = ({ onClick }: HeaderType) => {
             )}
           </Menu>
         ))}
+        <button onClick={() => setMode((prev) => !prev)}>darkmode</button>
       </Nav>
     </Wrapper>
   );
