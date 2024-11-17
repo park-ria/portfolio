@@ -56,6 +56,40 @@ const Underline = styled(motion.span)<{ $menuIdx: number }>`
     $menuIdx === 1 ? "#fff" : theme.accentColor};
 `;
 
+const ModeBtn = styled.div`
+  width: 70px;
+  height: 30px;
+  background: #eee;
+  border-radius: 13px;
+  position: relative;
+  img {
+    width: 18px;
+    height: 18px;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    .dark {
+      left: 10px;
+    }
+    .light {
+      right: 10px;
+    }
+  }
+`;
+
+const ModeCircle = styled.span`
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #242424;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+`;
+
 const menuArr: string[] = [
   "Home",
   "About",
@@ -97,7 +131,11 @@ const Header = ({ onClick }: HeaderType) => {
             )}
           </Menu>
         ))}
-        <button onClick={() => setMode((prev) => !prev)}>darkmode</button>
+        <ModeBtn onClick={() => setMode((prev) => !prev)}>
+          <img className="dark" src="/imgs/moon.png" alt="dark mode" />
+          <img className="light" src="/imgs/sun.png" alt="light mode" />
+          <ModeCircle></ModeCircle>
+        </ModeBtn>
       </Nav>
     </Wrapper>
   );
