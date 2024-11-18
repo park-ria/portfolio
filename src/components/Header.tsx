@@ -1,8 +1,8 @@
+import React from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { isDarkAtom, selectedIndexAtom } from "../atoms";
-import React from "react";
 
 const Wrapper = styled.header<{ $menuIdx: number }>`
   position: absolute;
@@ -57,11 +57,18 @@ const Underline = styled(motion.span)<{ $menuIdx: number }>`
 `;
 
 const ModeBtn = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+const ModeBg = styled.div`
   width: 70px;
   height: 30px;
   background: #eee;
   border-radius: 13px;
   position: relative;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.2);
+
   img {
     width: 18px;
     height: 18px;
@@ -69,25 +76,24 @@ const ModeBtn = styled.div`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    .dark {
+    &:first-child {
       left: 10px;
     }
-    .light {
+    &:last-child {
       right: 10px;
     }
   }
 `;
 
-const ModeCircle = styled.span`
+const ModeCircle = styled(motion.span)`
   display: inline-block;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #242424;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 10px;
 `;
 
 const menuArr: string[] = [
@@ -104,7 +110,7 @@ interface HeaderType {
 }
 
 const Header = ({ onClick }: HeaderType) => {
-  const setMode = useSetRecoilState(isDarkAtom);
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedIndexAtom);
 
   const handleClick = (index: number) => {
@@ -131,10 +137,19 @@ const Header = ({ onClick }: HeaderType) => {
             )}
           </Menu>
         ))}
-        <ModeBtn onClick={() => setMode((prev) => !prev)}>
-          <img className="dark" src="/imgs/moon.png" alt="dark mode" />
-          <img className="light" src="/imgs/sun.png" alt="light mode" />
-          <ModeCircle></ModeCircle>
+        <ModeBtn>
+          <ModeBg onClick={() => setIsDark((prev) => !prev)}>
+            <img src="/imgs/moon.png" alt="dark mode" />
+            <img src="/imgs/sun.png" alt="light mode" />
+          </ModeBg>
+          <ModeCircle
+            initial={{ left: 6 }}
+            animate={{
+              left: isDark ? "auto" : 6,
+              right: isDark ? 6 : "auto",
+            }}
+            transition={{ duration: 0.3 }}
+          />
         </ModeBtn>
       </Nav>
     </Wrapper>

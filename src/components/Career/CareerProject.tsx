@@ -2,15 +2,17 @@ import { useState } from "react";
 import styled from "styled-components";
 import { ProjectType } from "../../type";
 import CareerProjectDesc from "./CareerProjectDesc";
-import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
-const Wrapper = styled.li`
-  padding: 10px 0;
+const Wrapper = styled(motion.li)`
   padding-left: 10px;
   border-bottom: 1px solid var(--dark-gray-color);
+  overflow: hidden;
+  transform-origin: top;
 `;
 
 const ProjectTop = styled.div`
+  margin: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,16 +53,18 @@ const ProjectCareer = ({ project }: CareerProjectType) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ height: 58 }}
+      animate={{ height: isOpen ? "fit-content" : 58 }}
+      transition={{ duration: 0.3 }}
+    >
       <ProjectTop>
         <ProjectName onClick={onClick}>{project.name}</ProjectName>
         <OpenButton $isOpen={isOpen} onClick={onClick}>
           +
         </OpenButton>
       </ProjectTop>
-      <AnimatePresence>
-        {isOpen && <CareerProjectDesc project={project} />}
-      </AnimatePresence>
+      <CareerProjectDesc isOpen={isOpen} project={project} />
     </Wrapper>
   );
 };

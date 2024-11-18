@@ -3,7 +3,6 @@ import { ProjectType } from "../../type";
 import CareerSkill from "./CareerSkill";
 import CareerSkillIcon from "./CareerSkillIcon";
 import { motion } from "framer-motion";
-import { useRef } from "react";
 
 const ProjectDesc = styled(motion.ul)`
   margin: 10px 0;
@@ -16,6 +15,7 @@ const ProjectDesc = styled(motion.ul)`
   color: ${({ theme }) => theme.textColor};
   border-radius: 8px;
   overflow: hidden;
+  transform-origin: top;
 `;
 
 const ProjectDescLabel = styled.span`
@@ -39,31 +39,16 @@ const SkillIconGroup = styled.li`
 `;
 
 interface CareerProjectType {
+  isOpen: boolean;
   project: ProjectType;
 }
 
-const CareerProjectDesc = ({ project }: CareerProjectType) => {
-  const descRef = useRef<HTMLUListElement>(null);
-  const variants = {
-    open: {
-      height: descRef.current?.scrollHeight || 0, // 실제 높이를 기준으로 설정
-      opacity: 1,
-    },
-    closed: {
-      height: 0,
-      opacity: 0,
-    },
-  };
+const CareerProjectDesc = ({ isOpen, project }: CareerProjectType) => {
   return (
     <ProjectDesc
-      ref={descRef}
-      initial={{ height: 0, opacity: 0 }}
-      animate={{ height: "fit-content", opacity: 1 }}
-      exit={{ height: 0, opacity: 0 }}
-      transition={{
-        duration: 0.3,
-        ease: "linear",
-      }}
+      initial={{ scaleY: 0 }}
+      animate={{ scaleY: isOpen ? 1 : 0 }}
+      transition={{ duration: 0.3 }}
     >
       <li>
         <ProjectDescLabel>기간</ProjectDescLabel>
