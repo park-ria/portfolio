@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { isDarkAtom, selectedIndexAtom } from "../atoms";
 
 const Wrapper = styled.header<{ $menuIdx: number }>`
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -18,10 +18,12 @@ const Wrapper = styled.header<{ $menuIdx: number }>`
   ${({ $menuIdx }) =>
     $menuIdx
       ? `position: fixed;
-        top: 0;
-        width: fit-content;
-        height: fit-content;
-        padding: 200px 30px 0 30px;`
+          top: 0;
+          width: fit-content;
+          height: 100%;
+          padding: 80px 30px 50px;
+          flex-direction: column;
+          justify-content: space-between;`
       : "border-bottom: 1px solid #eee;"}
 `;
 
@@ -56,8 +58,9 @@ const Underline = styled(motion.span)<{ $menuIdx: number }>`
     $menuIdx === 1 ? "#fff" : theme.accentColor};
 `;
 
-const ModeBtn = styled.div`
+const ModeBtn = styled.div<{ $menuIdx: number }>`
   position: relative;
+  right: ${({ $menuIdx }) => ($menuIdx === 0 ? "30px" : "auto")};
   cursor: pointer;
 `;
 
@@ -137,21 +140,21 @@ const Header = ({ onClick }: HeaderType) => {
             )}
           </Menu>
         ))}
-        <ModeBtn>
-          <ModeBg onClick={() => setIsDark((prev) => !prev)}>
-            <img src="/imgs/moon.png" alt="dark mode" />
-            <img src="/imgs/sun.png" alt="light mode" />
-          </ModeBg>
-          <ModeCircle
-            initial={{ left: 6 }}
-            animate={{
-              left: isDark ? "auto" : 6,
-              right: isDark ? 6 : "auto",
-            }}
-            transition={{ duration: 0.3 }}
-          />
-        </ModeBtn>
       </Nav>
+      <ModeBtn $menuIdx={selectedIndex}>
+        <ModeBg onClick={() => setIsDark((prev) => !prev)}>
+          <img src="/imgs/moon.png" alt="dark mode" />
+          <img src="/imgs/sun.png" alt="light mode" />
+        </ModeBg>
+        <ModeCircle
+          initial={{ left: 6 }}
+          animate={{
+            left: isDark ? "auto" : 6,
+            right: isDark ? 6 : "auto",
+          }}
+          transition={{ duration: 0.3 }}
+        />
+      </ModeBtn>
     </Wrapper>
   );
 };

@@ -14,10 +14,17 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.textColor};
 `;
 
+const SubTitle = styled.h3`
+  font: 500 2rem/1 "Teko", serif;
+  letter-spacing: -2px;
+  color: ${({ theme }) => theme.textColor};
+`;
+
 const Skill = () => {
   return (
     <Wrapper>
       <Title>SKILL</Title>
+      <SubTitle>FRONT-END</SubTitle>
     </Wrapper>
   );
 };

@@ -14,7 +14,6 @@ const Wrapper = styled.div`
 
 const HomeInner = styled.div`
   width: 1290px;
-  //height: fit-content;
   height: 500px;
   display: flex;
   justify-content: space-between;
@@ -27,7 +26,6 @@ const HomeTextSection = styled.div`
 const HomeTitle = styled.div`
   display: flex;
   flex-direction: column;
-  //gap: 40px;
   margin-bottom: 40px;
   span {
     font: 700 174px/1 "Teko", serif;
@@ -63,7 +61,6 @@ const HomeDesc = styled.p`
 const HomeImgSection = styled.div`
   position: relative;
   height: 1500px;
-  //border: 1px solid #000;
 
   .effect2 {
     position: absolute;

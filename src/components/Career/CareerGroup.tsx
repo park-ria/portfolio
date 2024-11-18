@@ -28,7 +28,6 @@ const CareerDate = styled.span`
 
 const Projects = styled.ul`
   width: 50%;
-  //border-top: 1px solid var(--dark-gray-color);
 `;
 
 interface CareerGroupType {
