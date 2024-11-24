@@ -41,13 +41,13 @@ const Nav = styled.ul<{ $menuIdx: number }>`
 `;
 
 const Menu = styled(motion.li)<{ $isSelected: boolean; $menuIdx: number }>`
+  ${({ $menuIdx }) => $menuIdx && `width: fit-content;`}
+  height:32px;
   display: flex;
   flex-direction: column;
   font-size: 20px;
   color: ${({ theme }) => theme.textColor};
   cursor: pointer;
-
-  ${({ $menuIdx }) => $menuIdx && `width: fit-content;`}
 `;
 
 const Underline = styled(motion.span)<{ $menuIdx: number }>`
@@ -153,6 +153,7 @@ const Header = ({ onClick }: HeaderType) => {
             right: isDark ? 6 : "auto",
           }}
           transition={{ duration: 0.3 }}
+          onClick={() => setIsDark((prev) => !prev)}
         />
       </ModeBtn>
     </Wrapper>

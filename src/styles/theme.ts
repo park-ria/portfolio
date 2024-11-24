@@ -12,5 +12,5 @@ export const lightTheme: DefaultTheme = {
   bgColor: "#fff",
   accentColor: "#c8f31d",
   lightGrayColor: "#f9f9f9",
-  skillIconBg: "#ddd",
+  skillIconBg: "#eee",
 };

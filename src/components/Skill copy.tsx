@@ -1,7 +1,6 @@
-import { useEffect, useRef, useMemo } from "react";
-import styled, { useTheme } from "styled-components";
-import { motion } from "framer-motion";
-import { gsap } from "gsap";
+import { useEffect, useMemo, useState } from "react";
+import styled from "styled-components";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRecoilValue } from "recoil";
 import { selectedIndexAtom } from "../atoms";
 import datas from "../data.json";
@@ -12,31 +11,29 @@ const Wrapper = styled.div`
 `;
 
 const svgs = `
-  position: absolute;
   fill: transparent;
+  stroke: #D0F0FF;
   stroke-width: 2;
   z-index: -1;
 `;
 
 const Cloud1 = styled(motion.svg)`
-  ${svgs}
-  top: 13%;
+  ${svgs}//top: 13%;
   //right: 10%;
-  stroke: ${({ theme }) => theme.textColor};
 `;
 
 const Cloud2 = styled(motion.svg)`
   ${svgs}
   top: 48%;
   left: 10%;
-  stroke: ${({ theme }) => theme.textColor};
+  position: absolute;
 `;
 
 const Cloud3 = styled(motion.svg)`
   ${svgs}
   bottom: 5%;
   right: 15%;
-  stroke: ${({ theme }) => theme.textColor};
+  position: absolute;
 `;
 
 const Title = styled.h1`
@@ -102,23 +99,21 @@ const SkillName = styled.p`
 `;
 
 const Skill = () => {
-  const theme = useTheme();
   const selectedIndex = useRecoilValue(selectedIndexAtom);
   const isSelected: boolean = useMemo(
     () => selectedIndex === 3,
     [selectedIndex]
   );
 
-  const cloudRef = useRef<SVGSVGElement | null>(null);
+  const [animationState, setAnimationState] = useState(["70vw", "100vw"]);
+
   useEffect(() => {
-    if (cloudRef.current && selectedIndex === 3) {
-      gsap.fromTo(
-        cloudRef.current,
-        { x: "70vw" },
-        { x: "100vw", delay: 4, duration: 5, ease: "power1.out", repeat: -1 }
-      );
-    }
-  }, [selectedIndex]);
+    const timer = setTimeout(() => {
+      setAnimationState(["0vw", "100vw"]);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Wrapper>
@@ -138,29 +133,43 @@ const Skill = () => {
           </Skills>
         </SkillGroup>
       ))}
-      <Cloud1
-        className="cloud1"
-        width="337"
-        height="194"
-        viewBox="0 0 337 194"
-        ref={cloudRef}
-      >
-        <motion.path
-          initial={{ pathLength: 0, fill: "rgba(255, 255, 255, 0)" }}
-          animate={{
-            pathLength: isSelected ? 1 : 0,
-            fill: isSelected ? "#D0F0FF" : "rgba(255, 255, 255, 0)",
+      <AnimatePresence>
+        <Cloud1
+          className="cloud1"
+          width="337"
+          height="194"
+          viewBox="0 0 337 194"
+          style={{
+            position: "absolute",
+            top: "13%",
           }}
+          initial={{ x: "70vw" }}
+          animate={{ x: animationState }}
+          exit={{ x: "0vw" }}
           transition={{
-            pathLength: {
-              duration: isSelected ? 3 : 0,
-              ease: "easeInOut",
-            },
-            fill: { duration: 1, delay: isSelected ? 3 : 0 },
+            repeat: Infinity,
+            duration: 10,
+            ease: "easeInOut",
+            repeatDelay: 1,
           }}
-          d="M281.112 106.216L280.93 107.008L281.719 106.813C285.102 105.979 288.635 105.529 292.274 105.529C316.537 105.529 336.207 125.198 336.207 149.461C336.207 173.725 316.537 193.395 292.274 193.395H58.2255C26.3443 193.395 0.5 167.55 0.5 135.669C0.5 103.788 26.345 77.9436 58.2255 77.9436H58.7255V77.4436C58.7255 34.9491 93.1746 0.5 135.669 0.5C171.467 0.5 201.554 24.9473 210.148 58.0579L210.327 58.7481L210.915 58.3445C218.495 53.1401 227.476 50.3603 236.671 50.3732H236.671C261.86 50.3732 282.28 70.7929 282.28 95.9814C282.277 99.4259 281.886 102.859 281.112 106.216Z"
-        />
-      </Cloud1>
+        >
+          <motion.path
+            initial={{ pathLength: 0, fill: "rgba(255, 255, 255, 0)" }}
+            animate={{
+              pathLength: isSelected ? 1 : 0,
+              fill: isSelected ? "#D0F0FF" : "rgba(255, 255, 255, 0)",
+            }}
+            transition={{
+              pathLength: {
+                duration: isSelected ? 3 : 0,
+                ease: "easeInOut",
+              },
+              fill: { duration: 1, delay: isSelected ? 3 : 0 },
+            }}
+            d="M281.112 106.216L280.93 107.008L281.719 106.813C285.102 105.979 288.635 105.529 292.274 105.529C316.537 105.529 336.207 125.198 336.207 149.461C336.207 173.725 316.537 193.395 292.274 193.395H58.2255C26.3443 193.395 0.5 167.55 0.5 135.669C0.5 103.788 26.345 77.9436 58.2255 77.9436H58.7255V77.4436C58.7255 34.9491 93.1746 0.5 135.669 0.5C171.467 0.5 201.554 24.9473 210.148 58.0579L210.327 58.7481L210.915 58.3445C218.495 53.1401 227.476 50.3603 236.671 50.3732H236.671C261.86 50.3732 282.28 70.7929 282.28 95.9814C282.277 99.4259 281.886 102.859 281.112 106.216Z"
+          />
+        </Cloud1>
+      </AnimatePresence>
       <Cloud2 width="283" height="221" viewBox="0 0 283 221">
         <motion.path
           initial={{ pathLength: 0, fill: "rgba(255, 255, 255, 0)" }}

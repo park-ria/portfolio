@@ -226,5 +226,150 @@
         }
       ]
     }
+  ],
+  "skill": [
+    {
+      "title": "FRONT-END",
+      "skills": [
+        {
+          "name": "Next.js",
+          "img": "nextjs"
+        },
+        {
+          "name": "Typescript",
+          "img": "typescript"
+        },
+        {
+          "name": "React.js",
+          "img": "react"
+        },
+        {
+          "name": "Recoil",
+          "img": "recoil"
+        },
+        {
+          "name": "React-query",
+          "img": "reactquery"
+        },
+        {
+          "name": "Redux",
+          "img": "redux"
+        },
+        {
+          "name": "Axios",
+          "img": "axios"
+        },
+        {
+          "name": "Router",
+          "img": "router"
+        },
+        {
+          "name": "Javascript",
+          "img": "javascript"
+        },
+        {
+          "name": "Tailwind",
+          "img": "tailwind"
+        },
+        {
+          "name": "Styled-components",
+          "img": "styledcomponents"
+        },
+        {
+          "name": "Scss",
+          "img": "scss"
+        },
+        {
+          "name": "HTML5",
+          "img": "html"
+        },
+        {
+          "name": "CSS3",
+          "img": "css"
+        }
+      ]
+    },
+    {
+      "title": "BACK-END",
+      "skills": [
+        {
+          "name": "Java",
+          "img": "java"
+        },
+        {
+          "name": "Spring",
+          "img": "spring"
+        },
+        {
+          "name": "Node.js",
+          "img": "nodejs"
+        },
+        {
+          "name": "Oracle",
+          "img": "oracle"
+        },
+        {
+          "name": "Mysql",
+          "img": "mysql"
+        },
+        {
+          "name": "Maria db",
+          "img": "mariadb"
+        },
+        {
+          "name": "Monggo db",
+          "img": "monggodb"
+        },
+        {
+          "name": "MyBatis",
+          "img": "mybatis"
+        },
+        {
+          "name": "Firebase",
+          "img": "firebase"
+        },
+        {
+          "name": "Supabase",
+          "img": "supabase"
+        },
+        {
+          "name": "Prisma",
+          "img": "prisma"
+        },
+        {
+          "name": "GraphQL",
+          "img": "graphql"
+        },
+        {
+          "name": "Apollo Server",
+          "img": "apolloserver"
+        }
+      ]
+    },
+    {
+      "title": "ETC",
+      "skills": [
+        {
+          "name": "Figma",
+          "img": "figma"
+        },
+        {
+          "name": "Git",
+          "img": "git"
+        },
+        {
+          "name": "Github",
+          "img": "github"
+        },
+        {
+          "name": "Netlify",
+          "img": "netlify"
+        },
+        {
+          "name": "SVN",
+          "img": "svn"
+        }
+      ]
+    }
   ]
 }
