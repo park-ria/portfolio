@@ -317,8 +317,8 @@
           "img": "mariadb"
         },
         {
-          "name": "Monggo db",
-          "img": "monggodb"
+          "name": "Mongo db",
+          "img": "mongodb"
         },
         {
           "name": "MyBatis",

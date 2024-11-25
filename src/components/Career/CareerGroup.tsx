@@ -9,10 +9,11 @@ const Wrapper = styled.div`
 `;
 
 const SubTitle = styled.div`
-  margin-top: 10px;
+  margin: 10px 0 0 100px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex: 1;
+  gap: 100px;
 `;
 
 const SubTitleText = styled.h3`

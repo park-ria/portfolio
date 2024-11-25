@@ -9,6 +9,7 @@ import datas from "../data.json";
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
+  overflow: hidden;
 `;
 
 const svgs = `
@@ -21,7 +22,7 @@ const svgs = `
 const Cloud1 = styled(motion.svg)`
   ${svgs}
   top: 13%;
-  //right: 10%;
+  left: 70%;
   stroke: ${({ theme }) => theme.textColor};
 `;
 
@@ -102,21 +103,54 @@ const SkillName = styled.p`
 `;
 
 const Skill = () => {
-  const theme = useTheme();
   const selectedIndex = useRecoilValue(selectedIndexAtom);
   const isSelected: boolean = useMemo(
     () => selectedIndex === 3,
     [selectedIndex]
   );
 
+  const pathRef = useRef<SVGPathElement | null>(null);
   const cloudRef = useRef<SVGSVGElement | null>(null);
+
   useEffect(() => {
-    if (cloudRef.current && selectedIndex === 3) {
-      gsap.fromTo(
-        cloudRef.current,
-        { x: "70vw" },
-        { x: "100vw", delay: 4, duration: 5, ease: "power1.out", repeat: -1 }
-      );
+    if (pathRef.current && cloudRef.current && selectedIndex === 3) {
+      const pathLength = pathRef.current.getTotalLength();
+      gsap.set(pathRef.current, {
+        strokeDasharray: pathLength,
+        strokeDashoffset: isSelected ? pathLength : 0,
+      });
+      gsap.to(pathRef.current, {
+        strokeDashoffset: isSelected ? 0 : pathLength,
+        duration: isSelected ? 3 : 0,
+        ease: "power1.inOut",
+      });
+
+      //gsap.set(cloudRef.current, { left: "100%", opacity: 0 });
+      gsap
+        .timeline()
+        .from(cloudRef.current, {
+          left: "70%",
+          opacity: 1,
+          duration: 2,
+          delay: 3,
+        })
+        .to(cloudRef.current, {
+          left: "100%",
+          opacity: 0,
+        })
+        .to(cloudRef.current, {
+          left: "-50%",
+          opacity: 0,
+        })
+        .to(cloudRef.current, {
+          opacity: 1,
+        })
+        .to(cloudRef.current, {
+          left: "100%",
+          duration: 15,
+          repeat: -1,
+          ease: "easeInOut",
+        });
     }
   }, [selectedIndex]);
 
@@ -145,17 +179,18 @@ const Skill = () => {
         viewBox="0 0 337 194"
         ref={cloudRef}
       >
-        <motion.path
-          initial={{ pathLength: 0 }}
-          animate={{
-            pathLength: isSelected ? 1 : 0,
-          }}
-          transition={{
-            pathLength: {
-              duration: isSelected ? 3 : 0,
-              ease: "easeInOut",
-            },
-          }}
+        <path
+          ref={pathRef}
+          // initial={{ pathLength: 0 }}
+          // animate={{
+          //   pathLength: isSelected ? 1 : 0,
+          // }}
+          // transition={{
+          //   pathLength: {
+          //     duration: isSelected ? 3 : 0,
+          //     ease: "easeInOut",
+          //   },
+          // }}
           d="M281.112 106.216L280.93 107.008L281.719 106.813C285.102 105.979 288.635 105.529 292.274 105.529C316.537 105.529 336.207 125.198 336.207 149.461C336.207 173.725 316.537 193.395 292.274 193.395H58.2255C26.3443 193.395 0.5 167.55 0.5 135.669C0.5 103.788 26.345 77.9436 58.2255 77.9436H58.7255V77.4436C58.7255 34.9491 93.1746 0.5 135.669 0.5C171.467 0.5 201.554 24.9473 210.148 58.0579L210.327 58.7481L210.915 58.3445C218.495 53.1401 227.476 50.3603 236.671 50.3732H236.671C261.86 50.3732 282.28 70.7929 282.28 95.9814C282.277 99.4259 281.886 102.859 281.112 106.216Z"
         />
       </Cloud1>
