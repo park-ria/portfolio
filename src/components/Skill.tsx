@@ -125,32 +125,38 @@ const Skill = () => {
         ease: "power1.inOut",
       });
 
-      //gsap.set(cloudRef.current, { left: "100%", opacity: 0 });
-      gsap
-        .timeline()
-        .from(cloudRef.current, {
+      if (isSelected) {
+        gsap
+          .timeline()
+          .from(cloudRef.current, {
+            left: "70%",
+            opacity: 1,
+            duration: 2,
+            delay: 3,
+          })
+          .to(cloudRef.current, {
+            left: "100%",
+            opacity: 0,
+          })
+          .to(cloudRef.current, {
+            left: "-50%",
+            opacity: 0,
+          })
+          .to(cloudRef.current, {
+            opacity: 1,
+          })
+          .to(cloudRef.current, {
+            left: "100%",
+            duration: 15,
+            repeat: -1,
+            ease: "easeInOut",
+          });
+      } else {
+        gsap.timeline().to(cloudRef.current, {
           left: "70%",
-          opacity: 1,
-          duration: 2,
-          delay: 3,
-        })
-        .to(cloudRef.current, {
-          left: "100%",
           opacity: 0,
-        })
-        .to(cloudRef.current, {
-          left: "-50%",
-          opacity: 0,
-        })
-        .to(cloudRef.current, {
-          opacity: 1,
-        })
-        .to(cloudRef.current, {
-          left: "100%",
-          duration: 15,
-          repeat: -1,
-          ease: "easeInOut",
         });
+      }
     }
   }, [selectedIndex]);
 
