@@ -25,6 +25,8 @@ const Wrapper = styled.header<{ $menuIdx: number }>`
           flex-direction: column;
           justify-content: space-between;`
       : "border-bottom: 1px solid #eee;"}
+  transition: opacity 0.5s;
+  opacity: ${({ $menuIdx }) => ($menuIdx === 4 ? 0 : 1)};
 `;
 
 const Nav = styled.ul<{ $menuIdx: number }>`

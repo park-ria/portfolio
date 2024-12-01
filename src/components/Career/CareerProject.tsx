@@ -46,7 +46,7 @@ interface CareerProjectType {
   project: ProjectType;
 }
 
-const ProjectCareer = ({ project }: CareerProjectType) => {
+const CareerProject = ({ project }: CareerProjectType) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClick = () => {
     setIsOpen((prev) => !prev);
@@ -69,4 +69,4 @@ const ProjectCareer = ({ project }: CareerProjectType) => {
   );
 };
 
-export default ProjectCareer;
+export default CareerProject;

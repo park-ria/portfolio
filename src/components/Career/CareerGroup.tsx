@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { CareerType } from "../../type";
-import ProjectCareer from "./CareerProject";
+import CareerProject from "./CareerProject";
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const CareerGroup = ({ data }: CareerGroupType) => {
       </SubTitle>
       <Projects>
         {data.project.map((project, pIndex) => (
-          <ProjectCareer key={pIndex} project={project} />
+          <CareerProject key={pIndex} project={project} />
         ))}
       </Projects>
     </Wrapper>
