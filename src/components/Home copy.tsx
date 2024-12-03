@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { selectedIndexAtom } from "../atoms";
 import { useRecoilValue } from "recoil";
 
@@ -200,30 +200,6 @@ const BackCircle = styled(motion.span)`
 const Home = () => {
   const selectedIndex = useRecoilValue(selectedIndexAtom);
   const imgCircleRef = useRef(null);
-
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (wrapperRef.current) {
-        const { top } = wrapperRef.current.getBoundingClientRect();
-
-        // wrapperRef의 top 값이 화면 상단에 도달했을 때
-        if (top == 0) {
-          console.log("Wrapper has reached the top of the screen!");
-        }
-      }
-    };
-
-    // 스크롤 이벤트를 추가
-    window.addEventListener("scroll", handleScroll);
-
-    // 컴포넌트가 언마운트 될 때 이벤트 리스너를 제거
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const { scrollYProgress } = useScroll({
     target: imgCircleRef,
     offset: ["start end", "end start"],
@@ -241,7 +217,7 @@ const Home = () => {
   );
 
   return (
-    <Wrapper ref={wrapperRef} style={{ border: "1px solid #f00" }}>
+    <Wrapper>
       <HomeInner>
         <HomeTextSection>
           <HomeTitle>
@@ -316,6 +292,7 @@ const Home = () => {
                 animate={{
                   opacity: selectedIndex > 0 ? 1 : 0,
                 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
               />
               <FrontCircle
                 style={{ translateY: frontTranslateY }}

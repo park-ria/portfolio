@@ -32,6 +32,12 @@ const WorksWrapper = styled.div`
 const WorksGroup = styled.ul`
   display: flex;
   gap: 10px;
+  &:first-child {
+    justify-self: flex-start;
+  }
+  &:last-child {
+    justify-self: flex-end;
+  }
   li {
     //width: 556px;
     //height: 566px;
