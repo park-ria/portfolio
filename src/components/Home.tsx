@@ -65,8 +65,7 @@ const HomeDesc = styled.p`
 
 const HomeImgSection = styled.div`
   position: relative;
-  height: 1500px;
-  border: 1px solid #f00;
+  height: 1470px;
 
   .effect2 {
     position: absolute;
@@ -85,15 +84,14 @@ const HomeImgSection = styled.div`
 
 const ImgWrapper = styled.div`
   position: sticky;
-  top: 210px;
+  top: 180px;
 `;
 
 const ImgCircle = styled.div`
-  width: 502px;
+  width: 500px;
   height: 500px;
   border-radius: 50%;
   position: relative;
-  border: 1px solid #f00;
 `;
 
 const AboutCircle = styled.span`
@@ -103,9 +101,19 @@ const AboutCircle = styled.span`
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: url("/imgs/profile4.png") top/cover no-repeat;
+  background: #fff;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   opacity: 0;
   overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("/imgs/profile4.png") top/cover no-repeat;
+  }
 `;
 
 const FrontCircle = styled.span`
@@ -115,6 +123,7 @@ const FrontCircle = styled.span`
   border-radius: 250px 0 0 250px;
   background: ${({ theme }) => theme.accentColor};
   position: relative;
+  opacity: 1;
   transform: translateY(30%);
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   overflow: hidden;
@@ -163,6 +172,7 @@ const BackCircle = styled.span`
   border-radius: 0 250px 250px 0;
   background: #ececec;
   position: relative;
+  opacity: 1;
   transform: translateY(-20%);
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   overflow: hidden;
@@ -320,65 +330,57 @@ const Home = () => {
           "+=0.2" // 이전 애니메이션 완료 후 0.2초 뒤에 시작
         );
 
-      // Parallax 효과: frontCircleRef와 backCircleRef가 다르게 이동하도록 설정
       gsap.to(frontCircleRef.current, {
         scrollTrigger: {
           trigger: wrapperRef.current,
-          start: "top top", // 스크롤이 시작되었을 때
-          end: "center top", // center top에 도달할 때
-          scrub: true, // 스크롤에 따라 애니메이션을 동기화
-          toggleActions: "play reverse play reverse", // 스크롤 방향에 따라 애니메이션 동작
-          markers: true, // 디버깅용 마커 활성화
-          onEnter: () => {
-            // frontCircleRef가 center top에 도달했을 때 opacity를 1로 설정
-            gsap.to(frontCircleRef.current, { opacity: 1, duration: 0.3 });
-          },
-          onLeave: () => {
-            // frontCircleRef가 화면을 벗어날 때 opacity를 0으로 설정
-            gsap.to(frontCircleRef.current, { opacity: 0, duration: 0.3 });
-          },
-          onEnterBack: () => {
-            // 스크롤을 위로 올렸을 때 다시 보이도록 설정
-            gsap.to(frontCircleRef.current, { opacity: 1, duration: 0.3 });
-          },
-          onLeaveBack: () => {
-            // 화면을 벗어났을 때 opacity를 다시 0으로 설정
-            gsap.to(frontCircleRef.current, { opacity: 0, duration: 0.3 });
-          },
+          start: "top top",
+          end: "35% top",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+          //markers: true,
         },
-        y: "0%", // frontCircleRef는 0%로 이동
+        y: "0%",
+        duration: 0.3,
+        ease: "power1.out",
+      });
+
+      gsap.to(frontCircleRef.current, {
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "center top",
+          end: "bottom top",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+        opacity: 0,
         duration: 0.5,
-        ease: "power1.out", // 이징 효과
       });
 
       gsap.to(backCircleRef.current, {
         scrollTrigger: {
           trigger: wrapperRef.current,
-          start: "top top", // 스크롤이 시작되었을 때
-          end: "center top", // center top에 도달할 때
-          scrub: true, // 스크롤에 따라 애니메이션을 동기화
-          toggleActions: "play reverse play reverse", // 스크롤 방향에 따라 애니메이션 동작
-          markers: true, // 디버깅용 마커 활성화
-          onEnter: () => {
-            // backCircleRef가 center top에 도달했을 때 opacity를 1로 설정
-            gsap.to(backCircleRef.current, { opacity: 1, duration: 0.3 });
-          },
-          onLeave: () => {
-            // backCircleRef가 화면을 벗어날 때 opacity를 0으로 설정
-            gsap.to(backCircleRef.current, { opacity: 0, duration: 0.3 });
-          },
-          onEnterBack: () => {
-            // 스크롤을 위로 올렸을 때 다시 보이도록 설정
-            gsap.to(frontCircleRef.current, { opacity: 1, duration: 0.3 });
-          },
-          onLeaveBack: () => {
-            // 화면을 벗어났을 때 opacity를 다시 0으로 설정
-            gsap.to(frontCircleRef.current, { opacity: 0, duration: 0.3 });
-          },
+          start: "top top",
+          end: "30% top",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+          //markers: true,
         },
-        y: "0%", // backCircleRef는 0%로 이동
-        duration: 1,
-        ease: "power2.out", // 이징 효과
+        y: "0%",
+        //opacity: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      gsap.to(backCircleRef.current, {
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "center top",
+          end: "bottom top",
+          scrub: true,
+          toggleActions: "play reverse play reverse",
+        },
+        opacity: 0,
+        duration: 0.5,
       });
 
       // aboutCircleRef의 opacity 설정
@@ -389,7 +391,6 @@ const Home = () => {
           end: "bottom top", // 끝까지 스크롤
           scrub: true, // 스크롤에 따라 애니메이션을 동기화
           toggleActions: "play reverse play reverse", // 스크롤 방향에 따라 애니메이션 동작
-          markers: true, // 디버깅용 마커 활성화
         },
         opacity: 1, // aboutCircleRef의 opacity를 1로 변경
         duration: 0.5, // 속도 설정
