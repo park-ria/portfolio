@@ -80,7 +80,7 @@ const HomeImgSection = styled.div`
   .effect4 {
     position: absolute;
     top: 50px;
-    right: -50px;
+    right: -70px;
     fill: ${({ theme }) => theme.textColor};
   }
 `;
@@ -127,7 +127,7 @@ const FrontCircle = styled.span`
   background: ${({ theme }) => theme.accentColor};
   position: relative;
   opacity: 1;
-  transform: translateY(20%);
+  transform: translateY(15%);
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   overflow: hidden;
 
