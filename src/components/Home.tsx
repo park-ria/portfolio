@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 1080px;
+  height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const HomeInner = styled.div`
   width: 1290px;
-  height: 500px;
+  height: 600px;
   display: flex;
   justify-content: space-between;
 `;
@@ -30,6 +30,7 @@ const HomeTitle = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
+  perspective: 1000px;
   span {
     display: inline-block;
     min-width: 40px;
@@ -54,6 +55,8 @@ const HomeTitle = styled.div`
     }
     &.text3 {
       font-size: 150px;
+      transform-origin: center;
+      transform-style: preserve-3d;
     }
   }
 `;
@@ -65,7 +68,7 @@ const HomeDesc = styled.p`
 
 const HomeImgSection = styled.div`
   position: relative;
-  height: 1470px;
+  height: 1420px;
 
   .effect2 {
     position: absolute;
@@ -84,7 +87,7 @@ const HomeImgSection = styled.div`
 
 const ImgWrapper = styled.div`
   position: sticky;
-  top: 180px;
+  top: 120px;
 `;
 
 const ImgCircle = styled.div`
@@ -124,7 +127,7 @@ const FrontCircle = styled.span`
   background: ${({ theme }) => theme.accentColor};
   position: relative;
   opacity: 1;
-  transform: translateY(30%);
+  transform: translateY(20%);
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   overflow: hidden;
 
@@ -173,7 +176,7 @@ const BackCircle = styled.span`
   background: #ececec;
   position: relative;
   opacity: 1;
-  transform: translateY(-20%);
+  transform: translateY(-10%);
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   overflow: hidden;
 
@@ -235,6 +238,7 @@ const Home = () => {
       wrapperRef.current &&
       text1Ref.current &&
       text2Ref.current &&
+      text3Ref.current &&
       effect1Ref.current &&
       effect2Ref.current &&
       imgCircleRef.current &&
@@ -245,10 +249,10 @@ const Home = () => {
     ) {
       // 공통 scrollTrigger 설정
       const scrollTrigger = {
-        trigger: wrapperRef.current, // 트리거 요소
-        start: "top center", // 트리거가 화면 중앙에 올 때 시작
-        end: "bottom center", // 트리거가 화면 바깥으로 나갈 때까지 유지
-        toggleActions: "play reverse play reverse", // 스크롤 상태에 따라 애니메이션 동작
+        trigger: wrapperRef.current,
+        start: "top center",
+        end: "bottom center",
+        toggleActions: "play reverse play reverse",
       };
 
       const imgCircleTop = imgCircleRef.current.getBoundingClientRect().top;
@@ -294,13 +298,13 @@ const Home = () => {
         .addLabel("start")
         .fromTo(
           text1Ref.current,
-          { x: 200 }, // 시작 위치
-          { x: 0, duration: 0.8, ease: "power1.out" }, // 종료 위치
+          { x: 100 }, // 시작 위치
+          { x: 0, duration: 0.5, ease: "power1.out" }, // 종료 위치
           "start" // 동시에 시작
         )
         .fromTo(
           text2Ref.current.children, // text2Ref의 각 글자에 대해 애니메이션
-          { x: 30, opacity: 0 }, // 시작 상태
+          { x: 100, opacity: 0 }, // 시작 상태
           {
             x: 0,
             opacity: 1,
@@ -309,6 +313,27 @@ const Home = () => {
             stagger: 0.1, // 순차적으로 0.1초 간격으로 애니메이션
           },
           "start" // 동시에 시작
+        )
+        .fromTo(
+          text3Ref.current,
+          {
+            transform: "rotateY(-70deg) scale(0.8)", // 시작 상태
+            opacity: 0.5, // 회전 시 반투명 처리
+          },
+          {
+            transform: "rotateY(0deg) scale(1)", // 정면으로 돌아오면서 확대
+            opacity: 1, // 회전 종료 후 완전한 불투명도
+            duration: 1.3, // 애니메이션 시간
+            ease: "power3.out",
+          },
+          "start"
+        )
+        .addLabel("effectStart")
+        .fromTo(
+          effect1Ref.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.2 },
+          "effectStart"
         )
         .fromTo(
           effect2Ref.current,
@@ -321,20 +346,26 @@ const Home = () => {
             y: 0,
             duration: 0.4,
           },
-          "start" // 동시에 시작
+          "effectStart"
         )
         .fromTo(
-          effect1Ref.current,
-          { opacity: 0 }, // 시작 상태
-          { opacity: 1, duration: 0.2 }, // 종료 상태
-          "+=0.2" // 이전 애니메이션 완료 후 0.2초 뒤에 시작
+          effect3Ref.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.3 },
+          "effectStart"
+        )
+        .fromTo(
+          effect4Ref.current,
+          { scale: 0 },
+          { scale: 1, duration: 0.3 },
+          "effectStart"
         );
 
       gsap.to(frontCircleRef.current, {
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: "top top",
-          end: "35% top",
+          end: "20% top",
           scrub: true,
           toggleActions: "play reverse play reverse",
           //markers: true,
@@ -342,18 +373,6 @@ const Home = () => {
         y: "0%",
         duration: 0.3,
         ease: "power1.out",
-      });
-
-      gsap.to(frontCircleRef.current, {
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "center top",
-          end: "bottom top",
-          scrub: true,
-          toggleActions: "play reverse play reverse",
-        },
-        opacity: 0,
-        duration: 0.5,
       });
 
       gsap.to(backCircleRef.current, {
@@ -366,34 +385,34 @@ const Home = () => {
           //markers: true,
         },
         y: "0%",
-        //opacity: 0,
         duration: 0.3,
         ease: "power2.out",
       });
 
-      gsap.to(backCircleRef.current, {
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "center top",
-          end: "bottom top",
-          scrub: true,
-          toggleActions: "play reverse play reverse",
-        },
+      const opacityScrollTrigger = {
+        trigger: wrapperRef.current,
+        start: "center top",
+        end: "bottom top",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      };
+
+      gsap.to(frontCircleRef.current, {
+        scrollTrigger: opacityScrollTrigger,
         opacity: 0,
         duration: 0.5,
       });
 
-      // aboutCircleRef의 opacity 설정
+      gsap.to(backCircleRef.current, {
+        scrollTrigger: opacityScrollTrigger,
+        opacity: 0,
+        duration: 0.5,
+      });
+
       gsap.to(aboutCircleRef.current, {
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "center top", // aboutCircleRef가 화면의 중앙에 도달할 때
-          end: "bottom top", // 끝까지 스크롤
-          scrub: true, // 스크롤에 따라 애니메이션을 동기화
-          toggleActions: "play reverse play reverse", // 스크롤 방향에 따라 애니메이션 동작
-        },
-        opacity: 1, // aboutCircleRef의 opacity를 1로 변경
-        duration: 0.5, // 속도 설정
+        scrollTrigger: opacityScrollTrigger,
+        opacity: 1,
+        duration: 0.5,
       });
     }
   }, []);
