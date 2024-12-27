@@ -7,5 +7,5 @@ export const isDarkAtom = atom({
 
 export const selectedIndexAtom = atom<number>({
   key: "selectedIndex",
-  default: 0,
+  default: -1,
 });

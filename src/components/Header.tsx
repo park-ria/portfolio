@@ -1,69 +1,117 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isDarkAtom, selectedIndexAtom } from "../atoms";
 
-const Wrapper = styled.header<{ $menuIdx: number }>`
-  position: relative;
+const Wrapper = styled.header<{ $menuIdx: number; $menuOpen: boolean }>`
+  position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: transparent;
-  display: flex;
+  width: fit-content;
+  height: 100%;
+  padding: 80px 30px 50px;
+  display: ${({ $menuIdx }) => ($menuIdx < 0 ? "none" : "flex")};
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  z-index: 1;
-
-  ${({ $menuIdx }) =>
-    $menuIdx
-      ? `position: fixed;
-          top: 0;
-          width: fit-content;
-          height: 100%;
-          padding: 80px 30px 50px;
-          flex-direction: column;
-          justify-content: space-between;`
-      : "border-bottom: 1px solid #eee;"}
   transition: opacity 0.5s;
   opacity: ${({ $menuIdx }) => ($menuIdx === 4 ? 0 : 1)};
+  z-index: 1;
+
+  @media screen and (min-width: 451px) {
+    ${({ $menuIdx }) =>
+      $menuIdx === 0
+        ? `position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      padding: 0 15px;
+      background: transparent;
+      flex-direction: row;
+      justify-content: space-around;
+      border-bottom: 1px solid #eee;`
+        : ""}
+  }
+
+  @media screen and (max-width: 450px) {
+    opacity: 0.95;
+    background: ${({ theme }) => theme.bgColor};
+    color: ${({ theme }) => theme.textColor};
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    transform: ${({ $menuOpen }) => ($menuOpen ? "none" : "translateX(-100%)")};
+    transition: all 0.3s ease-in-out;
+  }
 `;
 
 const Nav = styled.ul<{ $menuIdx: number }>`
-  width: 1290px;
-  margin: 0 auto;
+  width: fit-content;
   display: flex;
+  flex-direction: column;
+  gap: 30px;
   justify-content: space-between;
 
-  ${({ $menuIdx }) =>
-    $menuIdx &&
-    `width: fit-content;
-    flex-direction: column;
-    gap: 30px;`}
+  @media screen and (min-width: 451px) {
+    ${({ $menuIdx }) =>
+      !$menuIdx &&
+      `width: 1290px;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 0px;`}
+  }
 `;
 
 const Menu = styled(motion.li)<{ $isSelected: boolean; $menuIdx: number }>`
-  ${({ $menuIdx }) => $menuIdx && `width: fit-content;`}
-  height:32px;
+  width: fit-content;
+  height: 32px;
+  margin-right: 0;
   display: flex;
   flex-direction: column;
   font-size: 20px;
   color: ${({ theme }) => theme.textColor};
   cursor: pointer;
+
+  @media screen and (max-width: 1500px) {
+    &:last-child {
+      margin-right: ${({ $menuIdx }) => ($menuIdx === 0 ? "125px" : "0")};
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 18px;
+    &:last-child {
+      margin-right: ${({ $menuIdx }) => ($menuIdx === 0 ? "80px" : "0")};
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 `;
 
 const Underline = styled(motion.span)<{ $menuIdx: number }>`
   display: inline-block;
   width: 100%;
   height: 3px;
-  background: ${({ $menuIdx, theme }) =>
-    $menuIdx === 1 ? "#fff" : theme.accentColor};
+  background: ${({ theme }) => theme.accentColor};
+
+  @media screen and (min-width: 451px) {
+    background: ${({ $menuIdx, theme }) =>
+      $menuIdx === 1 ? "#fff" : theme.accentColor};
+  }
 `;
 
 const ModeBtn = styled.div<{ $menuIdx: number }>`
-  position: relative;
-  right: ${({ $menuIdx }) => ($menuIdx === 0 ? "30px" : "auto")};
+  position: absolute;
+  right: auto;
+  bottom: 50px;
   cursor: pointer;
+
+  @media screen and (min-width: 451px) {
+    ${({ $menuIdx }) => !$menuIdx && `right: 15px; bottom:auto;`}
+  }
 `;
 
 const ModeBg = styled.div`
@@ -101,6 +149,43 @@ const ModeCircle = styled(motion.span)`
   transform: translateY(-50%);
 `;
 
+const ToggleBtn = styled.div<{ $menuOpen: boolean }>`
+  padding: 10px 6px;
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: ${({ theme }) => theme.bgColor};
+  border-radius: 0 6px 6px 0;
+  box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  cursor: pointer;
+  span {
+    width: 20px;
+    height: 1px;
+    background: ${({ theme }) => theme.textColor};
+    transition: all 0.3s ease-in-out;
+
+    &:first-child {
+      transform: ${({ $menuOpen }) =>
+        $menuOpen ? "translateY(6px) rotate(45deg)" : "none"};
+    }
+    &:nth-child(2) {
+      opacity: ${({ $menuOpen }) => ($menuOpen ? "0" : "1")};
+    }
+    &:last-child {
+      transform: ${({ $menuOpen }) =>
+        $menuOpen ? "translateY(-6px) rotate(-45deg)" : "none"};
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    opacity: 0.95;
+  }
+`;
+
 const menuArr: string[] = [
   "Home",
   "About",
@@ -117,6 +202,7 @@ interface HeaderType {
 const Header = ({ onClick }: HeaderType) => {
   const [isDark, setIsDark] = useRecoilState(isDarkAtom);
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedIndexAtom);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
@@ -124,7 +210,7 @@ const Header = ({ onClick }: HeaderType) => {
   };
 
   return (
-    <Wrapper $menuIdx={selectedIndex}>
+    <Wrapper $menuIdx={selectedIndex} $menuOpen={menuOpen}>
       <Nav $menuIdx={selectedIndex}>
         {menuArr.map((menu: string, index: number) => (
           <Menu
@@ -158,6 +244,14 @@ const Header = ({ onClick }: HeaderType) => {
           onClick={() => setIsDark((prev) => !prev)}
         />
       </ModeBtn>
+      <ToggleBtn
+        $menuOpen={menuOpen}
+        onClick={() => setMenuOpen((prev) => !prev)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </ToggleBtn>
     </Wrapper>
   );
 };

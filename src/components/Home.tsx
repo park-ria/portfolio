@@ -61,7 +61,7 @@ const HomeTitle = styled.div`
   }
 `;
 
-const HomeDesc = styled.p`
+const HomeDesc = styled.span`
   font-size: 1.125rem;
   color: ${({ theme }) => theme.textColor};
 `;
@@ -227,6 +227,7 @@ const Home = () => {
   const text1Ref = useRef<HTMLSpanElement | null>(null);
   const text2Ref = useRef<HTMLSpanElement | null>(null);
   const text3Ref = useRef<HTMLSpanElement | null>(null);
+  const text4Ref = useRef<HTMLSpanElement | null>(null);
   const effect1Ref = useRef<SVGSVGElement | null>(null);
   const effect2Ref = useRef<SVGSVGElement | null>(null);
   const effect3Ref = useRef<SVGSVGElement | null>(null);
@@ -239,6 +240,7 @@ const Home = () => {
       text1Ref.current &&
       text2Ref.current &&
       text3Ref.current &&
+      text4Ref.current &&
       effect1Ref.current &&
       effect2Ref.current &&
       imgCircleRef.current &&
@@ -327,6 +329,18 @@ const Home = () => {
             ease: "power3.out",
           },
           "start"
+        )
+        .fromTo(
+          text4Ref.current.children, // text4Ref의 각 글자에 대해 애니메이션
+          { x: 100, opacity: 0 }, // 시작 상태
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: "power1.out",
+            stagger: 0.1, // 순차적으로 0.1초 간격으로 애니메이션
+          },
+          "start" // 동시에 시작
         )
         .addLabel("effectStart")
         .fromTo(
@@ -453,7 +467,7 @@ const Home = () => {
               EFFECTIVELY
             </span>
           </HomeTitle>
-          <HomeDesc>
+          <HomeDesc ref={text4Ref}>
             프론트엔드의 세련된 인터페이스부터 백엔드의 견고한 시스템 설계까지,
             웹 개발자로서 웹의 모든 단계를 책임집니다. 직관적인 사용자 경험과
             효율적인 데이터 처리로 아이디어를 완벽한 디지털 솔루션으로

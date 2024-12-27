@@ -60,6 +60,7 @@ const App = () => {
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedIndexAtom);
   const { scrollY } = useScroll();
 
+  const introRef = useRef<HTMLDivElement | null>(null);
   const homeRef = useRef<HTMLDivElement | null>(null);
   const aboutRef = useRef<HTMLDivElement | null>(null);
   const careerRef = useRef<HTMLDivElement | null>(null);
@@ -88,13 +89,26 @@ const App = () => {
     });
   };
 
+  const changeSelectedIndex = (
+    ref: React.RefObject<HTMLDivElement>,
+    index: number
+  ) => {
+    if (ref.current) {
+      const { top, bottom } = ref.current.getBoundingClientRect();
+      if (top < window.innerHeight / 2 && bottom > window.innerHeight / 2)
+        setSelectedIndex(index);
+    }
+  };
+
   useEffect(() => {
     const updateIndexOnScroll = () => {
+      if (introRef.current) {
+        changeSelectedIndex(introRef, -1);
+      }
+
       menuRef.map((menu, index) => {
         if (menu.ref.current) {
-          const { top, bottom } = menu.ref.current.getBoundingClientRect();
-          if (top < window.innerHeight / 2 && bottom > window.innerHeight / 2)
-            setSelectedIndex(index);
+          changeSelectedIndex(menu.ref, index);
         }
       });
     };
@@ -107,7 +121,9 @@ const App = () => {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <Intro />
+        <div ref={introRef}>
+          <Intro />
+        </div>
         <Main>
           <Header onClick={moveSection} />
           <Section>
