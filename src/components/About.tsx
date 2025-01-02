@@ -23,6 +23,9 @@ const SubWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 50px;
+  @media screen and (max-width: 1400px) {
+    margin-top: 50px;
+  }
 `;
 
 const SubRow = styled.div`

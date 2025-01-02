@@ -13,6 +13,15 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1400px) {
+    height: calc(100vh - 100px);
+  }
+  @media screen and (max-width: 1150px) {
+    height: 100%;
+  }
+  @media screen and (max-width: 850px) {
+    padding: 0 15px;
+  }
 `;
 
 const HomeInner = styled.div`
@@ -20,10 +29,29 @@ const HomeInner = styled.div`
   height: 600px;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 1400px) {
+    width: auto;
+    height: 500px;
+    gap: 50px;
+  }
+  @media screen and (max-width: 1150px) {
+    height: auto;
+    margin: 100px 0;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 90px;
+  }
 `;
 
 const HomeTextSection = styled.div`
   width: 622px;
+  @media screen and (max-width: 1400px) {
+    width: 560px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    padding: 0 100px;
+  }
 `;
 
 const HomeTitle = styled.div`
@@ -31,12 +59,21 @@ const HomeTitle = styled.div`
   flex-direction: column;
   margin-bottom: 40px;
   perspective: 1000px;
+  @media screen and (max-width: 450px) {
+    margin-bottom: 20px;
+  }
+
   span {
     display: inline-block;
     min-width: 40px;
     font: 700 174px/1 "Teko", serif;
     letter-spacing: -2px;
     color: ${({ theme }) => theme.textColor};
+
+    &.blank {
+      min-width: 20px;
+      width: 40px;
+    }
 
     &:first-child {
       position: relative;
@@ -57,13 +94,61 @@ const HomeTitle = styled.div`
       font-size: 150px;
       transform-origin: center;
       transform-style: preserve-3d;
+      @media screen and (max-width: 1400px) {
+        font-size: 115px;
+      }
+      @media screen and (max-width: 600px) {
+        font-size: 86px;
+      }
+      @media screen and (max-width: 450px) {
+        font-size: 72px;
+      }
+    }
+
+    @media screen and (max-width: 1400px) {
+      font-size: 130px;
+      &:first-child {
+        .effect3 {
+          width: 60px;
+          top: 30px;
+          right: 200px;
+        }
+      }
+    }
+    @media screen and (max-width: 1150px) {
+      font-size: 130px;
+      &:first-child {
+        .effect1 {
+          width: 70px;
+          left: -30px;
+        }
+      }
+    }
+    @media screen and (max-width: 600px) {
+      font-size: 100px;
+      &:first-child {
+        .effect1,
+        .effect3 {
+          opacity: 0 !important;
+        }
+      }
+    }
+    @media screen and (max-width: 450px) {
+      font-size: 80px;
+      &.blank {
+        width: 20px;
+      }
     }
   }
 `;
 
 const HomeDesc = styled.span`
+  display: inline-block;
   font-size: 1.125rem;
   color: ${({ theme }) => theme.textColor};
+  @media screen and (max-width: 450px) {
+    font-size: 0.875rem;
+  }
 `;
 
 const HomeImgSection = styled.div`
@@ -80,14 +165,41 @@ const HomeImgSection = styled.div`
   .effect4 {
     position: absolute;
     top: 50px;
-    right: -70px;
+    right: -60px;
     fill: ${({ theme }) => theme.textColor};
+  }
+
+  @media screen and (max-width: 1400px) {
+    height: 1300px;
+    .effect2 {
+      width: 100px;
+    }
+    .effect4 {
+      width: 50px;
+      right: -50px;
+    }
+  }
+  @media screen and (max-width: 1150px) {
+    width: fit-content;
+    height: fit-content;
+    .effect2 {
+      left: -30px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .effect2,
+    .effect4 {
+      opacity: 0 !important;
+    }
   }
 `;
 
 const ImgWrapper = styled.div`
   position: sticky;
   top: 120px;
+  @media screen and (max-width: 1150px) {
+    position: static;
+  }
 `;
 
 const ImgCircle = styled.div`
@@ -95,6 +207,14 @@ const ImgCircle = styled.div`
   height: 500px;
   border-radius: 50%;
   position: relative;
+  @media screen and (max-width: 1400px) {
+    width: 402px;
+    height: 400px;
+  }
+  @media screen and (max-width: 450px) {
+    width: 302px;
+    height: 300px;
+  }
 `;
 
 const AboutCircle = styled.span`
@@ -166,6 +286,21 @@ const FrontCircle = styled.span`
     letter-spacing: -2px;
     color: #fff;
   }
+
+  @media screen and (max-width: 1400px) {
+    width: 200px;
+    height: 400px;
+    &::after {
+      font-size: 50px;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    width: 150px;
+    height: 300px;
+    &::after {
+      font-size: 40px;
+    }
+  }
 `;
 
 const BackCircle = styled.span`
@@ -215,10 +350,25 @@ const BackCircle = styled.span`
     letter-spacing: -2px;
     color: #fff;
   }
+
+  @media screen and (max-width: 1400px) {
+    width: 200px;
+    height: 400px;
+    &::after {
+      font-size: 50px;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    width: 150px;
+    height: 300px;
+    &::after {
+      font-size: 40px;
+    }
+  }
 `;
 
 const Home = () => {
-  const selectedIndex = useRecoilValue(selectedIndexAtom);
+  //const selectedIndex = useRecoilValue(selectedIndexAtom);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const imgCircleRef = useRef<HTMLDivElement | null>(null);
   const aboutCircleRef = useRef<HTMLSpanElement | null>(null);
@@ -330,19 +480,13 @@ const Home = () => {
           },
           "start"
         )
-        .fromTo(
-          text4Ref.current.children, // text4Ref의 각 글자에 대해 애니메이션
-          { x: 100, opacity: 0 }, // 시작 상태
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.5,
-            ease: "power1.out",
-            stagger: 0.1, // 순차적으로 0.1초 간격으로 애니메이션
-          },
-          "start" // 동시에 시작
-        )
         .addLabel("effectStart")
+        .fromTo(
+          text4Ref.current,
+          { x: 100, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" },
+          "effectStart"
+        )
         .fromTo(
           effect1Ref.current,
           { opacity: 0 },
@@ -447,7 +591,9 @@ const Home = () => {
                 <path d="M50.8001 14C51.5001 17.3 52.6001 20 53.3001 20.1C54.0001 20.1 57.4001 20.1 61.0001 20C67.8001 19.9 73.5001 21.3 72.5001 22.9C72.2001 23.5 70.7001 23.5 68.7001 22.9C65.1001 21.9 57.0001 21.7 54.6001 22.6C53.4001 23.1 53.1001 24.1 53.6001 27.1C54.4001 31.6 52.4001 32.7 51.4001 28.2C51.1001 26.7 50.7001 24.9 50.5001 24.3C50.0001 22.8 35.8001 29.7 32.1001 33.1L29.7001 35.3L32.4001 37.3C35.8001 39.8 34.7001 41.4 30.9001 39.5C29.3001 38.6 27.6001 38.2 27.1001 38.5C25.9001 39.2 21.0001 51.6 21.0001 54C21.0001 55.1 20.5001 56 20.0001 56C18.0001 56 19.1001 49.9 22.2001 42.9L25.4001 35.7L23.0001 34.1C18.6001 31.1 16.5001 29.2 17.2001 28.5C17.5001 28.2 19.5001 28.9 21.7001 30.2C23.8001 31.6 26.0001 33 26.7001 33.3C27.4001 33.7 29.4001 32.7 31.3001 31C33.2001 29.4 38.2001 26.4 42.4001 24.4C46.6001 22.4 50.0001 20.5 50.0001 20.1C50.0001 19.8 49.4001 17.2 48.6001 14.3C47.3001 9.5 47.4001 8 49.0001 8C49.3001 8 50.2001 10.7 50.8001 14Z" />
                 <path d="M75.3 38.6C76.8 40.2 74.4 41 68.3 41C61.3 41 54.2 43.7 47.3 48.8C43.3 51.8 36 62.7 36 65.7C36 68.4 34.2 69.7 33.4 67.5C32.4 64.9 38.9 53.2 43.9 48.8C50.4 43 59 39.3 67.6 38.6C71.5 38.3 75 38.3 75.3 38.6Z" />
               </svg>
-              <span ref={text1Ref}>I CAN</span>
+              <span ref={text1Ref}>
+                I<span className="blank"></span>CAN
+              </span>
               <svg
                 ref={effect3Ref}
                 className="effect3"
@@ -460,7 +606,9 @@ const Home = () => {
             </span>
             <span ref={text2Ref}>
               {"DO BOTH".split("").map((char, index) => (
-                <span key={index}>{char}</span>
+                <span key={index} className={char === " " ? "blank" : ""}>
+                  {char}
+                </span>
               ))}
             </span>
             <span className="text3" ref={text3Ref}>
