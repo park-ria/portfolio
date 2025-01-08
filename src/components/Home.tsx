@@ -196,9 +196,10 @@ const HomeImgSection = styled.div`
 
 const ImgWrapper = styled.div`
   position: sticky;
-  top: 120px;
+  top: 180px;
   @media screen and (max-width: 1150px) {
     position: static;
+    top: 0;
   }
 `;
 

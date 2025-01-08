@@ -14,11 +14,11 @@ const Wrapper = styled.header<{ $menuIdx: number; $menuOpen: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  transition: opacity 0.5s;
+  transition: all 0.3s;
   opacity: ${({ $menuIdx }) => ($menuIdx === 4 ? 0 : 1)};
   z-index: 1;
 
-  @media screen and (min-width: 451px) {
+  @media screen and (min-width: 601px) {
     ${({ $menuIdx }) =>
       $menuIdx === 0
         ? `position: relative;
@@ -34,7 +34,7 @@ const Wrapper = styled.header<{ $menuIdx: number; $menuOpen: boolean }>`
         : ""}
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 600px) {
     opacity: 0.95;
     background: ${({ theme }) => theme.bgColor};
     color: ${({ theme }) => theme.textColor};
@@ -51,7 +51,7 @@ const Nav = styled.ul<{ $menuIdx: number }>`
   gap: 30px;
   justify-content: space-between;
 
-  @media screen and (min-width: 451px) {
+  @media screen and (min-width: 601px) {
     ${({ $menuIdx }) =>
       !$menuIdx &&
       `width: 1290px;
@@ -80,12 +80,6 @@ const Menu = styled(motion.li)<{ $isSelected: boolean; $menuIdx: number }>`
   @media screen and (max-width: 600px) {
     font-size: 18px;
     &:last-child {
-      margin-right: ${({ $menuIdx }) => ($menuIdx === 0 ? "80px" : "0")};
-    }
-  }
-
-  @media screen and (max-width: 450px) {
-    &:last-child {
       margin-right: 0;
     }
   }
@@ -97,7 +91,7 @@ const Underline = styled(motion.span)<{ $menuIdx: number }>`
   height: 3px;
   background: ${({ theme }) => theme.accentColor};
 
-  @media screen and (min-width: 451px) {
+  @media screen and (min-width: 601px) {
     background: ${({ $menuIdx, theme }) =>
       $menuIdx === 1 ? "#fff" : theme.accentColor};
   }
@@ -109,7 +103,7 @@ const ModeBtn = styled.div<{ $menuIdx: number }>`
   bottom: 50px;
   cursor: pointer;
 
-  @media screen and (min-width: 451px) {
+  @media screen and (min-width: 601px) {
     ${({ $menuIdx }) => !$menuIdx && `right: 15px; bottom:auto;`}
   }
 `;
@@ -181,7 +175,7 @@ const ToggleBtn = styled.div<{ $menuOpen: boolean }>`
     }
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 600px) {
     opacity: 0.95;
   }
 `;
