@@ -10,18 +10,18 @@ const Wrapper = styled.header<{ $menuIdx: number; $menuOpen: boolean }>`
   width: fit-content;
   height: 100%;
   padding: 80px 30px 50px;
-  display: ${({ $menuIdx }) => ($menuIdx < 0 ? "none" : "flex")};
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s;
+  //transition: all 0.3s;
   opacity: ${({ $menuIdx }) => ($menuIdx === 4 ? 0 : 1)};
   z-index: 1;
 
   @media screen and (min-width: 601px) {
     ${({ $menuIdx }) =>
-      $menuIdx === 0
-        ? `position: relative;
+      $menuIdx < 1 &&
+      `position: relative;
       top: 0;
       left: 0;
       width: 100%;
@@ -30,8 +30,7 @@ const Wrapper = styled.header<{ $menuIdx: number; $menuOpen: boolean }>`
       background: transparent;
       flex-direction: row;
       justify-content: space-around;
-      border-bottom: 1px solid #eee;`
-        : ""}
+      border-bottom: 1px solid #eee;`}
   }
 
   @media screen and (max-width: 600px) {
@@ -40,7 +39,6 @@ const Wrapper = styled.header<{ $menuIdx: number; $menuOpen: boolean }>`
     color: ${({ theme }) => theme.textColor};
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
     transform: ${({ $menuOpen }) => ($menuOpen ? "none" : "translateX(-100%)")};
-    transition: all 0.3s ease-in-out;
   }
 `;
 
@@ -53,7 +51,7 @@ const Nav = styled.ul<{ $menuIdx: number }>`
 
   @media screen and (min-width: 601px) {
     ${({ $menuIdx }) =>
-      !$menuIdx &&
+      $menuIdx < 1 &&
       `width: 1290px;
       flex-direction: row;
       justify-content: space-between;
@@ -73,7 +71,7 @@ const Menu = styled(motion.li)<{ $isSelected: boolean; $menuIdx: number }>`
 
   @media screen and (max-width: 1500px) {
     &:last-child {
-      margin-right: ${({ $menuIdx }) => ($menuIdx === 0 ? "125px" : "0")};
+      margin-right: ${({ $menuIdx }) => ($menuIdx < 1 ? "125px" : "0")};
     }
   }
 
@@ -104,7 +102,7 @@ const ModeBtn = styled.div<{ $menuIdx: number }>`
   cursor: pointer;
 
   @media screen and (min-width: 601px) {
-    ${({ $menuIdx }) => !$menuIdx && `right: 15px; bottom:auto;`}
+    ${({ $menuIdx }) => $menuIdx < 1 && `right: 15px; bottom:auto;`}
   }
 `;
 
@@ -199,7 +197,7 @@ const Header = ({ onClick }: HeaderType) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleClick = (index: number) => {
-    setSelectedIndex(index);
+    //setSelectedIndex(index);
     onClick(index);
   };
 
@@ -214,11 +212,9 @@ const Header = ({ onClick }: HeaderType) => {
             onClick={() => handleClick(index)}
           >
             {menu}
-            {index === selectedIndex && (
-              <Underline
-                $menuIdx={selectedIndex}
-                layoutId="underline"
-              ></Underline>
+            {((index === 0 && selectedIndex < 1) ||
+              index === selectedIndex) && (
+              <Underline $menuIdx={selectedIndex} layoutId="underline" />
             )}
           </Menu>
         ))}

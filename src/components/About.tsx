@@ -1,46 +1,16 @@
 import styled from "styled-components";
+import { Wrapper, Content } from "./Common/LayoutComponents";
+import Title from "./Common/Title";
+import { animate, motion } from "framer-motion";
+import { useRecoilValue } from "recoil";
+import { selectedIndexAtom } from "../atoms";
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  padding-left: 120px;
-  padding-right: 15px;
-  background: ${({ theme }) => theme.accentColor};
-  @media screen and (max-width: 600px) {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-`;
-
-const Title = styled.h1`
-  width: fit-content;
-  margin: 0 auto;
-  padding-top: 100px;
-  font: 700 80px/1 "Teko", serif;
-  letter-spacing: -2px;
-  color: ${({ theme }) => theme.textColor};
-  @media screen and (max-width: 450px) {
-    font-size: 50px;
-  }
-`;
-
-const Content = styled.div`
-  width: 1290px;
-  margin: 0 auto;
-  margin-top: 70px;
-  padding-bottom: 100px;
+const ContentBox = styled.div`
   display: flex;
-  @media screen and (max-width: 1400px) {
-    margin-top: 50px;
-  }
   @media screen and (max-width: 1150px) {
-    width: 100%;
     flex-direction: column-reverse;
     align-items: center;
     gap: 50px;
-  }
-  @media screen and (max-width: 420px) {
-    width: 300px;
   }
 `;
 
@@ -70,6 +40,8 @@ const TextRow = styled.div`
   }
 `;
 
+const TextDesc = styled(motion.div)``;
+
 const SubTitle = styled.h3`
   margin-bottom: 10px;
   font: 500 2rem/1 "Teko", serif;
@@ -92,15 +64,14 @@ const SubDesc = styled.div`
   }
 `;
 
-const AboutCircle = styled.span`
+const AboutCircle = styled(motion.span)`
   width: 400px;
   height: 400px;
   border-radius: 50%;
   background: #fff;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
-  opacity: 0;
+  display: none;
   overflow: hidden;
-  transition: all 0.3s;
   &::before {
     content: "";
     position: absolute;
@@ -111,7 +82,7 @@ const AboutCircle = styled.span`
     background: url("/imgs/profile4.png") top/cover no-repeat;
   }
   @media screen and (max-width: 1150px) {
-    opacity: 1;
+    display: block;
   }
   @media screen and (max-width: 450px) {
     width: 300px;
@@ -119,66 +90,170 @@ const AboutCircle = styled.span`
   }
 `;
 
+const photoTransition = {
+  duration: 0.5,
+  ease: "easeInOut",
+  delay: 0.1,
+};
+
+const photoReveal = {
+  initial: {
+    y: "50%",
+    opacity: 0,
+  },
+  animate: {
+    y: "0%",
+    opacity: 1,
+  },
+};
+
+const textTransition = {
+  duration: 0.4,
+  ease: "easeIn",
+};
+
+const textReveal = {
+  initial: {
+    x: "-100%",
+    opacity: 0,
+  },
+  animate: {
+    x: "0%",
+    opacity: 1,
+  },
+};
+
+const textSections = [
+  [
+    {
+      title: "Information",
+      content: [
+        {
+          label: "이름",
+          value: "박리아",
+        },
+        {
+          label: "나이",
+          value: "1991.02",
+        },
+      ],
+    },
+    {
+      title: "Career",
+      content: [
+        {
+          label: "웹개발",
+          value: "3년 8개월",
+        },
+        {
+          label: "서버엔지니어",
+          value: "1년",
+        },
+      ],
+    },
+    {
+      title: "Certificate",
+      content: "정보처리기사",
+    },
+  ],
+  {
+    title: "Education",
+    content: [
+      "조선대학교 컴퓨터공학부 졸업",
+      "UXUI 디자인 웹 프론트엔트 개발 부트캠프 수료",
+      "지능형 빅데이터 서비스 개발자 과정 수료",
+    ],
+  },
+  {
+    title: "Study",
+    content: ["자바스크립트 문법 멘토(24.08.16~24.11.18)"],
+  },
+];
+
 const About = () => {
+  const selectedIndex = useRecoilValue(selectedIndexAtom);
+  const delay = 0.1 as number;
+  let num = 0;
+
   return (
     <Wrapper>
-      <Title>ABOUT ME</Title>
+      <Title word={"ABOUT ME"} />
       <Content>
-        <TextWrapper>
-          <TextRow>
-            <div>
-              <SubTitle>Information</SubTitle>
-              <SubDesc>
-                <div>
-                  <label>이름</label>
-                  <span>박리아</span>
-                </div>
-                <div>
-                  <label>나이</label>
-                  <span>1991.02</span>
-                </div>
-              </SubDesc>
-            </div>
-            <div>
-              <SubTitle>Career</SubTitle>
-              <SubDesc>
-                <div>
-                  <label>웹개발</label>
-                  <span>3년 8개월</span>
-                </div>
-                <div>
-                  <label>서버엔지니어</label>
-                  <span>1년</span>
-                </div>
-              </SubDesc>
-            </div>
-            <div>
-              <SubTitle>Certificate</SubTitle>
-              <SubDesc>
-                <span>정보처리기사</span>
-              </SubDesc>
-            </div>
-          </TextRow>
-          <TextRow>
-            <div>
-              <SubTitle>Education</SubTitle>
-              <SubDesc>
-                <span>조선대학교 컴퓨터공학부 졸업</span>
-                <span>UXUI 디자인 웹 프론트엔트 개발 부트캠프 수료</span>
-                <span>지능형 빅데이터 서비스 개발자 과정 수료</span>
-              </SubDesc>
-            </div>
-          </TextRow>
-          <TextRow>
-            <div>
-              <SubTitle>Education</SubTitle>
-              <SubDesc>
-                <span> 자바스크립트 문법 멘토(24.08.16~진행중)</span>
-              </SubDesc>
-            </div>
-          </TextRow>
-        </TextWrapper>
-        <AboutCircle />
+        <ContentBox>
+          <TextWrapper>
+            {textSections.map((list, index) => (
+              <TextRow key={index}>
+                {Array.isArray(list) ? (
+                  list.map((desc, descIdx) => (
+                    <TextDesc
+                      key={"desc" + descIdx}
+                      variants={textReveal}
+                      initial="initial"
+                      animate={
+                        selectedIndex === -1 || selectedIndex === 1
+                          ? "animate"
+                          : "initial"
+                      }
+                      transition={{
+                        ...textTransition,
+                        delay: parseFloat((++num * delay).toFixed(1)),
+                      }}
+                    >
+                      <SubTitle>{desc.title}</SubTitle>
+                      <SubDesc>
+                        {typeof desc.content === "object" ? (
+                          desc.content.map((content, contentIdx) => (
+                            <div key={"content" + contentIdx}>
+                              {typeof content === "object" && (
+                                <>
+                                  <label>{content.label}</label>
+                                  <span>{content.value}</span>
+                                </>
+                              )}
+                            </div>
+                          ))
+                        ) : (
+                          <span>{desc.content}</span>
+                        )}
+                      </SubDesc>
+                    </TextDesc>
+                  ))
+                ) : (
+                  <TextDesc
+                    variants={textReveal}
+                    initial="initial"
+                    animate={
+                      selectedIndex === -1 || selectedIndex === 1
+                        ? "animate"
+                        : "initial"
+                    }
+                    transition={{
+                      ...textTransition,
+                      delay: parseFloat((++num * delay).toFixed(1)),
+                    }}
+                  >
+                    <SubTitle>{list.title}</SubTitle>
+                    <SubDesc>
+                      {list.content.map((content, contentIdx) => (
+                        <span key={"content2" + contentIdx}>{content}</span>
+                      ))}
+                    </SubDesc>
+                  </TextDesc>
+                )}
+              </TextRow>
+            ))}
+          </TextWrapper>
+          <AboutCircle
+            variants={photoReveal}
+            initial="initial"
+            animate={
+              selectedIndex === -1 || selectedIndex === 1
+                ? "animate"
+                : "initial"
+            }
+            transition={photoTransition}
+          />
+        </ContentBox>
       </Content>
     </Wrapper>
   );

@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { selectedIndexAtom } from "../atoms";
-import { useRecoilValue } from "recoil";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -41,6 +39,9 @@ const HomeInner = styled.div`
     align-items: center;
     gap: 90px;
   }
+  @media screen and (max-width: 450px) {
+    gap: 60px;
+  }
 `;
 
 const HomeTextSection = styled.div`
@@ -59,8 +60,8 @@ const HomeTitle = styled.div`
   flex-direction: column;
   margin-bottom: 40px;
   perspective: 1000px;
-  @media screen and (max-width: 450px) {
-    margin-bottom: 20px;
+  @media screen and (max-width: 1150px) {
+    margin-bottom: 10px;
   }
 
   span {
@@ -369,7 +370,6 @@ const BackCircle = styled.span`
 `;
 
 const Home = () => {
-  //const selectedIndex = useRecoilValue(selectedIndexAtom);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const imgCircleRef = useRef<HTMLDivElement | null>(null);
   const aboutCircleRef = useRef<HTMLSpanElement | null>(null);
@@ -476,12 +476,12 @@ const Home = () => {
           {
             transform: "rotateY(0deg) scale(1)", // 정면으로 돌아오면서 확대
             opacity: 1, // 회전 종료 후 완전한 불투명도
-            duration: 1.3, // 애니메이션 시간
+            duration: 1, // 애니메이션 시간
             ease: "power3.out",
           },
           "start"
         )
-        .addLabel("effectStart")
+        .addLabel("effectStart", "start+=0.7")
         .fromTo(
           text4Ref.current,
           { x: 100, opacity: 0 },
