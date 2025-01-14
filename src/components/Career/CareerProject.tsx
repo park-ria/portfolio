@@ -9,6 +9,9 @@ const Wrapper = styled(motion.li)`
   border-bottom: 1px solid var(--dark-gray-color);
   overflow: hidden;
   transform-origin: top;
+  @media screen and (max-width: 450px) {
+    padding-left: 0;
+  }
 `;
 
 const ProjectTop = styled.div`
@@ -27,6 +30,12 @@ const ProjectName = styled.div`
   &:hover {
     color: ${({ theme }) => theme.accentColor};
   }
+  @media screen and (max-width: 850px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 0.875rem;
+  }
 `;
 
 const OpenButton = styled.span<{ $isOpen: boolean }>`
@@ -39,6 +48,9 @@ const OpenButton = styled.span<{ $isOpen: boolean }>`
   &:hover {
     scale: 1.5;
     color: ${({ theme }) => theme.accentColor};
+  }
+  @media screen and (max-width: 450px) {
+    padding: 0 5px;
   }
 `;
 

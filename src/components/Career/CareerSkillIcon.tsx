@@ -8,10 +8,18 @@ const SkillIcon = styled.span`
   height: 40px;
   background: ${({ theme }) => theme.skillIconBg};
   border-radius: 8px;
+  @media screen and (max-width: 450px) {
+    width: 30px;
+    height: 30px;
+  }
   img {
     width: 30px;
     height: 30px;
     object-fit: cover;
+    @media screen and (max-width: 450px) {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
 

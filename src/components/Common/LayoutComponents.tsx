@@ -16,7 +16,6 @@ export const Content = styled.div`
   width: 1290px;
   margin: 0 auto;
   margin-top: 70px;
-  padding-left: 100px;
   padding-bottom: 100px;
   @media screen and (max-width: 1400px) {
     margin-top: 50px;

@@ -48,7 +48,7 @@ const child = {
   },
 };
 
-const Title = ({ word }: { word: string }) => {
+const Title = ({ word, menuIdx }: { word: string; menuIdx: number }) => {
   const seletedIndex = useRecoilValue(selectedIndexAtom);
   return (
     <Wrapper className="rotatingHeader">
@@ -56,7 +56,7 @@ const Title = ({ word }: { word: string }) => {
         variants={container}
         initial="hidden"
         animate={
-          seletedIndex === -1 || seletedIndex === 1 ? "visible" : "hidden"
+          seletedIndex === -1 || seletedIndex === menuIdx ? "visible" : "hidden"
         }
       >
         {word.split("").map((char, index) => (

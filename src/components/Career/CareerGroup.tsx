@@ -6,6 +6,9 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   border-top: 1px solid var(--dark-gray-color);
+  @media screen and (max-width: 1150px) {
+    flex-direction: column;
+  }
 `;
 
 const SubTitle = styled.div`
@@ -14,21 +17,51 @@ const SubTitle = styled.div`
   justify-content: flex-start;
   flex: 1;
   gap: 100px;
+  @media screen and (max-width: 1150px) {
+    margin-left: 0px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    gap: 30px;
+    border-bottom: 1px dashed;
+  }
+  @media screen and (max-width: 850px) {
+    gap: 10px;
+  }
+  @media screen and (max-width: 450px) {
+    padding-left: 0;
+  }
+`;
+
+const SubTitleGroup = styled.div`
+  @media screen and (max-width: 1150px) {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+  }
 `;
 
 const SubTitleText = styled.h3`
   font-size: 2rem;
   font-weight: 700;
   color: ${({ theme }) => theme.textColor};
+  @media screen and (max-width: 850px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const CareerDate = styled.span`
   font-size: 20px;
   color: var(--dark-gray-color);
+  @media screen and (max-width: 850px) {
+    font-size: 0.875rem;
+  }
 `;
 
 const Projects = styled.ul`
   width: 50%;
+  @media screen and (max-width: 1150px) {
+    width: 100%;
+  }
 `;
 
 interface CareerGroupType {
@@ -40,10 +73,10 @@ const CareerGroup = ({ data }: CareerGroupType) => {
     <Wrapper>
       <SubTitle>
         <SubTitleText>{data.orderNum}.</SubTitleText>
-        <div>
+        <SubTitleGroup>
           <SubTitleText>{data.company}</SubTitleText>
           <CareerDate>{data.period}</CareerDate>
-        </div>
+        </SubTitleGroup>
       </SubTitle>
       <Projects>
         {data.project.map((project, pIndex) => (

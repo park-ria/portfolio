@@ -1,9 +1,16 @@
 import styled from "styled-components";
 import { Wrapper, Content } from "./Common/LayoutComponents";
 import Title from "./Common/Title";
-import { animate, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRecoilValue } from "recoil";
 import { selectedIndexAtom } from "../atoms";
+
+const AboutContent = styled(Content)`
+  padding-left: 100px;
+  @media screen and (max-width: 600px) {
+    padding-left: 0;
+  }
+`;
 
 const ContentBox = styled.div`
   display: flex;
@@ -177,8 +184,8 @@ const About = () => {
 
   return (
     <Wrapper>
-      <Title word={"ABOUT ME"} />
-      <Content>
+      <Title word={"ABOUT ME"} menuIdx={1} />
+      <AboutContent>
         <ContentBox>
           <TextWrapper>
             {textSections.map((list, index) => (
@@ -254,7 +261,7 @@ const About = () => {
             transition={photoTransition}
           />
         </ContentBox>
-      </Content>
+      </AboutContent>
     </Wrapper>
   );
 };

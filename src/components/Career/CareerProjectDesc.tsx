@@ -16,6 +16,10 @@ const ProjectDesc = styled(motion.ul)`
   border-radius: 8px;
   overflow: hidden;
   transform-origin: top;
+  @media screen and (max-width: 450px) {
+    padding: 20px 10px;
+    font-size: 0.875rem;
+  }
 `;
 
 const ProjectDescLabel = styled.span`

@@ -3,6 +3,9 @@ import { SkillType } from "../../type";
 
 const SkillDesc = styled.ul`
   margin: 5px 0 0 20px;
+  @media screen and (max-width: 450px) {
+    margin-left: 10px;
+  }
 `;
 
 const SkillLine = styled.li`
@@ -11,6 +14,9 @@ const SkillLine = styled.li`
   gap: 10px;
   p {
     flex: 1;
+    @media screen and (max-width: 450px) {
+      font-size: 0.875rem;
+    }
   }
 `;
 
