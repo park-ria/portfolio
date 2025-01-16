@@ -8,6 +8,20 @@ const SkillIcon = styled.span`
   height: 40px;
   background: ${({ theme }) => theme.skillIconBg};
   border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  .name {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: opacity 0.2s;
+  }
+  &:hover .name {
+    opacity: 1;
+  }
   @media screen and (max-width: 450px) {
     width: 30px;
     height: 30px;
@@ -31,6 +45,7 @@ const CareerSkillIcon = ({ icon }: CareerSkillIconType) => {
   return (
     <SkillIcon>
       <img src={`/imgs/${icon}.png`} alt={icon} />
+      <span className="name">{icon}</span>
     </SkillIcon>
   );
 };

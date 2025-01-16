@@ -14,7 +14,7 @@ const Wrapper = styled.header<{ $menuIdx: number; $menuOpen: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  //transition: all 0.3s;
+  transition: transform 0.3s ease;
   opacity: ${({ $menuIdx }) => ($menuIdx === 4 ? 0 : 1)};
   z-index: 1;
 

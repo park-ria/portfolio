@@ -28,11 +28,11 @@ const ProjectDescLabel = styled.span`
 `;
 
 const Site = styled.a`
+  color: crimson;
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
     text-decoration: underline;
-    color: crimson;
   }
 `;
 

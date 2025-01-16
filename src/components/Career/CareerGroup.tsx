@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { CareerType } from "../../type";
 import CareerProject from "./CareerProject";
+import { motion } from "framer-motion";
+import { useRecoilValue } from "recoil";
+import { selectedIndexAtom } from "../../atoms";
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   border-top: 1px solid var(--dark-gray-color);
@@ -57,7 +60,7 @@ const CareerDate = styled.span`
   }
 `;
 
-const Projects = styled.ul`
+const Projects = styled(motion.ul)`
   width: 50%;
   @media screen and (max-width: 1150px) {
     width: 100%;
@@ -69,8 +72,37 @@ interface CareerGroupType {
 }
 
 const CareerGroup = ({ data }: CareerGroupType) => {
+  const seletedIndex = useRecoilValue(selectedIndexAtom);
+
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: data.orderNum === "01" ? 0.3 : 0.75,
+      },
+    },
+  };
+
+  const listVariant = {
+    hidden: {
+      y: -10,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
-    <Wrapper>
+    <Wrapper
+      variants={listVariant}
+      initial="hidden"
+      animate={seletedIndex === -1 || seletedIndex === 2 ? "visible" : "hidden"}
+      transition={{ delay: data.orderNum === "01" ? 0.3 : 0.7 }}
+    >
       <SubTitle>
         <SubTitleText>{data.orderNum}.</SubTitleText>
         <SubTitleGroup>
@@ -78,9 +110,20 @@ const CareerGroup = ({ data }: CareerGroupType) => {
           <CareerDate>{data.period}</CareerDate>
         </SubTitleGroup>
       </SubTitle>
-      <Projects>
+      <Projects
+        variants={container}
+        initial="hidden"
+        animate={
+          seletedIndex === -1 || seletedIndex === 2 ? "visible" : "hidden"
+        }
+      >
         {data.project.map((project, pIndex) => (
-          <CareerProject key={pIndex} project={project} />
+          <motion.li key={pIndex} variants={listVariant}>
+            <CareerProject
+              project={project}
+              first={data.orderNum === "01" && pIndex === 3}
+            />
+          </motion.li>
         ))}
       </Projects>
     </Wrapper>

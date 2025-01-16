@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ProjectType } from "../../type";
 import CareerProjectDesc from "./CareerProjectDesc";
 import { motion } from "framer-motion";
 
-const Wrapper = styled(motion.li)`
+const Wrapper = styled(motion.div)`
   padding-left: 10px;
   border-bottom: 1px solid var(--dark-gray-color);
   overflow: hidden;
@@ -56,13 +56,18 @@ const OpenButton = styled.span<{ $isOpen: boolean }>`
 
 interface CareerProjectType {
   project: ProjectType;
+  first: boolean;
 }
 
-const CareerProject = ({ project }: CareerProjectType) => {
+const CareerProject = ({ project, first }: CareerProjectType) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClick = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (first) setIsOpen(true);
+  }, []);
 
   return (
     <Wrapper
