@@ -52,7 +52,13 @@ const Main = styled.main`
 `;
 
 const Section = styled.section`
-  flex: 1;
+  width: 100%;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  @media screen and (max-width: 600px) {
+    top: 0;
+  }
 `;
 
 const App = () => {

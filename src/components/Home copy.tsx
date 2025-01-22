@@ -154,6 +154,7 @@ const HomeDesc = styled.span`
 
 const HomeImgSection = styled.div`
   position: relative;
+  height: 1420px;
 
   .effect2 {
     position: absolute;
@@ -170,6 +171,7 @@ const HomeImgSection = styled.div`
   }
 
   @media screen and (max-width: 1400px) {
+    height: 1300px;
     .effect2 {
       width: 100px;
     }
@@ -193,7 +195,14 @@ const HomeImgSection = styled.div`
   }
 `;
 
-const ImgWrapper = styled.div``;
+const ImgWrapper = styled.div`
+  position: sticky;
+  top: 180px;
+  @media screen and (max-width: 1150px) {
+    position: static;
+    top: 0;
+  }
+`;
 
 const ImgCircle = styled.div`
   width: 500px;
@@ -207,6 +216,28 @@ const ImgCircle = styled.div`
   @media screen and (max-width: 450px) {
     width: 302px;
     height: 300px;
+  }
+`;
+
+const AboutCircle = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
+  opacity: 0;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("/imgs/profile4.png") top/cover no-repeat;
   }
 `;
 
@@ -341,6 +372,7 @@ const BackCircle = styled.span`
 const Home = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const imgCircleRef = useRef<HTMLDivElement | null>(null);
+  const aboutCircleRef = useRef<HTMLSpanElement | null>(null);
   const frontCircleRef = useRef<HTMLSpanElement | null>(null);
   const backCircleRef = useRef<HTMLSpanElement | null>(null);
   const text1Ref = useRef<HTMLSpanElement | null>(null);
@@ -365,56 +397,61 @@ const Home = () => {
       imgCircleRef.current &&
       imgSectionRef.current &&
       frontCircleRef.current &&
-      backCircleRef.current
+      backCircleRef.current &&
+      aboutCircleRef.current
     ) {
       // 공통 scrollTrigger 설정
       const scrollTrigger = {
         trigger: wrapperRef.current,
         start: "top center",
-        end: "bottom 20%",
+        end: "bottom center",
         toggleActions: "play reverse play reverse",
-        //markers: true,
       };
 
-      const timeline1 = gsap.timeline({
-        scrollTrigger: {
-          ...scrollTrigger,
-          toggleActions: "restart none none none",
-        },
-      });
-      timeline1 // imgCircleRef 공이 튀는 효과 추가
-        .fromTo(
-          imgCircleRef.current,
-          { y: "-20%" }, // 시작 위치
-          { y: "0%", duration: 0.3, ease: "bounce.out" }
-        )
-        .to(imgCircleRef.current, {
-          y: "-10%",
-          duration: 0.2,
-          ease: "power1.out",
-        })
-        .to(imgCircleRef.current, {
-          y: "0%",
-          duration: 0.3,
-          ease: "bounce.out",
-        })
-        .to(imgCircleRef.current, {
-          y: "-1.5%",
-          duration: 0.15,
-          ease: "power1.out",
-        })
-        .to(imgCircleRef.current, {
-          y: "0%",
-          duration: 0.2,
-          ease: "bounce.out",
+      const imgCircleTop = imgCircleRef.current.getBoundingClientRect().top;
+      const imgSectionTop = imgSectionRef.current.getBoundingClientRect().top;
+      if (imgCircleTop - imgSectionTop <= 40) {
+        const timeline1 = gsap.timeline({
+          scrollTrigger: {
+            ...scrollTrigger,
+            toggleActions: "play none none none",
+          },
         });
+
+        timeline1 // imgCircleRef 공이 튀는 효과 추가
+          .fromTo(
+            imgCircleRef.current,
+            { y: "50%" }, // 시작 위치
+            { y: "0%", duration: 0.3, ease: "bounce.out" }
+          )
+          .to(imgCircleRef.current, {
+            y: "10%",
+            duration: 0.2,
+            ease: "power1.out",
+          })
+          .to(imgCircleRef.current, {
+            y: "0%",
+            duration: 0.3,
+            ease: "bounce.out",
+          })
+          .to(imgCircleRef.current, {
+            y: "1.5%",
+            duration: 0.15,
+            ease: "power1.out",
+          })
+          .to(imgCircleRef.current, {
+            y: "0%",
+            duration: 0.2,
+            ease: "bounce.out",
+          });
+      }
 
       const timeline2 = gsap.timeline({ scrollTrigger });
       timeline2
         .addLabel("start")
         .fromTo(
           text1Ref.current,
-          { x: 150 }, // 시작 위치
+          { x: 100 }, // 시작 위치
           { x: 0, duration: 0.5, ease: "power1.out" }, // 종료 위치
           "start" // 동시에 시작
         )
@@ -448,7 +485,7 @@ const Home = () => {
         .fromTo(
           text4Ref.current,
           { x: 100, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" },
           "effectStart"
         )
         .fromTo(
@@ -487,12 +524,13 @@ const Home = () => {
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: "top top",
-          end: "50% top",
+          end: "20% top",
           scrub: true,
           toggleActions: "play reverse play reverse",
           //markers: true,
         },
         y: "0%",
+        duration: 0.3,
         ease: "power1.out",
       });
 
@@ -506,7 +544,34 @@ const Home = () => {
           //markers: true,
         },
         y: "0%",
+        duration: 0.3,
         ease: "power2.out",
+      });
+
+      const opacityScrollTrigger = {
+        trigger: wrapperRef.current,
+        start: "center top",
+        end: "bottom top",
+        scrub: true,
+        toggleActions: "play reverse play reverse",
+      };
+
+      gsap.to(frontCircleRef.current, {
+        scrollTrigger: opacityScrollTrigger,
+        opacity: 0,
+        duration: 0.5,
+      });
+
+      gsap.to(backCircleRef.current, {
+        scrollTrigger: opacityScrollTrigger,
+        opacity: 0,
+        duration: 0.5,
+      });
+
+      gsap.to(aboutCircleRef.current, {
+        scrollTrigger: opacityScrollTrigger,
+        opacity: 1,
+        duration: 0.5,
       });
     }
   }, []);
@@ -591,6 +656,7 @@ const Home = () => {
           </svg>
           <ImgWrapper>
             <ImgCircle ref={imgCircleRef}>
+              <AboutCircle ref={aboutCircleRef} />
               <FrontCircle ref={frontCircleRef}>
                 <span />
               </FrontCircle>

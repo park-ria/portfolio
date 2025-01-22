@@ -6,14 +6,14 @@ import { useRecoilValue } from "recoil";
 import { selectedIndexAtom } from "../atoms";
 
 const AboutContent = styled(Content)`
-  @media screen and (max-width: 1400px) {
-    width: 100%;
+  padding-left: 100px;
+  @media screen and (max-width: 850px) {
+    padding-left: 0;
   }
 `;
 
 const ContentBox = styled.div`
   display: flex;
-  justify-content: space-evenly;
   @media screen and (max-width: 1150px) {
     flex-direction: column-reverse;
     align-items: center;
@@ -77,6 +77,7 @@ const AboutCircle = styled(motion.span)`
   border-radius: 50%;
   background: #fff;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
+  display: none;
   overflow: hidden;
   &::before {
     content: "";
@@ -104,17 +105,16 @@ const photoTransition = {
 
 const photoReveal = {
   initial: {
-    x: "50%",
+    y: "50%",
     opacity: 0,
   },
   animate: {
-    x: "0%",
+    y: "0%",
     opacity: 1,
   },
 };
 
 const textTransition = {
-  delay: 0.8,
   duration: 0.4,
   ease: "easeIn",
 };
