@@ -5,18 +5,18 @@ import CareerGroup from "./CareerGroup";
 import Title from "../Common/Title";
 import { Wrapper, Content } from "../Common/LayoutComponents";
 
+const CareerContent = styled(Content)`
+  @media screen and (max-width: 1450px) {
+    width: 100%;
+  }
+`;
+
 const CareerDesc = styled.div`
   display: flex;
   flex-direction: column;
   gap: 80px;
   @media screen and (max-width: 450px) {
     gap: 50px;
-  }
-`;
-
-const CareerContent = styled(Content)`
-  @media screen and (max-width: 1450px) {
-    width: 100%;
   }
 `;
 

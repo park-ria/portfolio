@@ -7,7 +7,7 @@ import { selectedIndexAtom } from "../atoms";
 
 const AboutContent = styled(Content)`
   padding-left: 100px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 850px) {
     padding-left: 0;
   }
 `;
