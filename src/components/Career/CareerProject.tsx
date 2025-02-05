@@ -57,13 +57,18 @@ const OpenButton = styled.span<{ $isOpen: boolean }>`
 interface CareerProjectType {
   project: ProjectType;
   first: boolean;
+  seletedIndex: number;
 }
 
-const CareerProject = ({ project, first }: CareerProjectType) => {
+const CareerProject = ({ project, first, seletedIndex }: CareerProjectType) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClick = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (seletedIndex !== 2) setIsOpen(false);
+  }, [seletedIndex]);
 
   useEffect(() => {
     if (first) setIsOpen(true);

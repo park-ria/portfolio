@@ -122,6 +122,7 @@ const CareerGroup = ({ data }: CareerGroupType) => {
             <CareerProject
               project={project}
               first={data.orderNum === "01" && pIndex === 3}
+              seletedIndex={seletedIndex}
             />
           </motion.li>
         ))}

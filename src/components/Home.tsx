@@ -282,7 +282,7 @@ const BackCircle = styled.span`
   background: #ececec;
   position: relative;
   opacity: 1;
-  transform: translateY(-10%);
+  transform: translateY(-5%);
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   overflow: hidden;
 

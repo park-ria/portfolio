@@ -121,22 +121,41 @@ const Wave = styled.div`
     opacity: 0.4;
     position: absolute;
     top: 5%;
-    left: -30%;
+    left: -340px;
     background: #0af;
-    width: 170%;
-    height: 160%;
-    border-radius: 43%;
+    width: 2500px;
+    height: 2500px;
+    border-radius: 42%;
     z-index: -1;
-    animation: drift 3s infinite linear;
+    animation: drift 4s infinite linear;
 
     &:nth-child(2) {
       animation: drift 8s infinite linear;
       opacity: 0.1;
-      background: yellow;
+      background: #1aff00;
     }
 
     &:last-child {
       animation: drift 5s infinite linear;
+    }
+
+    @media screen and (max-width: 1400px) {
+      left: -500px;
+    }
+    @media screen and (max-width: 1150px) {
+      left: -700px;
+      border-radius: 45%;
+    }
+    @media screen and (max-width: 850px) {
+      top: 4%;
+      left: -800px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 3500px;
+      height: 3500px;
+      top: 2%;
+      left: -1500px;
+      border-radius: 48%;
     }
   }
 

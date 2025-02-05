@@ -5,12 +5,14 @@ export const darkTheme: DefaultTheme = {
   bgColor: "#222",
   accentColor: "#f1629c",
   lightGrayColor: "#444",
-  skillIconBg: "#888",
+  miniIconBg: "#ddd",
+  skillIconBg: "#eee",
 };
 export const lightTheme: DefaultTheme = {
   textColor: "#000",
   bgColor: "#fff",
   accentColor: "#c8f31d",
   lightGrayColor: "#f9f9f9",
+  miniIconBg: "#ddd",
   skillIconBg: "#eee",
 };

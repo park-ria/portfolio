@@ -6,7 +6,7 @@ const SkillIcon = styled.span`
   align-items: center;
   width: 40px;
   height: 40px;
-  background: ${({ theme }) => theme.skillIconBg};
+  background: ${({ theme }) => theme.miniIconBg};
   border-radius: 8px;
   position: relative;
   cursor: pointer;
@@ -14,7 +14,7 @@ const SkillIcon = styled.span`
     position: absolute;
     bottom: -18px;
     left: 50%;
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0;
     transform: translateX(-50%);
     transition: opacity 0.2s;
