@@ -72,7 +72,7 @@ interface CareerGroupType {
 }
 
 const CareerGroup = ({ data }: CareerGroupType) => {
-  const seletedIndex = useRecoilValue(selectedIndexAtom);
+  const selectedIndex = useRecoilValue(selectedIndexAtom);
 
   const container = {
     hidden: { opacity: 0 },
@@ -100,7 +100,9 @@ const CareerGroup = ({ data }: CareerGroupType) => {
     <Wrapper
       variants={listVariant}
       initial="hidden"
-      animate={seletedIndex === -1 || seletedIndex === 2 ? "visible" : "hidden"}
+      animate={
+        selectedIndex === -1 || selectedIndex === 2 ? "visible" : "hidden"
+      }
       transition={{ delay: data.orderNum === "01" ? 0.3 : 0.7 }}
     >
       <SubTitle>
@@ -114,7 +116,7 @@ const CareerGroup = ({ data }: CareerGroupType) => {
         variants={container}
         initial="hidden"
         animate={
-          seletedIndex === -1 || seletedIndex === 2 ? "visible" : "hidden"
+          selectedIndex === -1 || selectedIndex === 2 ? "visible" : "hidden"
         }
       >
         {data.project.map((project, pIndex) => (
@@ -122,7 +124,7 @@ const CareerGroup = ({ data }: CareerGroupType) => {
             <CareerProject
               project={project}
               first={data.orderNum === "01" && pIndex === 3}
-              seletedIndex={seletedIndex}
+              selectedIndex={selectedIndex}
             />
           </motion.li>
         ))}

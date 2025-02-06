@@ -2,6 +2,11 @@ import styled from "styled-components";
 import datas from "../data.json";
 import { Content, Wrapper } from "./Common/LayoutComponents";
 import Title from "./Common/Title";
+import { motion } from "framer-motion";
+import { useRecoilValue } from "recoil";
+import { selectedIndexAtom } from "../atoms";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const SkillWrapper = styled(Wrapper)`
   position: relative;
@@ -14,7 +19,7 @@ const SkillContent = styled(Content)`
   }
 `;
 
-const SkillGroup = styled.div`
+const SkillGroup = styled(motion.div)`
   width: 1003px;
   margin: 0 auto;
   margin-bottom: 100px;
@@ -87,13 +92,6 @@ const Wave = styled.div`
     top: 0;
     width: 100%;
     height: 100%;
-    /* background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.5),
-      rgba(221, 238, 255, 0) 20%,
-
-      rgba(238, 136, 170, 1)
-    ); */
     background: linear-gradient(
       to bottom,
       transparent,
@@ -170,16 +168,69 @@ const Wave = styled.div`
 `;
 
 const Skill = () => {
+  const selectedIndex = useRecoilValue(selectedIndexAtom);
+
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+        delayChildren: 0.5,
+      },
+    },
+  };
+
+  const child = {
+    hidden: {
+      y: 50,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
+  const proxy = { skew: 0 },
+    skewSetter = gsap.quickSetter(".skewElem", "skewY", "deg"),
+    clamp = gsap.utils.clamp(-50, 50);
+
+  ScrollTrigger.create({
+    onUpdate: (self) => {
+      let skew = clamp(self.getVelocity() / -150);
+      if (Math.abs(skew) > Math.abs(proxy.skew)) {
+        proxy.skew = skew;
+        gsap.to(proxy, {
+          skew: 0,
+          duration: 0.8,
+          ease: "power3",
+          overwrite: true,
+          onUpdate: () => skewSetter(proxy.skew),
+        });
+      }
+    },
+  });
+
+  gsap.set(".skewElem", { transformOrigin: "right center", force3D: true });
+
   return (
     <SkillWrapper>
       <Title word={"SKILL"} menuIdx={3} />
-      <SkillContent>
+      <SkillContent
+        as={motion.div}
+        variants={container}
+        initial="hidden"
+        animate={
+          selectedIndex === -1 || selectedIndex === 3 ? "visible" : "hidden"
+        }
+      >
         {datas.skill.map((list) => (
-          <SkillGroup key={list.title}>
+          <SkillGroup key={list.title} variants={child}>
             <SubTitle>{list.title}</SubTitle>
             <Skills>
               {list.skills.map((skill) => (
-                <SkillDesc key={skill.name}>
+                <SkillDesc key={skill.name} className="skewElem">
                   <SkillImgSpan>
                     <SkillImg src={`/imgs/${skill.img}.png`} alt={skill.name} />
                   </SkillImgSpan>
