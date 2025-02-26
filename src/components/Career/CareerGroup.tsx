@@ -121,11 +121,7 @@ const CareerGroup = ({ data }: CareerGroupType) => {
       >
         {data.project.map((project, pIndex) => (
           <motion.li key={pIndex} variants={listVariant}>
-            <CareerProject
-              project={project}
-              first={data.orderNum === "01" && pIndex === 3}
-              selectedIndex={selectedIndex}
-            />
+            <CareerProject project={project} />
           </motion.li>
         ))}
       </Projects>

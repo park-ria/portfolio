@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { ProjectType } from "../../type";
 import CareerProjectDesc from "./CareerProjectDesc";
 import { motion } from "framer-motion";
+import { useRecoilState } from "recoil";
+import { careerIdAtom } from "../../atoms";
 
 const Wrapper = styled(motion.div)`
   padding-left: 10px;
@@ -56,27 +58,21 @@ const OpenButton = styled.span<{ $isOpen: boolean }>`
 
 interface CareerProjectType {
   project: ProjectType;
-  first: boolean;
-  selectedIndex: number;
 }
 
-const CareerProject = ({
-  project,
-  first,
-  selectedIndex,
-}: CareerProjectType) => {
+const CareerProject = ({ project }: CareerProjectType) => {
+  const [careerId, setCareerId] = useRecoilState(careerIdAtom);
   const [isOpen, setIsOpen] = useState(false);
+
   const onClick = () => {
-    setIsOpen((prev) => !prev);
+    if (careerId === project.id) setCareerId(-1);
+    else setCareerId(project.id);
   };
 
   useEffect(() => {
-    if (selectedIndex !== 2) setIsOpen(false);
-  }, [selectedIndex]);
-
-  useEffect(() => {
-    if (first) setIsOpen(true);
-  }, []);
+    if (careerId !== -1 && careerId === project.id) setIsOpen(true);
+    else setIsOpen(false);
+  }, [careerId]);
 
   return (
     <Wrapper

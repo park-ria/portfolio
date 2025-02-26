@@ -7,6 +7,7 @@ import { useRecoilValue } from "recoil";
 import { selectedIndexAtom } from "../atoms";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
 
 const SkillWrapper = styled(Wrapper)`
   position: relative;
@@ -192,27 +193,29 @@ const Skill = () => {
     },
   };
 
-  const proxy = { skew: 0 },
-    skewSetter = gsap.quickSetter(".skewElem", "skewY", "deg"),
-    clamp = gsap.utils.clamp(-50, 50);
+  useEffect(() => {
+    const proxy = { skew: 0 },
+      skewSetter = gsap.quickSetter(".skewElem", "skewY", "deg"),
+      clamp = gsap.utils.clamp(-50, 50);
 
-  ScrollTrigger.create({
-    onUpdate: (self) => {
-      let skew = clamp(self.getVelocity() / -150);
-      if (Math.abs(skew) > Math.abs(proxy.skew)) {
-        proxy.skew = skew;
-        gsap.to(proxy, {
-          skew: 0,
-          duration: 0.8,
-          ease: "power3",
-          overwrite: true,
-          onUpdate: () => skewSetter(proxy.skew),
-        });
-      }
-    },
-  });
+    ScrollTrigger.create({
+      onUpdate: (self) => {
+        let skew = clamp(self.getVelocity() / -150);
+        if (Math.abs(skew) > Math.abs(proxy.skew)) {
+          proxy.skew = skew;
+          gsap.to(proxy, {
+            skew: 0,
+            duration: 0.8,
+            ease: "power3",
+            overwrite: true,
+            onUpdate: () => skewSetter(proxy.skew),
+          });
+        }
+      },
+    });
 
-  gsap.set(".skewElem", { transformOrigin: "right center", force3D: true });
+    gsap.set(".skewElem", { transformOrigin: "right center", force3D: true });
+  }, []);
 
   return (
     <SkillWrapper>

@@ -1,22 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Title from "./Common/Title";
+import { useRecoilValue } from "recoil";
+import { workScrollTopAtom } from "../atoms";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Wrapper = styled.div`
   width: 100%;
   overflow: hidden;
-`;
-
-const Title = styled.h1`
-  width: fit-content;
-  margin: 0 auto;
-  padding-top: 100px;
-  font: 700 80px/1 "Teko", serif;
-  letter-spacing: -2px;
-  color: ${({ theme }) => theme.textColor};
 `;
 
 const WorksWrapper = styled.div`
@@ -39,9 +33,7 @@ const WorksGroup = styled.ul`
     justify-self: flex-end;
   }
   li {
-    //width: 556px;
-    //height: 566px;
-    width: 600px;
+    width: 700px;
     height: calc(100vh / 2 - 10px);
     background: #ddd;
     flex-shrink: 0;
@@ -88,6 +80,7 @@ const CircleText = styled.span`
 `;
 
 const Works = () => {
+  const workTop = useRecoilValue(workScrollTopAtom);
   const [circleScroll, setCircleScroll] = useState(0);
 
   const firstGroupRef = useRef<HTMLUListElement>(null);
@@ -110,17 +103,18 @@ const Works = () => {
       // 첫 번째 그룹의 스크롤에 따라 path가 그려지는 애니메이션
       gsap.set(pathRef.current, {
         strokeDasharray: pathLength,
-        strokeDashoffset: pathLength, // 처음에 path가 그려지지 않도록 설정
+        strokeDashoffset: pathLength,
       });
 
       // ScrollTrigger 타임라인 설정
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: triggerRef.current,
-          start: "top top", // trigger가 화면 상단에 도달할 때
-          end: `+=${firstGroupWidth + secondGroupWidth - viewportWidth}`, // 전체 애니메이션 범위
-          scrub: 0.7,
+          start: `top+=${workTop / 50} top`,
+          end: `+=${firstGroupWidth + secondGroupWidth - viewportWidth}`,
+          scrub: 3,
           pin: true,
+          //markers: true,
           onUpdate: (self) => {
             const progress = Number(self.progress.toFixed(2)); // 스크롤 진행률 (0 ~ 1)
             setCircleScroll(Math.floor(progress * 100));
@@ -158,23 +152,21 @@ const Works = () => {
         timeline.kill();
       };
     }
-  }, []);
+  }, [workTop]);
 
   return (
     <Wrapper>
-      <Title>WORKS</Title>
+      <Title word={"WORKS"} menuIdx={4} />
       <WorksWrapper ref={triggerRef}>
         <WorksGroup ref={firstGroupRef}>
           <li>1</li>
           <li>2</li>
           <li>3</li>
-          <li>4</li>
         </WorksGroup>
         <WorksGroup ref={secondGroupRef}>
+          <li>4</li>
           <li>5</li>
           <li>6</li>
-          <li>7</li>
-          <li>8</li>
         </WorksGroup>
         <Circle>
           <svg width="360" height="360" viewBox="0 0 360 360">

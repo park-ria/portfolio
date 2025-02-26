@@ -4,6 +4,7 @@ export interface SkillType {
 }
 
 export interface ProjectType {
+  id: number;
   name: string;
   period: string;
   site?: string;
