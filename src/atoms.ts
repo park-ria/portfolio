@@ -12,7 +12,7 @@ export const selectedIndexAtom = atom<number>({
 
 export const careerIdAtom = atom<number>({
   key: "careerId",
-  default: 3,
+  default: -1,
 });
 
 export const workScrollTopAtom = atom<number>({

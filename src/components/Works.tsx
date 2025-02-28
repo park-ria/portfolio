@@ -21,22 +21,46 @@ const WorksWrapper = styled.div`
   margin-top: 70px;
   margin-bottom: 100px;
   position: relative;
+  @media screen and (max-width: 1150px) {
+    display: none;
+  }
 `;
 
 const WorksGroup = styled.ul`
   display: flex;
   gap: 10px;
+
   &:first-child {
     justify-self: flex-start;
   }
   &:last-child {
     justify-self: flex-end;
   }
+
+  /* @media screen and (max-width: 1150px) {
+    flex-direction: column;
+  } */
+
   li {
-    width: 700px;
+    width: calc(100vw / 2.5);
     height: calc(100vh / 2 - 10px);
     background: #ddd;
     flex-shrink: 0;
+    @media screen and (max-width: 1600px) {
+      width: calc(100vw / 2.3);
+    }
+    @media screen and (max-width: 1150px) {
+      width: 100%;
+    }
+    /* @media screen and (max-width: 1100px) {
+      width: calc(100vw / 2.15);
+    }
+    @media screen and (max-width: 850px) {
+      width: calc(100vw / 1.95);
+    }
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    } */
   }
 `;
 
@@ -47,7 +71,7 @@ const Circle = styled.div`
   background: ${({ theme }) => theme.accentColor};
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: calc(100vw / 2);
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
@@ -76,6 +100,26 @@ const CircleText = styled.span`
   }
   p {
     font-size: 30px;
+  }
+`;
+
+const FixWrapper = styled.ul`
+  width: 100%;
+  margin: 70px 0 100px;
+  display: none;
+  li {
+    width: calc(50% - 5px);
+    min-width: 400px;
+    height: 300px;
+    background: #ddd;
+    @media screen and (max-width: 850px) {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 1150px) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 `;
 
@@ -178,6 +222,14 @@ const Works = () => {
           </CircleText>
         </Circle>
       </WorksWrapper>
+      <FixWrapper>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+      </FixWrapper>
     </Wrapper>
   );
 };

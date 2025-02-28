@@ -146,7 +146,7 @@ const ToggleBtn = styled.div<{ $menuOpen: boolean }>`
   position: absolute;
   top: 20px;
   right: -30px;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 5px;
   background: ${({ theme }) => theme.bgColor};
@@ -174,6 +174,7 @@ const ToggleBtn = styled.div<{ $menuOpen: boolean }>`
   }
 
   @media screen and (max-width: 600px) {
+    display: flex;
     opacity: 0.95;
   }
 `;

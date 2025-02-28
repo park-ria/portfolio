@@ -44,6 +44,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Teko", sans-serif;
   }
 `;
+const IntroWrapper = styled.div`
+  overflow: hidden;
+`;
 
 const Main = styled.main`
   position: relative;
@@ -56,6 +59,7 @@ const Section = styled.section`
   position: absolute;
   top: 80px;
   left: 0;
+  overflow: hidden;
   @media screen and (max-width: 600px) {
     top: 0;
   }
@@ -127,9 +131,9 @@ const App = () => {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <div ref={introRef}>
+        <IntroWrapper ref={introRef}>
           <Intro />
-        </div>
+        </IntroWrapper>
         <Main>
           <Header onClick={moveSection} />
           <Section>
