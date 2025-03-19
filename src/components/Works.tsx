@@ -5,6 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Title from "./Common/Title";
 import { useRecoilValue } from "recoil";
 import { workScrollTopAtom } from "../atoms";
+import datas from "../data.json";
+import Project from "./Project";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,38 +31,11 @@ const WorksWrapper = styled.div`
 const WorksGroup = styled.ul`
   display: flex;
   gap: 10px;
-
   &:first-child {
     justify-self: flex-start;
   }
   &:last-child {
     justify-self: flex-end;
-  }
-
-  /* @media screen and (max-width: 1150px) {
-    flex-direction: column;
-  } */
-
-  li {
-    width: calc(100vw / 2.5);
-    height: calc(100vh / 2 - 10px);
-    background: #ddd;
-    flex-shrink: 0;
-    @media screen and (max-width: 1600px) {
-      width: calc(100vw / 2.3);
-    }
-    @media screen and (max-width: 1150px) {
-      width: 100%;
-    }
-    /* @media screen and (max-width: 1100px) {
-      width: calc(100vw / 2.15);
-    }
-    @media screen and (max-width: 850px) {
-      width: calc(100vw / 1.95);
-    }
-    @media screen and (max-width: 600px) {
-      width: 100%;
-    } */
   }
 `;
 
@@ -111,7 +86,6 @@ const FixWrapper = styled.ul`
     width: calc(50% - 5px);
     min-width: 400px;
     height: 300px;
-    background: #ddd;
     @media screen and (max-width: 850px) {
       width: 100%;
     }
@@ -123,8 +97,60 @@ const FixWrapper = styled.ul`
   }
 `;
 
+const ModalBg = styled.div<{ $isOpen: boolean }>`
+  width: 98%;
+  height: 98%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
+  color: #fff;
+  transition: opacity 0.3s ease-in-out;
+`;
+
+const CloseBtn = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    background: #fff;
+    color: #222;
+  }
+`;
+
+interface ProjectType {
+  id: number;
+  title: string;
+  tech_stack: string[];
+  type: string;
+  layout: string;
+  implementation: string[];
+  description: string;
+  figma_url: string;
+  github_url: string;
+  site_url: string;
+  img: string;
+}
+
 const Works = () => {
   const workTop = useRecoilValue(workScrollTopAtom);
+  const [isOpen, setIsOpen] = useState(false);
+  const [projectContent, setProjectContent] = useState<ProjectType | null>(
+    null
+  );
   const [circleScroll, setCircleScroll] = useState(0);
 
   const firstGroupRef = useRef<HTMLUListElement>(null);
@@ -203,14 +229,30 @@ const Works = () => {
       <Title word={"WORKS"} menuIdx={4} />
       <WorksWrapper ref={triggerRef}>
         <WorksGroup ref={firstGroupRef}>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
+          {datas.project.slice(0, 3).map((project) => (
+            <Project
+              key={project.id}
+              img={project.img}
+              title={project.title}
+              onClick={() => {
+                setIsOpen(true);
+                setProjectContent(project);
+              }}
+            />
+          ))}
         </WorksGroup>
         <WorksGroup ref={secondGroupRef}>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
+          {datas.project.slice(3, 6).map((project) => (
+            <Project
+              key={project.id}
+              img={project.img}
+              title={project.title}
+              onClick={() => {
+                setIsOpen(true);
+                setProjectContent(project);
+              }}
+            />
+          ))}
         </WorksGroup>
         <Circle>
           <svg width="360" height="360" viewBox="0 0 360 360">
@@ -223,13 +265,29 @@ const Works = () => {
         </Circle>
       </WorksWrapper>
       <FixWrapper>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
+        {datas.project.map((project) => (
+          <Project
+            key={project.id}
+            img={project.img}
+            title={project.title}
+            onClick={() => {
+              setIsOpen(true);
+              setProjectContent(project);
+            }}
+          />
+        ))}
       </FixWrapper>
+      <ModalBg $isOpen={isOpen}>
+        <CloseBtn
+          onClick={() => {
+            setIsOpen(false);
+            setProjectContent(null);
+          }}
+        >
+          Close
+        </CloseBtn>
+        {projectContent?.title}
+      </ModalBg>
     </Wrapper>
   );
 };

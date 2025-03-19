@@ -267,7 +267,7 @@ const Contact = () => {
           </IconGroup>
         </ContactDetail>
         <Footer>
-          Copyright 2024. parkria all rights reserved.
+          Copyright 2025. parkria all rights reserved.
           <br />
           Typescript, Styled Components 기반으로 제작된 사이트입니다.
         </Footer>

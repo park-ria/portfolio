@@ -276,10 +276,6 @@
           "img": "javascript"
         },
         {
-          "name": "Tailwind",
-          "img": "tailwind"
-        },
-        {
           "name": "Styled-components",
           "img": "styledcomponents"
         },
@@ -378,6 +374,109 @@
           "img": "svn"
         }
       ]
+    }
+  ],
+  "project": [
+    {
+      "id": 0,
+      "title": "오로라+",
+      "tech_stack": [
+        "Typescript",
+        "React",
+        "Recoil",
+        "React Query",
+        "Styled Components"
+      ],
+      "type": "Team project",
+      "layout": "반응형",
+      "implementation": ["Detail", "Header", "Review", "Login & Logout"],
+      "description": "React와 TypeScript를 기반으로 Recoil을 활용한 상태 관리, React Query를 이용한 데이터 패칭 및 캐싱을 구현한 프로젝트입니다. TMDB API를 연동하여 영화 정보를 제공하며, Styled Components를 활용해 반응형 UI를 구축했습니다.",
+      "figma_url": "https://www.figma.com/design/FuXJ2FWBjyMqw8IPFaWBzn/OTT_AuroraPlus?node-id=1-5&t=1xnIPuTRrRBHrd9Y-1",
+      "github_url": "https://github.com/hoon730/aurora_ytk",
+      "site_url": "https://auroraplus-3fc8e.web.app",
+      "img": "imgs/project/aurora.png"
+    },
+    {
+      "id": 1,
+      "title": "인스타그램",
+      "tech_stack": [
+        "React",
+        "Firebase database",
+        "Firebase storage",
+        "Styled Components"
+      ],
+      "type": "Team project",
+      "layout": "반응형",
+      "implementation": ["Main", "Detail", "Review", "Like", "Follow"],
+      "description": "React와 Firebase를 활용하여 소셜 미디어 플랫폼을 구현한 프로젝트입니다. Firebase Database를 이용한 실시간 데이터 저장 및 관리, Firebase Storage를 활용한 이미지 업로드 기능을 포함하며, Styled Components로 반응형 UI를 구성했습니다. 게시물 업로드, 좋아요, 댓글 기능 등 핵심적인 인스타그램의 주요 기능을 구현하여 사용자 경험을 향상시켰습니다.",
+      "figma_url": "https://www.figma.com/design/eGNxCzRNo32CFq88wLE8S9/Instagram_%EC%97%BC%ED%83%90%EA%BE%BC?node-id=1-2&t=PQH6cYlRy6ll0OnN-1",
+      "github_url": "https://github.com/park-ria/Frontend-Class/tree/main/customizing/instagram",
+      "site_url": "https://ria-instagram.web.app",
+      "img": "imgs/project/instagram.png"
+    },
+    {
+      "id": 2,
+      "title": "중고나라",
+      "tech_stack": ["Javascript", "Local Storage", "Scss"],
+      "type": "Team project",
+      "layout": "반응형",
+      "implementation": ["WishList", "Order", "Payment", "Slide"],
+      "description": "라이브러리 없이 Vanilla script로 동적인 UI를 구현했습니다.  SCSS를 사용해 스타일을 구조적으로 관리하고, Local Storage를 이용하여 사용자 데이터를 저장할 수 있도록 설계했습니다. 기존 중고나라 페이지에서 더욱 편리하도록 UI를 수정하여 사용자 경험을 개선하였습니다.",
+      "figma_url": "https://www.figma.com/design/cCLe6dVPpVkbsNCGpv8pLU/COREA-Team-project?node-id=1036-6518&t=IXUBmEoHyZ0GEbVX-1",
+      "github_url": "https://github.com/park-ria/teamproject-corea",
+      "site_url": "https://junggonara-8874f.web.app/",
+      "img": "imgs/project/joonggonara.png"
+    },
+    {
+      "id": 3,
+      "title": "포트폴리오",
+      "tech_stack": ["Typescript", "React", "Recoil", "Styled Components"],
+      "type": "Personal project",
+      "layout": "반응형",
+      "implementation": ["ALL"],
+      "description": "TypeScript와 React를 기반으로 개발한 포트폴리오 사이트로, Recoil을 활용한 상태 관리와 Styled Components를 이용한 반응형 UI 디자인을 적용했습니다. 프로젝트 및 경험을 효과적으로 소개할 수 있도록 구성했으며, 직관적인 내비게이션과 깔끔한 디자인을 통해 가독성을 높였습니다. 또한, 유지보수와 확장성을 고려하여 모듈화된 컴포넌트 구조로 개발하였습니다.",
+      "figma_url": "https://www.figma.com/design/EPB3tg1bIoZ9qNUB08J5px/Untitled?node-id=0-1&p=f",
+      "github_url": "https://github.com/park-ria/portfolio",
+      "site_url": "",
+      "img": "imgs/project/portfolio.png"
+    },
+    {
+      "id": 4,
+      "title": "코인랭킹",
+      "tech_stack": [
+        "Typescript",
+        "React",
+        "Recoil",
+        "React Query",
+        "Styled Components"
+      ],
+      "type": "Personal project",
+      "layout": "반응형",
+      "implementation": ["ALL"],
+      "description": "TypeScript와 React를 기반으로 실시간 암호화폐 정보를 제공하는 코인 랭킹 사이트를 개발했습니다. Recoil을 활용한 상태 관리와 React Query를 이용한 API 데이터 패칭 및 캐싱으로 최적화된 성능을 구현했습니다. Styled Components를 적용하여 반응형 UI를 구성하였습니다.",
+      "figma_url": "",
+      "github_url": "https://github.com/park-ria/Frontend-Class/tree/main/customizing/coin",
+      "site_url": "https://coin-ranking.web.app",
+      "img": "imgs/project/coinranking.png"
+    },
+    {
+      "id": 5,
+      "title": "",
+      "tech_stack": [
+        "Typescript",
+        "React",
+        "Recoil",
+        "React Query",
+        "Styled Components"
+      ],
+      "type": "Personal project",
+      "layout": "반응형",
+      "implementation": ["ALL"],
+      "description": "",
+      "figma_url": "",
+      "github_url": "",
+      "site_url": "",
+      "img": "imgs/project/coinranking.png"
     }
   ]
 }
