@@ -108,26 +108,224 @@ const ModalBg = styled.div<{ $isOpen: boolean }>`
   background: rgba(0, 0, 0, 0.9);
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
   display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   color: #fff;
   transition: opacity 0.3s ease-in-out;
+  z-index: 10;
+  @media screen and (max-width: 800px) {
+    align-items: flex-start;
+  }
+`;
+
+const ModalTop = styled.div`
+  width: 100%;
+  padding: 10px 30px 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 50px;
+    line-height: 1;
+    padding-left: 40px;
+  }
+  @media screen and (max-width: 1600px) and (min-width: 1201px) {
+    padding-top: 60px;
+  }
+  @media screen and (max-width: 1200px) {
+    padding: 20px 15px;
+  }
+  @media screen and (max-width: 800px) {
+    h1 {
+      font-size: 30px;
+    }
+  }
 `;
 
 const CloseBtn = styled.span`
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px 10px;
   color: #fff;
+  font-size: 16px;
   border: 1px solid #fff;
   border-radius: 5px;
-  position: absolute;
-  top: 30px;
-  right: 30px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   &:hover {
     background: #fff;
     color: #222;
+  }
+  @media screen and (max-width: 800px) {
+    font-size: 14px;
+    padding: 3px 5px;
+  }
+`;
+
+const ModalWrapper = styled.div`
+  width: 90%;
+  height: 80%;
+  display: flex;
+  gap: 20px;
+  @media screen and (max-width: 1600px) {
+    width: 96%;
+    height: 90%;
+  }
+  @media screen and (max-width: 1200px) {
+    width: 98%;
+    flex-direction: column;
+    gap: 10px;
+  }
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    height: 100%;
+    padding: 0px 15px 20px;
+  }
+`;
+
+const ModalSection = styled.div`
+  &:first-child {
+    flex: 2;
+  }
+  &:last-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 15px;
+  }
+  @media screen and (max-width: 1200px) and (min-width: 801px) {
+    &:last-child {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    &:last-child {
+      padding: 0;
+      flex: none;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    &:first-child {
+      flex: none;
+    }
+    &:last-child {
+      flex: 1;
+    }
+  }
+`;
+
+const ProjectImg = styled.span<{ $imgUrl: string }>`
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: ${({ $imgUrl }) => `url(${$imgUrl}) no-repeat center/contain`};
+  @media screen and (max-width: 1200px) {
+    background-size: cover;
+    border-radius: 10px;
+  }
+  @media screen and (max-width: 450px) {
+    height: 200px;
+  }
+`;
+
+const ProjectDesc = styled.ul`
+  li {
+    margin-top: 20px;
+    &:first-child {
+      margin-top: 0;
+    }
+    & > label {
+      font-size: 20px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    & > span {
+      color: #bbb;
+    }
+    &.column {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      & > span {
+        padding: 0 8px;
+        &.stack {
+          margin-top: 6px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 5px;
+          row-gap: 10px;
+          & > span {
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ddd;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    flex: 2;
+    li {
+      margin-top: 10px;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    li {
+      & > label {
+        font-size: 16px;
+      }
+      & > span {
+        font-size: 14px;
+      }
+      &.column {
+        & > span {
+          padding: 0;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 450px) {
+    flex: none;
+  }
+`;
+
+const ProjectLink = styled.ul`
+  width: 100%;
+  text-align: center;
+  li {
+    width: 100%;
+    margin-top: 16px;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      background: #fff;
+      border: 1px solid transparent;
+      color: #222;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    flex: 1;
+    li {
+      margin-top: 10px;
+      padding: 5px;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    flex: none;
   }
 `;
 
@@ -278,15 +476,70 @@ const Works = () => {
         ))}
       </FixWrapper>
       <ModalBg $isOpen={isOpen}>
-        <CloseBtn
-          onClick={() => {
-            setIsOpen(false);
-            setProjectContent(null);
-          }}
-        >
-          Close
-        </CloseBtn>
-        {projectContent?.title}
+        <ModalTop>
+          <h1 className="teko">PROJECT</h1>
+          <CloseBtn
+            onClick={() => {
+              setIsOpen(false);
+              setProjectContent(null);
+            }}
+          >
+            Close
+          </CloseBtn>
+        </ModalTop>
+
+        {projectContent && (
+          <ModalWrapper>
+            <ModalSection>
+              <ProjectImg $imgUrl={projectContent?.img} />
+            </ModalSection>
+            <ModalSection>
+              <ProjectDesc>
+                <li>
+                  <label>Title</label>
+                  <span>{projectContent.title}</span>
+                </li>
+                <li>
+                  <label>Type</label>
+                  <span>{projectContent.type}</span>
+                </li>
+                <li>
+                  <label>Layout</label>
+                  <span>{projectContent.layout}</span>
+                </li>
+                <li className="column">
+                  <label>Tech Stack</label>
+                  <span className="stack">
+                    {projectContent.tech_stack.map((stack, idx) => (
+                      <span key={idx}>{stack}</span>
+                    ))}
+                  </span>
+                </li>
+                <li className="column">
+                  <label>Implementation</label>
+                  <span>{projectContent.implementation.join(", ")}</span>
+                </li>
+                <li className="column">
+                  <label>Description</label>
+                  <span>{projectContent.description}</span>
+                </li>
+              </ProjectDesc>
+              <ProjectLink>
+                {projectContent.figma_url && (
+                  <a href={projectContent.figma_url} target="_blank">
+                    <li>Figma</li>
+                  </a>
+                )}
+                <a href={projectContent.github_url} target="_blank">
+                  <li>Git hub</li>
+                </a>
+                <a href={projectContent.github_url} target="_blank">
+                  <li>Site</li>
+                </a>
+              </ProjectLink>
+            </ModalSection>
+          </ModalWrapper>
+        )}
       </ModalBg>
     </Wrapper>
   );

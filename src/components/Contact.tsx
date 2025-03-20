@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { Content, Wrapper } from "./Common/LayoutComponents";
 import Title from "./Common/Title";
+import { useRecoilValue } from "recoil";
+import { selectedIndexAtom } from "../atoms";
 
 const ContactTitle = styled.div`
   width: 350px;
@@ -13,10 +16,16 @@ const ContactTitle = styled.div`
   & > div {
     padding: 0;
   }
+  @media screen and (max-width: 500px) {
+    height: 50px;
+  }
 `;
 
-const Plane = styled.svg`
+const Plane = styled(motion.svg)`
   fill: ${({ theme }) => theme.textColor};
+  @media screen and (max-width: 500px) {
+    height: 50px;
+  }
 `;
 
 const Ment = styled.p`
@@ -25,6 +34,12 @@ const Ment = styled.p`
   font-size: 1.875rem;
   font-weight: 100;
   color: ${({ theme }) => theme.textColor};
+  @media screen and (max-width: 900px) {
+    font-size: 1.5rem;
+  }
+  @media screen and (max-width: 500px) {
+    margin-bottom: 30px;
+  }
 `;
 
 const ContactDetail = styled.div`
@@ -35,6 +50,9 @@ const ContactDetail = styled.div`
   gap: 50px;
   position: relative;
   margin: 0 auto;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const Effect = styled.svg`
@@ -42,24 +60,42 @@ const Effect = styled.svg`
   top: -10%;
   left: -15%;
   fill: ${({ theme }) => theme.textColor};
+  transition: opacity 0.3s ease-in-out;
+  @media screen and (max-width: 900px) {
+    opacity: 0;
+  }
 `;
 
 const ContactDesc = styled.div`
   display: flex;
   align-items: center;
   gap: 60px;
+  @media screen and (max-width: 900px) {
+    gap: 10px;
+  }
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    gap: 30px;
+  }
 `;
 
 const QrImg = styled.span`
   width: 216px;
   height: 216px;
   background: url("/imgs/qr.jpg") center/cover no-repeat;
+  @media screen and (max-width: 900px) and (min-width: 501px) {
+    width: 150px;
+    height: 150px;
+  }
 `;
 
 const ContactInfos = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 30px;
+  @media screen and (max-width: 900px) {
+    gap: 20px;
+  }
 `;
 
 const ContactInfo = styled.li`
@@ -75,6 +111,9 @@ const ContactInfo = styled.li`
     transform: translateY(-5px);
     border-radius: 3px;
     background: ${({ theme }) => theme.textColor};
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 1rem;
   }
 `;
 
@@ -130,6 +169,27 @@ const IconGroup = styled.ul`
       transform: rotateY(360deg);
     }
   }
+  @media screen and (max-width: 900px) {
+    gap: 50px;
+  }
+  @media screen and (max-width: 420px) {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+    li {
+      width: 80px;
+      height: 80px;
+
+      svg {
+        width: 50px;
+        height: 50px;
+        &.vlog {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
 `;
 
 const Heart = styled.svg`
@@ -137,17 +197,52 @@ const Heart = styled.svg`
   position: absolute;
   top: -80%;
   right: -20%;
+  @media screen and (max-width: 900px) {
+    width: 100px;
+    height: 100px;
+    top: -65%;
+    right: -15%;
+  }
+  @media screen and (max-width: 500px) {
+    opacity: 0;
+  }
 `;
 
 const Footer = styled.footer`
   width: fit-content;
-  margin: 100px auto;
+  margin: 50px auto 0;
   font-size: 0.875rem;
   color: #999;
   text-align: center;
 `;
 
 const Contact = () => {
+  const selectedIndex = useRecoilValue(selectedIndexAtom);
+
+  const planeContainer = {
+    hidden: { opacity: 0, y: 100, x: -100 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      transition: {
+        delay: 0.3,
+        duration: 1,
+      },
+    },
+  };
+
+  const container = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.5,
+      },
+    },
+  };
+
   return (
     <Wrapper style={{ background: "none" }}>
       <ContactTitle>
@@ -158,6 +253,11 @@ const Contact = () => {
           height="62"
           viewBox="0 0 71 62"
           preserveAspectRatio="xMidYMid meet"
+          variants={planeContainer}
+          initial="hidden"
+          animate={
+            selectedIndex === -1 || selectedIndex === 5 ? "visible" : "hidden"
+          }
         >
           <g transform="translate(0,62) scale(0.1,-0.1)" stroke="none">
             <path
@@ -172,7 +272,15 @@ const Contact = () => {
           </g>
         </Plane>
       </ContactTitle>
-      <Content style={{ marginTop: 0 }}>
+      <Content
+        style={{ marginTop: 0 }}
+        as={motion.div}
+        variants={container}
+        initial="hidden"
+        animate={
+          selectedIndex === -1 || selectedIndex === 5 ? "visible" : "hidden"
+        }
+      >
         <Ment>Thank you for visiting my portfolio</Ment>
         <ContactDetail>
           <Effect
@@ -253,7 +361,7 @@ const Contact = () => {
               </svg>
             </li>
             <li>
-              <svg width="46" height="46" viewBox="0 0 60 60">
+              <svg className="vlog" width="46" height="46" viewBox="0 0 60 60">
                 <g clipPath="url(#clip0_259_18)">
                   <path d="M22.3285 1.13413C24.7311 2.89217 25.2077 5.13888 25.6601 7.90981C25.7576 8.46396 25.7576 8.46396 25.857 9.0293C26.0708 10.2518 26.2769 11.4755 26.4832 12.6992C26.6316 13.5551 26.7807 14.4108 26.9304 15.2664C27.2486 17.0894 27.564 18.9128 27.8775 20.7366C28.6515 25.2274 29.4543 29.713 30.2559 34.1989C30.5141 35.6469 30.7706 37.0953 31.0268 38.5437C31.1846 39.4323 31.3425 40.321 31.5004 41.2096C31.5723 41.6182 31.6442 42.0267 31.7183 42.4475C31.785 42.8212 31.8516 43.1949 31.9203 43.58C32.0067 44.0683 32.0067 44.0683 32.0949 44.5664C32.2618 45.4681 32.2618 45.4681 32.6545 46.5685C43.8812 31.887 43.8812 31.887 47.038 14.3028C46.0987 10.9873 42.4461 8.6362 39.6518 6.91669C40.9133 4.14153 43.6218 2.43214 46.3577 1.3042C49.3863 0.324352 52.5958 0.144615 55.5903 1.3285C57.6206 2.37902 59.0383 3.99665 59.8665 6.1392C61.1845 19.3886 52.4883 31.2992 44.972 41.4095C44.2858 42.3341 43.6053 43.2626 42.9258 44.192C33.6978 56.7987 33.6978 56.7987 31.4882 59.0083C30.8249 59.0971 30.1584 59.1619 29.4914 59.2164C29.0822 59.2502 28.673 59.284 28.2515 59.3189C27.8203 59.3527 27.3891 59.3865 26.9448 59.4214C26.3093 59.4744 26.3093 59.4744 25.6609 59.5284C23.7077 59.6865 21.7861 59.7931 19.8259 59.7858C18.8245 54.2032 17.8241 48.6204 16.8251 43.0374C16.361 40.4445 15.8967 37.8517 15.4315 35.2591C14.982 32.7538 14.5334 30.2483 14.0855 27.7427C13.915 26.7902 13.7443 25.8377 13.5731 24.8853C13.3322 23.5441 13.0925 22.2026 12.853 20.8612C12.7482 20.2798 12.7482 20.2798 12.6412 19.6867C12.1154 16.7303 11.699 13.7822 11.2736 10.8041C7.55329 10.8041 3.83301 10.8041 0 10.8041C0 9.13641 0 7.4687 0 5.75046C3.07571 4.43186 6.20534 3.46558 9.42675 2.58337C10.2761 2.34931 11.1228 2.10707 11.9698 1.86454C15.4121 0.902542 18.8243 -0.0126969 22.3285 1.13413Z" />
                 </g>

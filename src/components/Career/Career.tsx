@@ -4,7 +4,7 @@ import { CareerType } from "../../type";
 import CareerGroup from "./CareerGroup";
 import Title from "../Common/Title";
 import { Wrapper, Content } from "../Common/LayoutComponents";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { careerIdAtom, workScrollTopAtom } from "../../atoms";
 
