@@ -461,22 +461,16 @@
     },
     {
       "id": 5,
-      "title": "",
-      "tech_stack": [
-        "Typescript",
-        "React",
-        "Recoil",
-        "React Query",
-        "Styled Components"
-      ],
+      "title": "Music Player",
+      "tech_stack": ["Javascript", "Scss"],
       "type": "Personal project",
       "layout": "반응형",
       "implementation": ["ALL"],
-      "description": "",
+      "description": "JavaScript와 SCSS를 활용하여 커스텀 오디오 컨트롤이 가능한 뮤직 플레이어를 만들었습니다. 재생, 일시 정지, 볼륨 조절, 진행 바 동기화 등의 기능을 구현했으며, SCSS를 활용한 스타일링 및 애니메이션으로 직관적인 UI/UX를 제공합니다.",
       "figma_url": "",
-      "github_url": "",
-      "site_url": "",
-      "img": "imgs/project/coinranking.png"
+      "github_url": "https://github.com/park-ria/Frontend-Class/tree/main/customizing/music",
+      "site_url": "https://music-player-fe7a8.web.app",
+      "img": "imgs/project/music.jpg"
     }
   ]
 }
