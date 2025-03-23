@@ -78,13 +78,15 @@ const AboutCircle = styled(motion.span)`
   background: #fff;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   overflow: hidden;
-  &::before {
+  position: relative;
+  &::after {
+    display: inline-block;
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: inherit;
+    height: inherit;
     background: url("/imgs/profile4.png") top/cover no-repeat;
   }
   @media screen and (max-width: 1150px) {

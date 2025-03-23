@@ -95,6 +95,10 @@ const FixWrapper = styled.ul`
     flex-wrap: wrap;
     gap: 10px;
   }
+  @media screen and (max-width: 850px) {
+    margin-top: 50px;
+    gap: 30px;
+  }
 `;
 
 const ModalBg = styled.div<{ $isOpen: boolean }>`

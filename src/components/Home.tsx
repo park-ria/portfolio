@@ -193,147 +193,162 @@ const HomeImgSection = styled.div`
   }
 `;
 
-const ImgWrapper = styled.div``;
-
 const ImgCircle = styled.div`
   width: 500px;
   height: 500px;
-  border-radius: 50%;
-  position: relative;
+  display: flex;
   @media screen and (max-width: 1400px) {
-    width: 402px;
+    width: 400px;
     height: 400px;
   }
   @media screen and (max-width: 450px) {
-    width: 302px;
+    width: 300px;
     height: 300px;
   }
 `;
 
-const FrontCircle = styled.span`
-  display: inline-block;
-  width: 250px;
-  height: 500px;
-  border-radius: 250px 0 0 250px;
+const FrontCircle = styled.div`
+  width: 50%;
+  height: 100%;
   background: ${({ theme }) => theme.accentColor};
-  position: relative;
+  border-radius: 250px 0 0 250px;
   opacity: 1;
   transform: translateY(15%);
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
-  overflow: hidden;
+  will-change: transform;
 
-  &::before {
-    content: "";
-    width: 90%;
-    height: 80%;
-    object-fit: cover;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: url("imgs/profile1.png") center/cover no-repeat;
-  }
-
-  span {
-    position: absolute;
-    top: 0;
-    left: 0;
+  div {
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 15%,
-      rgba(0, 0, 0, 0.3) 75%
-    );
-  }
+    border-radius: 250px 0 0 250px;
+    position: relative;
+    overflow: hidden;
 
-  &::after {
-    content: "Front";
-    position: absolute;
-    left: 60%;
-    bottom: 70px;
-    transform: translateX(-30%);
-    font-family: "Teko", serif;
-    font-size: 70px;
-    letter-spacing: -2px;
-    color: #fff;
+    &::before {
+      content: "";
+      width: 90%;
+      height: 80%;
+      object-fit: cover;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: url("imgs/profile1.png") center/cover no-repeat;
+    }
+
+    span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 15%,
+        rgba(0, 0, 0, 0.3) 75%
+      );
+    }
+
+    &::after {
+      content: "Front";
+      position: absolute;
+      left: 60%;
+      bottom: 70px;
+      transform: translateX(-30%);
+      font-family: "Teko", serif;
+      font-size: 70px;
+      letter-spacing: -2px;
+      color: #fff;
+    }
   }
 
   @media screen and (max-width: 1400px) {
-    width: 200px;
-    height: 400px;
-    &::after {
-      font-size: 50px;
+    border-radius: 200px 0 0 200px;
+    div {
+      border-radius: 200px 0 0 200px;
+      &::after {
+        font-size: 50px;
+      }
     }
   }
   @media screen and (max-width: 450px) {
-    width: 150px;
-    height: 300px;
-    &::after {
-      font-size: 40px;
+    border-radius: 150px 0 0 150px;
+    div {
+      border-radius: 150px 0 0 150px;
+      &::after {
+        font-size: 40px;
+      }
     }
   }
 `;
 
-const BackCircle = styled.span`
-  display: inline-block;
-  width: 250px;
-  height: 500px;
+const BackCircle = styled.div`
+  width: 50%;
+  height: 100%;
   border-radius: 0 250px 250px 0;
   background: #ececec;
-  position: relative;
   opacity: 1;
   transform: translateY(-5%);
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
-  overflow: hidden;
+  will-change: transform;
 
-  &::before {
-    content: "";
-    width: 82%;
-    height: 80%;
-    object-fit: cover;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: url("imgs/profile2.png") center/cover no-repeat;
-  }
-
-  span {
-    position: absolute;
-    top: 0;
-    left: 0;
+  div {
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 20%,
-      rgba(0, 0, 0, 0.3) 75%
-    );
-  }
+    border-radius: 0 250px 250px 0;
+    position: relative;
+    overflow: hidden;
+    &::before {
+      content: "";
+      width: 82%;
+      height: 80%;
+      object-fit: cover;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: url("imgs/profile2.png") center/cover no-repeat;
+    }
 
-  &::after {
-    content: "Back";
-    position: absolute;
-    right: 60%;
-    bottom: 70px;
-    transform: translateX(50%);
-    font-family: "Teko", serif;
-    font-size: 70px;
-    letter-spacing: -2px;
-    color: #fff;
-  }
+    span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 20%,
+        rgba(0, 0, 0, 0.3) 75%
+      );
+    }
 
-  @media screen and (max-width: 1400px) {
-    width: 200px;
-    height: 400px;
     &::after {
-      font-size: 50px;
+      content: "Back";
+      position: absolute;
+      right: 60%;
+      bottom: 70px;
+      transform: translateX(50%);
+      font-family: "Teko", serif;
+      font-size: 70px;
+      letter-spacing: -2px;
+      color: #fff;
+    }
+  }
+  @media screen and (max-width: 1400px) {
+    border-radius: 0 200px 200px 0;
+    div {
+      border-radius: 0 200px 200px 0;
+      &::after {
+        font-size: 50px;
+      }
     }
   }
   @media screen and (max-width: 450px) {
-    width: 150px;
-    height: 300px;
-    &::after {
-      font-size: 40px;
+    border-radius: 0 150px 150px 0;
+    div {
+      border-radius: 0 150px 150px 0;
+      &::after {
+        font-size: 40px;
+      }
     }
   }
 `;
@@ -341,8 +356,8 @@ const BackCircle = styled.span`
 const Home = () => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const imgCircleRef = useRef<HTMLDivElement | null>(null);
-  const frontCircleRef = useRef<HTMLSpanElement | null>(null);
-  const backCircleRef = useRef<HTMLSpanElement | null>(null);
+  const frontCircleRef = useRef<HTMLDivElement | null>(null);
+  const backCircleRef = useRef<HTMLDivElement | null>(null);
   const text1Ref = useRef<HTMLSpanElement | null>(null);
   const text2Ref = useRef<HTMLSpanElement | null>(null);
   const text3Ref = useRef<HTMLSpanElement | null>(null);
@@ -589,16 +604,18 @@ const Home = () => {
             <path d="M28 16.9001C28 20.2001 23.6 29.0001 21.2 30.5001C20.2 31.0001 18.2 31.7001 16.5 32.0001C14.5 32.3001 13.4 33.1001 13.2 34.5001C13 36.2001 13.8 36.8001 17.4 37.8001C21.2 38.8001 22.3 39.7001 24 42.9001C25.1 45.1001 26.1 49.0001 26.2 51.7001C26.5 55.8001 26.8 56.5001 28.8 56.8001C30.5 57.1001 31 56.6001 31 55.0001C31 53.8001 31.7 50.3001 32.6 47.2001C34.6 40.3001 38.6 36.0001 43 36.0001C45.7 36.0001 46.1 35.7001 45.8 33.7001C45.6 31.9001 44.7 31.4001 41 31.0001C38.5 30.7001 35.9 30.1001 35.2 29.6001C33.1 28.3001 31.8 23.9001 31.9 18.7001C32 14.6001 31.8 14.0001 30 14.0001C28.5 14.0001 28 14.7001 28 16.9001ZM33.7 33.0001C35.4 33.0001 35.4 34.7001 33.6 35.7001C32.9 36.1001 31.3 38.0001 30.2 39.8001L28.2 43.1001L27.2 40.1001C26.6 38.4001 25.4 36.7001 24.5 36.4001C23.3 35.9001 23.5 35.2001 25.7 32.6001C28.4 29.5001 28.6 29.5001 30.4 31.2001C31.5 32.2001 33 33.0001 33.7 33.0001Z" />
             <path d="M48.5001 37.7C47.7001 39.6 47.0001 42 47.0001 43C47.0001 45.3 45.3001 46.6 41.3001 47.5C37.7001 48.2 36.9001 50.7 39.8001 51.6C46.0001 53.6 48.0001 56.4 48.0001 62.9C48.0001 67.6 50.3001 70.1 51.9001 67.1C52.5001 66 53.0001 64 53.0001 62.5C53.0001 58.3 55.7001 54.2 60.0001 52C64.0001 50 64.6001 47.5 61.2001 47.3C55.6001 46.9 53.0001 44.2 53.0001 39C53.0001 33.7 50.5001 32.9 48.5001 37.7ZM52.7001 48.8C53.5001 49.3 53.5001 49.9 52.6001 51.2C51.1001 53.2 48.4001 51.9 49.3001 49.6C50.0001 47.9 50.9001 47.6 52.7001 48.8Z" />
           </svg>
-          <ImgWrapper>
-            <ImgCircle ref={imgCircleRef}>
-              <FrontCircle ref={frontCircleRef}>
+          <ImgCircle ref={imgCircleRef}>
+            <FrontCircle ref={frontCircleRef}>
+              <div>
                 <span />
-              </FrontCircle>
-              <BackCircle ref={backCircleRef}>
+              </div>
+            </FrontCircle>
+            <BackCircle ref={backCircleRef}>
+              <div>
                 <span />
-              </BackCircle>
-            </ImgCircle>
-          </ImgWrapper>
+              </div>
+            </BackCircle>
+          </ImgCircle>
         </HomeImgSection>
       </HomeInner>
     </Wrapper>
