@@ -103,7 +103,9 @@ const FixWrapper = styled.ul`
 
 const ModalBg = styled.div<{ $isOpen: boolean }>`
   width: 98%;
-  height: 98%;
+  height: fit-content;
+  max-height: 98%;
+  padding: 20px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -121,11 +123,14 @@ const ModalBg = styled.div<{ $isOpen: boolean }>`
   @media screen and (max-width: 800px) {
     align-items: flex-start;
   }
+  @media screen and (max-width: 600px) {
+    padding: 15px;
+  }
 `;
 
 const ModalTop = styled.div`
   width: 100%;
-  padding: 10px 30px 20px;
+  margin-bottom: 20px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -136,12 +141,6 @@ const ModalTop = styled.div`
     font-size: 50px;
     line-height: 1;
     padding-left: 40px;
-  }
-  @media screen and (max-width: 1600px) and (min-width: 1201px) {
-    padding-top: 60px;
-  }
-  @media screen and (max-width: 1200px) {
-    padding: 20px 15px;
   }
   @media screen and (max-width: 800px) {
     h1 {
@@ -173,23 +172,21 @@ const CloseBtn = styled.span`
 `;
 
 const ModalWrapper = styled.div`
-  width: 90%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   display: flex;
   gap: 20px;
-  @media screen and (max-width: 1600px) {
-    width: 96%;
-    height: 90%;
+  padding-right: 10px;
+  overflow-y: scroll;
+  scrollbar-gutter: stable both-edges;
+  &::-webkit-scrollbar {
+    width: 8px;
   }
-  @media screen and (max-width: 1200px) {
-    width: 98%;
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff;
+  }
+  @media screen and (max-width: 1400px) {
     flex-direction: column;
-    gap: 10px;
-  }
-  @media screen and (max-width: 800px) {
-    width: 100%;
-    height: 100%;
-    padding: 0px 15px 20px;
   }
 `;
 
@@ -198,31 +195,24 @@ const ModalSection = styled.div`
     flex: 2;
   }
   &:last-child {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    padding: 15px;
+    gap: 20px;
+    flex: 1;
   }
-  @media screen and (max-width: 1200px) and (min-width: 801px) {
+  @media screen and (max-width: 1400px) and (min-width: 801px) {
     &:last-child {
       flex-direction: row;
       align-items: flex-start;
     }
   }
   @media screen and (max-width: 800px) {
-    &:last-child {
-      padding: 0;
-      flex: none;
-    }
-  }
-  @media screen and (max-width: 450px) {
     &:first-child {
       flex: none;
     }
     &:last-child {
-      flex: 1;
+      flex: none;
     }
   }
 `;
@@ -231,12 +221,13 @@ const ProjectImg = styled.span<{ $imgUrl: string }>`
   display: inline-block;
   width: 100%;
   height: 100%;
-  background: ${({ $imgUrl }) => `url(${$imgUrl}) no-repeat center/contain`};
-  @media screen and (max-width: 1200px) {
-    background-size: cover;
+  background: ${({ $imgUrl }) => `url(${$imgUrl}) no-repeat center/cover`};
+  @media screen and (max-width: 1400px) {
+    height: 300px;
+    background-position: top;
     border-radius: 10px;
   }
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 600px) {
     height: 200px;
   }
 `;
@@ -279,7 +270,7 @@ const ProjectDesc = styled.ul`
     }
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1400px) {
     flex: 2;
     li {
       margin-top: 10px;
@@ -321,7 +312,7 @@ const ProjectLink = styled.ul`
       color: #222;
     }
   }
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1400px) {
     flex: 1;
     li {
       margin-top: 10px;

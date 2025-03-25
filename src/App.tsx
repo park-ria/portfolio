@@ -65,6 +65,16 @@ const Section = styled.section`
   }
 `;
 
+const TopBtn = styled.div`
+  width: 80px;
+  height: 80px;
+  background: ${({ theme }) => theme.skillIconBg};
+  border-radius: 50%;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+`;
+
 const App = () => {
   const isDark = useRecoilValue(isDarkAtom);
   const [selectedIndex, setSelectedIndex] = useRecoilState(selectedIndexAtom);
@@ -143,6 +153,7 @@ const App = () => {
               </div>
             ))}
           </Section>
+          <TopBtn></TopBtn>
         </Main>
       </ThemeProvider>
     </>
