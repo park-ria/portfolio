@@ -3,7 +3,7 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./styles/theme";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { isDarkAtom, selectedIndexAtom } from "./atoms";
-import { useScroll } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Intro from "./components/Intro";
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -68,20 +68,27 @@ const Section = styled.section`
 const TopBtn = styled.div`
   width: 50px;
   height: 50px;
-  background: ${({ theme }) => theme.textColor};
-  border-radius: 50%;
   position: fixed;
   bottom: 30px;
   right: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
   svg {
-    width: 24px;
-    height: 24px;
-    path {
-      stroke: ${({ theme }) => theme.bgColor};
+    &:first-child {
+      width: 100%;
+      height: 100%;
+      fill: #222;
+      stroke: ${({ theme }) => theme.accentColor};
+    }
+    &:last-child {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      path {
+        stroke: #fff;
+      }
     }
   }
   @media screen and (max-width: 600px) {
@@ -152,6 +159,14 @@ const App = () => {
     return () => scrollY.clearListeners();
   }, [scrollY, selectedIndex]);
 
+  const mainRef = useRef<HTMLDivElement | null>(null);
+  const scrollToTop = () => {
+    mainRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const { scrollYProgress } = useScroll();
+  const dashOffset = useTransform(scrollYProgress, [0, 1], [200, 0]);
+
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
@@ -159,7 +174,7 @@ const App = () => {
         <IntroWrapper ref={introRef}>
           <Intro />
         </IntroWrapper>
-        <Main>
+        <Main ref={mainRef}>
           <Header onClick={moveSection} />
           <Section>
             {menuRef.map((menu, index) => (
@@ -168,27 +183,34 @@ const App = () => {
               </div>
             ))}
           </Section>
-          <TopBtn onClick={() => moveSection(0)}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <TopBtn onClick={scrollToTop}>
+            <motion.svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <rect x="2.5" y="2.5" width="55" height="55" rx="27.5" />
+              <motion.rect
+                x="2.5"
+                y="2.5"
+                width="55"
+                height="55"
+                rx="27.5"
+                strokeWidth="5"
+                strokeDasharray="200"
+                style={{ strokeDashoffset: dashOffset as unknown as number }}
+              />
+            </motion.svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
                 d="M12 21V3.5"
                 stroke="black"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M19 10L12 3L5 10"
                 stroke="black"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </TopBtn>
