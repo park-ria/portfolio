@@ -198,7 +198,6 @@ const Header = ({ onClick }: HeaderType) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleClick = (index: number) => {
-    //setSelectedIndex(index);
     onClick(index);
   };
 

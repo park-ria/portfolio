@@ -66,13 +66,28 @@ const Section = styled.section`
 `;
 
 const TopBtn = styled.div`
-  width: 80px;
-  height: 80px;
-  background: ${({ theme }) => theme.skillIconBg};
+  width: 50px;
+  height: 50px;
+  background: ${({ theme }) => theme.textColor};
   border-radius: 50%;
   position: fixed;
   bottom: 30px;
   right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  svg {
+    width: 24px;
+    height: 24px;
+    path {
+      stroke: ${({ theme }) => theme.bgColor};
+    }
+  }
+  @media screen and (max-width: 600px) {
+    bottom: 10px;
+    right: 10px;
+  }
 `;
 
 const App = () => {
@@ -153,7 +168,30 @@ const App = () => {
               </div>
             ))}
           </Section>
-          <TopBtn></TopBtn>
+          <TopBtn onClick={() => moveSection(0)}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 21V3.5"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M19 10L12 3L5 10"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </TopBtn>
         </Main>
       </ThemeProvider>
     </>
