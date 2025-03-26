@@ -103,7 +103,7 @@ const FixWrapper = styled.ul`
 
 const ModalBg = styled.div<{ $isOpen: boolean }>`
   width: 98%;
-  height: fit-content;
+  height: auto;
   max-height: 98%;
   padding: 20px;
   position: fixed;
@@ -177,7 +177,7 @@ const ModalWrapper = styled.div`
   display: flex;
   gap: 20px;
   padding-right: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-gutter: stable both-edges;
   &::-webkit-scrollbar {
     width: 8px;
@@ -209,10 +209,10 @@ const ModalSection = styled.div`
   }
   @media screen and (max-width: 800px) {
     &:first-child {
-      flex: none;
+      flex: 1;
     }
     &:last-child {
-      flex: none;
+      flex: 2;
     }
   }
 `;
@@ -221,9 +221,9 @@ const ProjectImg = styled.span<{ $imgUrl: string }>`
   display: inline-block;
   width: 100%;
   height: 100%;
+  min-height: 300px;
   background: ${({ $imgUrl }) => `url(${$imgUrl}) no-repeat center/cover`};
   @media screen and (max-width: 1400px) {
-    height: 300px;
     background-position: top;
     border-radius: 10px;
   }
@@ -271,7 +271,6 @@ const ProjectDesc = styled.ul`
   }
 
   @media screen and (max-width: 1400px) {
-    flex: 2;
     li {
       margin-top: 10px;
     }
@@ -313,14 +312,10 @@ const ProjectLink = styled.ul`
     }
   }
   @media screen and (max-width: 1400px) {
-    flex: 1;
     li {
       margin-top: 10px;
       padding: 5px;
     }
-  }
-  @media screen and (max-width: 800px) {
-    flex: none;
   }
 `;
 
@@ -482,7 +477,6 @@ const Works = () => {
             Close
           </CloseBtn>
         </ModalTop>
-
         {projectContent && (
           <ModalWrapper>
             <ModalSection>
@@ -510,7 +504,11 @@ const Works = () => {
                     ))}
                   </span>
                 </li>
-                <li className="column">
+                <li
+                  className={
+                    projectContent.implementation.length > 1 ? "column" : ""
+                  }
+                >
                   <label>Implementation</label>
                   <span>{projectContent.implementation.join(", ")}</span>
                 </li>
