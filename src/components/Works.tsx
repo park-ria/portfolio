@@ -526,7 +526,7 @@ const Works = () => {
                 <a href={projectContent.github_url} target="_blank">
                   <li>Git hub</li>
                 </a>
-                <a href={projectContent.github_url} target="_blank">
+                <a href={projectContent.site_url} target="_blank">
                   <li>Site</li>
                 </a>
               </ProjectLink>
