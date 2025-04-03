@@ -102,24 +102,35 @@ const FixWrapper = styled.ul`
 `;
 
 const ModalBg = styled.div<{ $isOpen: boolean }>`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(90, 90, 90, 0.6);
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 10;
+`;
+
+const ModalWrapper = styled.div`
   width: 98%;
   height: auto;
   max-height: 98%;
   padding: 20px;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.9);
-  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
-  display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
+  display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   color: #fff;
-  transition: opacity 0.3s ease-in-out;
-  z-index: 10;
   @media screen and (max-width: 800px) {
     align-items: flex-start;
   }
@@ -171,7 +182,7 @@ const CloseBtn = styled.span`
   }
 `;
 
-const ModalWrapper = styled.div`
+const ModalContent = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -465,74 +476,82 @@ const Works = () => {
           />
         ))}
       </FixWrapper>
-      <ModalBg $isOpen={isOpen}>
-        <ModalTop>
-          <h1 className="teko">PROJECT</h1>
-          <CloseBtn
-            onClick={() => {
-              setIsOpen(false);
-              setProjectContent(null);
-            }}
-          >
-            Close
-          </CloseBtn>
-        </ModalTop>
-        {projectContent && (
-          <ModalWrapper>
-            <ModalSection>
-              <ProjectImg $imgUrl={projectContent?.img} />
-            </ModalSection>
-            <ModalSection>
-              <ProjectDesc>
-                <li>
-                  <label>Title</label>
-                  <span>{projectContent.title}</span>
-                </li>
-                <li>
-                  <label>Type</label>
-                  <span>{projectContent.type}</span>
-                </li>
-                <li>
-                  <label>Layout</label>
-                  <span>{projectContent.layout}</span>
-                </li>
-                <li className="column">
-                  <label>Tech Stack</label>
-                  <span className="stack">
-                    {projectContent.tech_stack.map((stack, idx) => (
-                      <span key={idx}>{stack}</span>
-                    ))}
-                  </span>
-                </li>
-                <li
-                  className={
-                    projectContent.implementation.length > 1 ? "column" : ""
-                  }
-                >
-                  <label>Implementation</label>
-                  <span>{projectContent.implementation.join(", ")}</span>
-                </li>
-                <li className="column">
-                  <label>Description</label>
-                  <span>{projectContent.description}</span>
-                </li>
-              </ProjectDesc>
-              <ProjectLink>
-                {projectContent.figma_url && (
-                  <a href={projectContent.figma_url} target="_blank">
-                    <li>Figma</li>
+      <ModalBg
+        $isOpen={isOpen}
+        onClick={() => {
+          setIsOpen(false);
+          setProjectContent(null);
+        }}
+      >
+        <ModalWrapper>
+          <ModalTop>
+            <h1 className="teko">PROJECT</h1>
+            <CloseBtn
+              onClick={() => {
+                setIsOpen(false);
+                setProjectContent(null);
+              }}
+            >
+              Close
+            </CloseBtn>
+          </ModalTop>
+          {projectContent && (
+            <ModalContent>
+              <ModalSection>
+                <ProjectImg $imgUrl={projectContent?.img} />
+              </ModalSection>
+              <ModalSection>
+                <ProjectDesc>
+                  <li>
+                    <label>Title</label>
+                    <span>{projectContent.title}</span>
+                  </li>
+                  <li>
+                    <label>Type</label>
+                    <span>{projectContent.type}</span>
+                  </li>
+                  <li>
+                    <label>Layout</label>
+                    <span>{projectContent.layout}</span>
+                  </li>
+                  <li className="column">
+                    <label>Tech Stack</label>
+                    <span className="stack">
+                      {projectContent.tech_stack.map((stack, idx) => (
+                        <span key={idx}>{stack}</span>
+                      ))}
+                    </span>
+                  </li>
+                  <li
+                    className={
+                      projectContent.implementation.length > 1 ? "column" : ""
+                    }
+                  >
+                    <label>Implementation</label>
+                    <span>{projectContent.implementation.join(", ")}</span>
+                  </li>
+                  <li className="column">
+                    <label>Description</label>
+                    <span>{projectContent.description}</span>
+                  </li>
+                </ProjectDesc>
+                <ProjectLink>
+                  {projectContent.figma_url && (
+                    <a href={projectContent.figma_url} target="_blank">
+                      <li>Figma</li>
+                    </a>
+                  )}
+                  <a href={projectContent.github_url} target="_blank">
+                    <li>Git hub</li>
                   </a>
-                )}
-                <a href={projectContent.github_url} target="_blank">
-                  <li>Git hub</li>
-                </a>
-                <a href={projectContent.site_url} target="_blank">
-                  <li>Site</li>
-                </a>
-              </ProjectLink>
-            </ModalSection>
-          </ModalWrapper>
-        )}
+                  <a href={projectContent.site_url} target="_blank">
+                    <li>Site</li>
+                  </a>
+                </ProjectLink>
+              </ModalSection>
+            </ModalContent>
+          )}
+        </ModalWrapper>
       </ModalBg>
     </Wrapper>
   );
