@@ -6,18 +6,23 @@ import { useRecoilValue } from "recoil";
 import { selectedIndexAtom } from "../atoms";
 
 const ContactTitle = styled.div`
-  width: 350px;
+  width: 1290px;
   height: 80px;
   margin: 0 auto;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   flex-direction: row-reverse;
 
   & > div {
     padding: 0;
   }
+  @media screen and (max-width: 1150px) {
+    width: 100%;
+  }
   @media screen and (max-width: 500px) {
     height: 50px;
+    transform: translateX(-20px);
   }
 `;
 

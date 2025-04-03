@@ -131,6 +131,7 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   color: #fff;
+  cursor: default;
   @media screen and (max-width: 800px) {
     align-items: flex-start;
   }
@@ -483,7 +484,7 @@ const Works = () => {
           setProjectContent(null);
         }}
       >
-        <ModalWrapper>
+        <ModalWrapper onClick={(event) => event.stopPropagation()}>
           <ModalTop>
             <h1 className="teko">PROJECT</h1>
             <CloseBtn
