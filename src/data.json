@@ -450,7 +450,7 @@
       "layout": "반응형",
       "implementation": ["ALL"],
       "description": "TypeScript와 React를 기반으로 실시간 암호화폐 정보를 제공하는 코인 랭킹 사이트를 개발했습니다. Recoil을 활용한 상태 관리와 React Query를 이용한 API 데이터 패칭 및 캐싱으로 최적화된 성능을 구현했습니다. Styled Components를 적용하여 반응형 UI를 구성하였습니다.",
-      "figma_url": "",
+      "figma_url": "https://www.figma.com/design/OfLMP7eqF0xmzNwZzw0VXo/Coin-Ranking?node-id=0-1&t=DVsN222UOHfYcYmb-1",
       "github_url": "https://github.com/park-ria/Frontend-Class/tree/main/customizing/coin",
       "site_url": "https://coin-ranking.web.app",
       "img": "imgs/project/coinranking.png"
