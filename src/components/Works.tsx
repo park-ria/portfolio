@@ -388,7 +388,7 @@ const Works = () => {
           onUpdate: (self) => {
             const progress = Number(self.progress.toFixed(2)); // 스크롤 진행률 (0 ~ 1)
             setCircleScroll(Math.floor(progress * 100));
-            const offset = pathLength * (1 - progress); // 진행률에 따라 strokeDashoffset 값 계산
+            const offset = pathLength * (1 - progress); //진행률에 따라 strokeDashoffset 값 계산
             gsap.to(pathRef.current, {
               strokeDashoffset: offset,
               ease: "none",
